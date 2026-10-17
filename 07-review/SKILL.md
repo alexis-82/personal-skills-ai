@@ -1,5 +1,5 @@
 ---
-name: review
+name: 07-review
 description: Revisione critica del codice appena implementato — correttezza, edge case, sicurezza, prestazioni, leggibilità — con findings elencati per severità. Usare quando l'utente dice "revisiona", "code review", "cerca bug nel codice", "controlla la qualità", "trova problemi", tipicamente dopo che i test sono verdi e prima di refactor/commit. Settima fase del workflow feature-driven, opzionale ma consigliata.
 ---
 
@@ -18,10 +18,10 @@ Fase 7/9 del workflow. Trova problemi nel **codice implementato** prima che fini
 >
 > Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.claude/` del progetto.
 
-## Differenza con `analyze` (fase 04)
+## Differenza con `04-analyze` (fase 04)
 
-- `analyze` esamina il **piano** prima dell'implementazione — ipotesi su cosa potrebbe andare storto.
-- `review` esamina il **codice scritto** dopo test verdi — problemi reali che i test non catturano (leggibilità, edge case non testati, sicurezza, prestazioni sottili).
+- `04-analyze` esamina il **piano** prima dell'implementazione — ipotesi su cosa potrebbe andare storto.
+- `07-review` esamina il **codice scritto** dopo test verdi — problemi reali che i test non catturano (leggibilità, edge case non testati, sicurezza, prestazioni sottili).
 
 Sono complementari, non alternative.
 
@@ -42,9 +42,9 @@ Sono complementari, non alternative.
    - **Scenario di fallimento** (per blocker/major): input concreto → comportamento sbagliato.
    - **Suggerimento**: una frase con la direzione della fix, non il codice completo.
 6. Al termine, in base ai findings:
-   - Se ci sono **blocker o major**: tornare a `/implement` per correggerli, poi rilanciare `/test`.
-   - Se ci sono solo **minor** di natura strutturale (duplicazione, naming, funzioni lunghe): passare a `/refactor`.
-   - Se non ci sono findings: passare direttamente a `/commit`.
+   - Se ci sono **blocker o major**: tornare a `/05-implement` per correggerli, poi rilanciare `/06-test`.
+   - Se ci sono solo **minor** di natura strutturale (duplicazione, naming, funzioni lunghe): passare a `/08-refactor`.
+   - Se non ci sono findings: passare direttamente a `/09-commit`.
 
 ## Output atteso
 
@@ -52,10 +52,10 @@ Sono complementari, non alternative.
 
 ## Regole
 
-- **[GUARDRAIL SCOPE]** Revisiona **solo** il codice modificato/aggiunto dall'implementazione corrente, non il resto del codebase. Se noti problemi in codice preesistente non toccato, elencali in una sezione separata "Fuori scope — segnalazioni" senza suggerire di risolverli in questo ciclo. Vedi `/guardrail-scope`.
+- **[GUARDRAIL SCOPE]** Revisiona **solo** il codice modificato/aggiunto dall'implementazione corrente, non il resto del codebase. Se noti problemi in codice preesistente non toccato, elencali in una sezione separata "Fuori scope — segnalazioni" senza suggerire di risolverli in questo ciclo. Vedi `/10-guardrail-scope`.
 - **[NON-GOALS]** I Non-Goals di `.claude/spec.md` valgono anche in review: non trattare come "problema" qualcosa che è esplicitamente dichiarato fuori scope (es. "NON parallelizzare" non è un finding di prestazioni).
 - Ogni finding **blocker** e **major** deve avere uno scenario di fallimento concreto (input → output sbagliato), non speculazioni tipo "potrebbe rompersi".
 - Preferire **pochi finding solidi** a molti speculativi. Meglio 3 problemi certi che 15 ipotesi.
-- Non riscrivere il codice in questa fase — segnala e basta. Le fix vanno in `/implement` o `/refactor`.
+- Non riscrivere il codice in questa fase — segnala e basta. Le fix vanno in `/05-implement` o `/08-refactor`.
 - Se un finding richiede di violare un Non-Goal per essere risolto, dichiararlo esplicitamente: la risoluzione va rimandata a una spec successiva, non fatta di nascosto.
 - La review è **critica ma costruttiva**: obiettivo è consegnare codice migliore, non elencare colpe.

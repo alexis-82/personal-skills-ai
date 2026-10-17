@@ -1,5 +1,5 @@
 ---
-name: clarify
+name: 02-clarify
 description: Chiarire una spec attraverso un dialogo di brainstorming con lo sviluppatore — esplorare alternative tecniche, stack, architettura, approcci e trade-off, poi risolvere le ambiguità residue. Usare quando l'utente dice "chiarisci", "brainstorma", "esploriamo le opzioni", "quale stack usare", "quali alternative", "cosa manca", "questa spec è vaga", o quando `.claude/spec.md` contiene marker `[?]` / TODO / punti ambigui. Seconda fase del workflow feature-driven, tra spec e plan-tasks.
 ---
 
@@ -83,5 +83,5 @@ Non serve toccarli tutti — solo quelli **realmente aperti** per questa feature
 - **Non decidere per l'utente**: proponi, valuta insieme, poi scrivi la scelta. Ma non essere neutro se hai un'opinione — dichiarala.
 - **Il brainstorming è divergente prima di essere convergente**: mostra le alternative *prima* di eleggere una vincitrice, anche quando hai già in mente la risposta.
 - **Non riscrivere la spec da zero** — modifica chirurgica, aggiungendo la sezione "Decisioni prese".
-- Se emergono ambiguità che cambiano la spec di fondo (Goals rivisti, scope allargato), tornare a `/spec`.
-- Se la spec è genuinamente chiusa e tutte le decisioni sono già state prese esplicitamente, dichiararlo e passare a `/plan-tasks`.
+- Se emergono ambiguità che cambiano la spec di fondo (Goals rivisti, scope allargato), tornare a `/01-spec`.
+- Se la spec è genuinamente chiusa e tutte le decisioni sono già state prese esplicitamente, dichiararlo e passare a `/03-plan-tasks`.

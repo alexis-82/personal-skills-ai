@@ -1,5 +1,5 @@
 ---
-name: guardrail-scope
+name: 10-guardrail-scope
 description: Guardrail di disciplina dello scope — vincola l'AI a modificare solo il codice strettamente necessario alla richiesta, mai fare "pulizie" opportunistiche o refactor non richiesti. Da invocare all'inizio di qualunque task che tocca codice, o quando l'utente dice "attenzione allo scope", "non toccare altro", "lavora sui binari", "solo quello che ho chiesto".
 ---
 
@@ -19,7 +19,7 @@ Se esiste `.claude/spec.md` con una sezione **Non-Goals**, quella è la fonte di
 2. Per ogni modifica pianificata, chiedersi: "questa modifica viola un Non-Goal?"
 3. Se sì → **fermarsi**, non farla, segnalarlo all'utente.
 
-I Non-Goals sono un **contratto** già firmato dall'utente in fase spec: non vanno rinegoziati implicitamente durante l'implementazione. Se un Non-Goal sembra dover cambiare, tornare a `/spec` o `/clarify` e aggiornarlo esplicitamente.
+I Non-Goals sono un **contratto** già firmato dall'utente in fase spec: non vanno rinegoziati implicitamente durante l'implementazione. Se un Non-Goal sembra dover cambiare, tornare a `/01-spec` o `/02-clarify` e aggiornarlo esplicitamente.
 
 ## Check n°2: cosa NON fare (mai, senza autorizzazione esplicita)
 
@@ -55,8 +55,9 @@ Regole:
 3. Se `.claude/` non esiste nella root del progetto, crearla **prima** di scrivere il primo file.
 4. Se durante il lavoro trovi uno di questi file per errore nella root del progetto (residui da sessioni precedenti), **spostalo** (git mv se tracciato, mv altrimenti) in `.claude/` prima di procedere; non duplicarlo.
 5. Il file `.claude/` è parte dei metadati del progetto, non dell'output finale: valuta con l'utente se andare in `.gitignore` o essere versionato — non è una decisione da prendere in autonomia.
+6. `CHANGELOG.md` **non** è un file di workflow: è un file di prodotto e va nella **root del progetto**, mai in `.claude/` (lo gestisce `09-commit`).
 
-Confusione da evitare: dentro ogni cartella skill (`~/.claude/skills/spec/`, `~/.claude/skills/plan-tasks/`, ecc.) esistono file `plan.md`, `spec.md`, `tasks.md` — quelli sono **template/checklist di riferimento** della skill, si **leggono** ma non si toccano. I file di lavoro veri stanno **solo** in `.claude/` del progetto corrente.
+Confusione da evitare: dentro ogni cartella skill (`~/.claude/skills/01-spec/`, `~/.claude/skills/03-plan-tasks/`, ecc.) esistono file `plan.md`, `spec.md`, `tasks.md` — quelli sono **template/checklist di riferimento** della skill, si **leggono** ma non si toccano. I file di lavoro veri stanno **solo** in `.claude/` del progetto corrente.
 
 ## Cosa fare quando si trova un problema fuori scope
 
@@ -79,7 +80,7 @@ Se anche una sola risposta è ambigua, il commit non è pronto.
 
 ## Applicazione nelle fasi del workflow
 
-- `implement`: implementa i task, non altro.
-- `test`: aggiungi test per la spec corrente, non riscrivere test esistenti.
-- `refactor`: refactor sì, ma limitato allo scope dichiarato dall'utente; anche il refactor ha binari.
-- `commit`: il diff deve essere leggibile e ogni riga giustificabile.
+- `05-implement`: implementa i task, non altro.
+- `06-test`: aggiungi test per la spec corrente, non riscrivere test esistenti.
+- `08-refactor`: refactor sì, ma limitato allo scope dichiarato dall'utente; anche il refactor ha binari.
+- `09-commit`: il diff deve essere leggibile e ogni riga giustificabile. La nuova voce di `CHANGELOG.md` è **nello scope** del commit; le voci precedenti no (non si toccano).

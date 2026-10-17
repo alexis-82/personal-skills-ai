@@ -5,16 +5,16 @@
 set -euo pipefail
 
 SKILLS=(
-    spec
-    clarify
-    plan-tasks
-    analyze
-    implement
-    test
-    review
-    refactor
-    commit
-    guardrail-scope
+    01-spec
+    02-clarify
+    03-plan-tasks
+    04-analyze
+    05-implement
+    06-test
+    07-review
+    08-refactor
+    09-commit
+    10-guardrail-scope
 )
 
 SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -33,6 +33,15 @@ fi
 printf "${C_CYAN}Installazione skill in: %s${C_RESET}\n\n" "$TARGET_DIR"
 
 mkdir -p "$TARGET_DIR"
+
+# Rimuovi le versioni precedenti senza numerazione (evita skill duplicate)
+for skill in "${SKILLS[@]}"; do
+    legacy="$TARGET_DIR/${skill#[0-9][0-9]-}"
+    if [ -d "$legacy" ]; then
+        rm -rf "$legacy"
+        printf "  ${C_YELLOW}RM${C_RESET}  %s (vecchio nome)\n" "${skill#[0-9][0-9]-}"
+    fi
+done
 
 # Copia (o sovrascrivi) le skill correnti
 installed=0

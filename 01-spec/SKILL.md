@@ -1,5 +1,5 @@
 ---
-name: spec
+name: 01-spec
 description: Definire la specifica di una nuova funzionalità partendo da un'idea o richiesta grezza, con Goals e Non-Goals espliciti. Usare quando l'utente vuole "specificare", "definire i requisiti", "scrivere la spec" o "documentare cosa fare" prima di iniziare a sviluppare. Prima fase del workflow feature-driven.
 ---
 
@@ -24,7 +24,7 @@ Fase 1/9 del workflow. Trasforma un'idea in una specifica azionabile con confini
 2. Chiedere all'utente (o dedurre dal contesto) chi sono gli utenti, cosa devono ottenere e con quali vincoli.
 3. Compilare `.claude/spec.md` nella cartella del progetto (non in questa cartella skill, non nella root). Creare la cartella `.claude/` se non esiste. Il file deve contenere **tutte** le sezioni sotto, incluse Goals e Non-Goals.
 4. Rileggere Non-Goals con l'utente prima di procedere — è la sezione più importante per prevenire scope creep.
-5. Al termine, suggerire di passare a `/clarify` se restano ambiguità, altrimenti a `/plan-tasks`.
+5. Al termine, suggerire di passare a `/02-clarify` se restano ambiguità, altrimenti a `/03-plan-tasks`.
 
 ## Output atteso
 
@@ -64,7 +64,7 @@ Il template `spec.md` non impone un vocabolario — usa quello del tuo dominio.
 ## Regole
 
 - Non implementare nulla in questa fase.
-- Non decidere lo stack tecnico se non è già vincolato — questo è compito di `plan-tasks`.
+- Non decidere lo stack tecnico se non è già vincolato — questo è compito di `03-plan-tasks`.
 - Se qualcosa è ambiguo, marcarlo con `[?]` invece di inventare.
 - La spec **non** è completa se manca la sezione Non-Goals — è un errore comune saltarla e porta a scope creep in fase di implementazione.
 - Se l'utente non sa cosa sono i Non-Goals, proporne 3 candidati dedotti dal contesto e chiedere conferma.

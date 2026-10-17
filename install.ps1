@@ -4,16 +4,16 @@
 $ErrorActionPreference = 'Stop'
 
 $skills = @(
-    'spec',
-    'clarify',
-    'plan-tasks',
-    'analyze',
-    'implement',
-    'test',
-    'review',
-    'refactor',
-    'commit',
-    'guardrail-scope'
+    '01-spec',
+    '02-clarify',
+    '03-plan-tasks',
+    '04-analyze',
+    '05-implement',
+    '06-test',
+    '07-review',
+    '08-refactor',
+    '09-commit',
+    '10-guardrail-scope'
 )
 
 $sourceDir = $PSScriptRoot
@@ -25,6 +25,15 @@ Write-Host ""
 if (-not (Test-Path $targetDir)) {
     New-Item -ItemType Directory -Path $targetDir -Force | Out-Null
     Write-Host "Creata directory $targetDir"
+}
+
+# Rimuovi le versioni precedenti senza numerazione (evita skill duplicate)
+foreach ($skill in $skills) {
+    $legacy = Join-Path $targetDir ($skill -replace '^\d{2}-', '')
+    if (Test-Path $legacy) {
+        Remove-Item -Recurse -Force $legacy
+        Write-Host "  RM  $(Split-Path $legacy -Leaf) (vecchio nome)" -ForegroundColor Yellow
+    }
 }
 
 # Copia (o sovrascrivi) le skill correnti
