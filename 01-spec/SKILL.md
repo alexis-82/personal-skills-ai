@@ -18,6 +18,25 @@ Fase 1/9 del workflow. Trasforma un'idea in una specifica azionabile con confini
 >
 > Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.claude/` del progetto.
 
+## Passo 0 — Profilo progetto (prima di tutto)
+
+Prima di leggere i template e prima di qualunque domanda sulla feature, stabilire il **profilo del progetto**. Il profilo decide a chi si rivolge il `README.md` del progetto (lo aggiorna `09-commit`).
+
+1. **Se esiste `.claude/project-profile.md` con un profilo valido** → leggerlo e scrivere in chat `Profilo progetto: <software|homelab>`. Non ripetere la domanda.
+2. **Se non esiste**, oppure la riga `profile:` manca o ha un valore diverso da `software`/`homelab` → chiedere con `AskUserQuestion`, come **prima** domanda della sessione:
+   - **Software** — prodotto per l'utente finale: il README parla solo del software e del suo uso (installazione, utilizzo, configurazione), niente build, compilazione, toolchain o sviluppo. Le note di sviluppo vanno in `.claude/development.md`.
+   - **Homelab** — progetto da riprodurre: il README è per lo sviluppatore, dettagliato e riproducibile (prerequisiti, setup passo-passo, build, deploy, struttura).
+
+   Poi creare `.claude/project-profile.md` con questo formato:
+   ```markdown
+   # Profilo progetto
+   profile: software
+   ```
+   (`profile:` vale `software` oppure `homelab`.)
+3. **Se l'utente chiede di cambiare profilo** (in qualunque momento) → riscrivere solo la riga `profile:`, togliere l'eventuale riga `readme-aligned: true` (il README va riallineato al nuovo profilo) e scrivere in chat il nuovo profilo.
+
+La riga opzionale `readme-aligned: true` la scrive solo `09-commit`, dopo la ristrutturazione una tantum del README: questa skill non la aggiunge mai.
+
 ## Cosa fare
 
 1. Leggere `plan.md` per il metodo, `spec.md` come template di output, `tasks.md` per la checklist operativa.
@@ -37,6 +56,8 @@ Un file `.claude/spec.md` nel progetto con queste sezioni **obbligatorie**:
 - **Criteri di accettazione** — condizioni oggettive per dichiarare la feature "fatta".
 - **Vincoli tecnici** — stack, compatibilità, performance, sicurezza.
 - **Ambiguità aperte** — marcate `[?]`, da risolvere in fase 02.
+
+In più, `.claude/project-profile.md` presente (creato al Passo 0 se mancava).
 
 ## Come scrivere i Non-Goals
 

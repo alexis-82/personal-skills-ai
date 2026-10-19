@@ -47,6 +47,8 @@ Tutti i file prodotti dalle skill di questo workflow vivono **esclusivamente** i
 - `.claude/analysis.md`
 - `.claude/review.md`
 - `.claude/test-report.md`
+- `.claude/project-profile.md` (profilo Software/Homelab, creato da `01-spec`)
+- `.claude/development.md` (note di build/sviluppo, solo profilo Software, gestito da `09-commit`)
 
 Regole:
 
@@ -55,7 +57,7 @@ Regole:
 3. Se `.claude/` non esiste nella root del progetto, crearla **prima** di scrivere il primo file.
 4. Se durante il lavoro trovi uno di questi file per errore nella root del progetto (residui da sessioni precedenti), **spostalo** (git mv se tracciato, mv altrimenti) in `.claude/` prima di procedere; non duplicarlo.
 5. Il file `.claude/` è parte dei metadati del progetto, non dell'output finale: valuta con l'utente se andare in `.gitignore` o essere versionato — non è una decisione da prendere in autonomia.
-6. `CHANGELOG.md` **non** è un file di workflow: è un file di prodotto e va nella **root del progetto**, mai in `.claude/` (lo gestisce `09-commit`).
+6. `CHANGELOG.md` e `README.md` **non** sono file di workflow: sono file di prodotto e vanno nella **root del progetto**, mai in `.claude/` (li gestisce `09-commit`).
 
 Confusione da evitare: dentro ogni cartella skill (`~/.claude/skills/01-spec/`, `~/.claude/skills/03-plan-tasks/`, ecc.) esistono file `plan.md`, `spec.md`, `tasks.md` — quelli sono **template/checklist di riferimento** della skill, si **leggono** ma non si toccano. I file di lavoro veri stanno **solo** in `.claude/` del progetto corrente.
 
@@ -83,4 +85,4 @@ Se anche una sola risposta è ambigua, il commit non è pronto.
 - `05-implement`: implementa i task, non altro.
 - `06-test`: aggiungi test per la spec corrente, non riscrivere test esistenti.
 - `08-refactor`: refactor sì, ma limitato allo scope dichiarato dall'utente; anche il refactor ha binari.
-- `09-commit`: il diff deve essere leggibile e ogni riga giustificabile. La nuova voce di `CHANGELOG.md` è **nello scope** del commit; le voci precedenti no (non si toccano).
+- `09-commit`: il diff deve essere leggibile e ogni riga giustificabile. La nuova voce di `CHANGELOG.md` è **nello scope** del commit; le voci precedenti no (non si toccano). Anche le modifiche a `README.md` (e `.claude/development.md`) richieste dal ciclo e dal profilo del progetto sono **nello scope**, ma **solo** in questa fase: nelle altre fasi il README non si tocca per allinearlo al profilo. Unica eccezione: se il README è esplicitamente nei Goals/task di `.claude/spec.md`, si modifica in `05-implement` come qualunque altro deliverable.
