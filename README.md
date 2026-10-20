@@ -13,7 +13,6 @@ Le skill sono **stack-agnostic**: funzionano per script Python, librerie, CLI to
   - [Goals / Non-Goals](#goals--non-goals)
   - [Guardrail: disciplina dello scope](#guardrail-disciplina-dello-scope)
   - [CHANGELOG automatico](#changelog-automatico)
-  - [Profilo progetto: Software vs Homelab](#profilo-progetto-software-vs-homelab)
 - [Installazione](#installazione)
   - [Windows (PowerShell)](#windows-powershell)
   - [Linux / macOS (bash)](#linux--macos-bash)
@@ -32,7 +31,7 @@ Le skill sono **stack-agnostic**: funzionano per script Python, librerie, CLI to
 
 | # | Skill | Ruolo | Output principale |
 |---|-------|-------|-------------------|
-| 01 | `01-spec` | Profilo progetto (Software/Homelab) + requisiti + Goals + **Non-Goals** | `.claude/spec.md` + `.claude/project-profile.md` nel progetto |
+| 01 | `01-spec` | Definire requisiti + Goals + **Non-Goals** | `.claude/spec.md` nel progetto |
 | 02 | `02-clarify` | Brainstorming interattivo (stack, architettura, alternative) + risoluzione ambiguità | `spec.md` chiarito con "Decisioni prese" |
 | 03 | `03-plan-tasks` | Piano tecnico + task breakdown | `.claude/plan.md` + `.claude/tasks.md` |
 | 04 | `04-analyze` | Analisi critica del piano | `.claude/analysis.md` |
@@ -40,7 +39,7 @@ Le skill sono **stack-agnostic**: funzionano per script Python, librerie, CLI to
 | 06 | `06-test` | Test contro criteri di accettazione | Suite verde |
 | 07 | `07-review` | Code review del codice implementato (correttezza, edge case, sicurezza, prestazioni, leggibilità) | `.claude/review.md` con findings per severità |
 | 08 | `08-refactor` | Pulire con i test come rete di sicurezza | Codice più leggibile, comportamento invariato |
-| 09 | `09-commit` | `CHANGELOG.md` + `README.md` (secondo il profilo) aggiornati + commit strutturati + eventuale PR | Storia git pulita + `CHANGELOG.md` e `README.md` nella root |
+| 09 | `09-commit` | `CHANGELOG.md` aggiornato + commit strutturati + eventuale PR | Storia git pulita + `CHANGELOG.md` nella root |
 | 10 ⚠ | `10-guardrail-scope` | Cross-cutting: Guardarail AI | — |
 
 Ordine tipico: `spec → clarify → plan-tasks → (analyze) → implement → test → (review) → (refactor) → commit`. Le fasi `04-analyze`, `07-review` e `08-refactor` sono opzionali.
@@ -97,28 +96,6 @@ A ogni ciclo `09-commit` crea o aggiorna `CHANGELOG.md` nella **root del progett
 - **Commit**: il CHANGELOG entra nello stesso commit della feature.
 - **Ogni ciclo è una nuova versione**. I cicli di solo refactor/chore/test non generano voci: l'AI lo dichiara in chat.
 - **Non** crea tag o GitHub Release, **non** modifica la versione in `package.json` & co., **non** tocca le voci precedenti.
-
-### Profilo progetto: Software vs Homelab
-
-Il `README.md` di un progetto ha due scopi diversi a seconda di chi lo legge. Per questo, la **prima** cosa che fa `01-spec` su un progetto nuovo è chiedere:
-
-> Il progetto è **Software** (per l'utente finale) o **Homelab** (documentazione per sviluppo e riproducibilità)?
-
-La risposta viene salvata in `.claude/project-profile.md` e riusata nei cicli successivi (la domanda non si ripete; l'AI scrive in chat `Profilo progetto: …`). Per cambiarlo basta chiederlo.
-
-| | Software | Homelab |
-|---|---|---|
-| Pubblico del README | Utente finale | Sviluppatore / te stesso tra sei mesi |
-| Contenuto del README | Cos'è, requisiti, installazione, utilizzo, configurazione, troubleshooting, licenza | Architettura, prerequisiti con versioni, setup passo-passo, build, configurazione, deploy, struttura, troubleshooting |
-| Build, toolchain (Go, Wails, npm…), struttura sorgenti, test | **Mai** nel README → vanno in `.claude/development.md` | Nel README |
-| Libreria / CLI per sviluppatori | README con installazione e **uso** (API, comandi), non la build del progetto | — |
-
-Come viene aggiornato:
-
-- Lo fa `09-commit`, subito dopo il CHANGELOG, **solo se** il ciclo cambia qualcosa di documentato; altrimenti l'AI scrive "README non aggiornato: <motivo>".
-- La prima volta, se il README esistente mescola le due cose, l'AI propone **una sola volta** una ristrutturazione completa (es. sposta la parte build in `.claude/development.md`). Dopo, solo modifiche incrementali (il file di profilo ricorda la scelta con `readme-aligned: true`).
-- Mostra sempre le modifiche e attende conferma; `README.md` entra nel commit della feature, `.claude/development.md` no (è un file di lavoro).
-- **Non** crea `DEVELOPMENT.md`, `CONTRIBUTING.md` o `docs/` nella root e **non** traduce il README.
 
 ---
 
@@ -186,7 +163,7 @@ Le skill si attivano da sole in base al `description` YAML. Frasi che le trigger
 | "testa", "scrivi i test" | `06-test` |
 | "revisiona", "code review", "cerca bug nel codice" | `07-review` |
 | "refactora", "pulisci il codice" | `08-refactor` |
-| "committa", "apri PR", "aggiorna il changelog", "aggiorna il README" | `09-commit` |
+| "committa", "apri PR", "aggiorna il changelog" | `09-commit` |
 | "attenzione allo scope", "lavora sui binari" | `10-guardrail-scope` |
 
 ---
@@ -279,6 +256,6 @@ skills/
 ## Note
 
 - Le skill sono in italiano ma il codice generato segue le convenzioni del progetto (inglese se il codebase è in inglese).
-- I file `plan.md` / `spec.md` / `tasks.md` nelle cartelle skill sono **template di riferimento**, non vengono modificati durante l'uso. I file di lavoro veri vivono **sempre** nel progetto sotto `.claude/` (`spec.md`, `plan.md`, `tasks.md`, `analysis.md`, `review.md`, l'eventuale `test-report.md`, più `project-profile.md` e, nel profilo Software, `development.md`). Mai nella root del progetto, mai nella cartella della skill — regola rafforzata dal Check n°3 di `10-guardrail-scope`.
+- I file `plan.md` / `spec.md` / `tasks.md` nelle cartelle skill sono **template di riferimento**, non vengono modificati durante l'uso. I file di lavoro veri vivono **sempre** nel progetto sotto `.claude/` (`spec.md`, `plan.md`, `tasks.md`, `analysis.md`, `review.md` e l'eventuale `test-report.md`). Mai nella root del progetto, mai nella cartella della skill — regola rafforzata dal Check n°3 di `10-guardrail-scope`.
 - Se dopo una sessione trovi uno di questi file nella root del progetto (residuo da versioni precedenti delle skill), spostalo dentro `.claude/`: le skill ora sanno gestirlo, ma un file omonimo in root può confondere le fasi successive.
 - La skill `10-guardrail-scope` è pensata anche per essere invocata fuori dal workflow feature-driven, in qualunque task che tocchi codice.

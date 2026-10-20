@@ -1,6 +1,6 @@
 ---
 name: 09-commit
-description: Creare commit ben strutturati e opzionalmente aprire una pull request per una funzionalità completata, testata ed eventualmente refactorata. Crea o aggiorna anche il CHANGELOG.md del progetto con versione SemVer e data, e il README.md secondo il profilo del progetto (Software/Homelab). Usare quando l'utente dice "committa", "fai il commit", "apri PR", "aggiorna il changelog", "aggiorna il README" a chiusura del ciclo di lavoro. Nona e ultima fase del workflow feature-driven.
+description: Creare commit ben strutturati e opzionalmente aprire una pull request per una funzionalità completata, testata ed eventualmente refactorata. Crea o aggiorna anche il CHANGELOG.md del progetto con versione SemVer e data. Usare quando l'utente dice "committa", "fai il commit", "apri PR", "aggiorna il changelog" a chiusura del ciclo di lavoro. Nona e ultima fase del workflow feature-driven.
 ---
 
 # Commit e pull request
@@ -18,7 +18,7 @@ Fase 9/9 del workflow. Consolida il lavoro (implementazione + test + refactor) i
 >
 > Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.claude/` del progetto.
 >
-> **Eccezione**: `CHANGELOG.md` e `README.md` sono file di prodotto, non di workflow — vanno nella **root del progetto** (vedi [Aggiornamento CHANGELOG](#aggiornamento-changelog) e [Aggiornamento README](#aggiornamento-readme)).
+> **Eccezione**: `CHANGELOG.md` è un file di prodotto, non di workflow — va nella **root del progetto** (vedi [Aggiornamento CHANGELOG](#aggiornamento-changelog)).
 
 ## Cosa fare
 
@@ -26,16 +26,15 @@ Fase 9/9 del workflow. Consolida il lavoro (implementazione + test + refactor) i
 2. Eseguire `git status` e `git diff` per capire cosa entra nel commit.
 3. **Ispezionare i file staged**: cercare segreti (chiavi API, password, token), file di build, file `.env`. Se trovi qualcosa di sospetto — anche se il nome sembra innocuo — aprire il file prima di procedere.
 4. **Aggiornare il CHANGELOG** (vedi sezione [Aggiornamento CHANGELOG](#aggiornamento-changelog)): creare o aggiornare `CHANGELOG.md` nella root del progetto con la nuova voce, oppure dichiarare perché viene saltato.
-5. **Aggiornare il README** (vedi sezione [Aggiornamento README](#aggiornamento-readme)): creare o aggiornare `README.md` secondo il profilo del progetto, oppure dichiarare perché viene saltato.
-6. Raggruppare le modifiche in commit logici. Come regola:
+5. Raggruppare le modifiche in commit logici. Come regola:
    - **Un commit per la feature** (implementazione + test relativi).
    - **Un commit separato per il refactor** se è stato fatto (fase 07), così la storia distingue chiaramente cambi di comportamento da cambi strutturali.
    - Mai un file solo per commit se non giustificato dal senso logico.
-7. Messaggio di commit:
+6. Messaggio di commit:
    - Prima riga: `<tipo>: <cosa cambia>` (max 70 caratteri). Tipi: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`.
    - Corpo: **perché**, non cosa (il diff mostra il cosa).
-8. Se richiesta PR: creare con `gh pr create`, titolo conciso, corpo con Summary (bullet) + Test plan.
-9. Non pushare/aprire PR senza conferma esplicita dell'utente per quel repo.
+7. Se richiesta PR: creare con `gh pr create`, titolo conciso, corpo con Summary (bullet) + Test plan.
+8. Non pushare/aprire PR senza conferma esplicita dell'utente per quel repo.
 
 ## Aggiornamento CHANGELOG
 
@@ -78,37 +77,9 @@ Eseguire i sotto-passi in ordine:
 
 **Vietato in questo passo**: creare tag git o GitHub Release, aggiornare la versione in file di progetto (`package.json`, `pyproject.toml`, ecc.), ricostruire lo storico dal `git log`.
 
-## Aggiornamento README
-
-> **Eccezione al path**: `README.md` è un file di prodotto e va nella **root del progetto**. `.claude/development.md` invece è un file di lavoro e resta in `.claude/`.
-
-Eseguire i sotto-passi in ordine:
-
-1. **Leggere il profilo** da `.claude/project-profile.md` (riga `profile: software` oppure `profile: homelab`) e scrivere in chat `Profilo progetto: <profilo>`.
-   - Se il file **non esiste** (es. `01-spec` saltata), oppure la riga `profile:` manca o ha un valore diverso da `software`/`homelab` → porre la stessa domanda Software/Homelab del Passo 0 di `01-spec` e creare il file nello stesso formato.
-   - Se l'utente chiede di **cambiare profilo** → riscrivere solo la riga `profile:` e togliere l'eventuale riga `readme-aligned: true`, come nel Passo 0 di `01-spec`.
-2. **Ristrutturazione una tantum.** Se il file di profilo **non** contiene la riga `readme-aligned: true` e il `README.md` esistente non è coerente col profilo (vedi sotto-passo 4) → preparare una riorganizzazione completa del README secondo il profilo:
-   - in Software: spostare build/sviluppo in `.claude/development.md`;
-   - in Homelab: se esiste `.claude/development.md` (es. dopo un cambio da Software), usarlo come **fonte** per le sezioni di sviluppo del README e chiedere all'utente se eliminarlo.
-
-   La riorganizzazione **non** ha una conferma propria: entra nella proposta unica del sotto-passo 5. La riga `readme-aligned: true` si aggiunge al file di profilo al sotto-passo 6, sia se l'utente accetta sia se rifiuta la riorganizzazione, così la proposta non si ripete. Se il README è già coerente o non esiste, aggiungere comunque la riga al sotto-passo 6.
-3. **Decidere se aggiornare.** Fonti: Goals di `.claude/spec.md`, task completati in `.claude/tasks.md`, diff (ignorando i file sotto `.claude/`). Aggiornare **solo se** il ciclo cambia qualcosa di documentato per il profilo:
-   - Software: una funzione visibile all'utente, requisiti di sistema, modo di installare, comandi/opzioni, configurazione lato utente. Se cambiano solo build, toolchain, struttura o test → aggiornare **solo** `.claude/development.md` (il README resta invariato).
-   - Homelab: tutto quanto sopra più prerequisiti/versioni, passi di setup, build, variabili d'ambiente, deploy, struttura del progetto.
-   - Se nulla di questo cambia (e non c'è una ristrutturazione al sotto-passo 2) → **saltare** e scrivere in chat: "README non aggiornato: <motivo>". Aggiungere comunque `readme-aligned: true` al file di profilo se non c'è già, poi passare al punto 6 di "Cosa fare".
-4. **Contenuto per profilo.**
-   - **Software** (utente finale) — sezioni ammesse: cos'è / a cosa serve, requisiti di sistema, installazione (download, installer, pacchetto), utilizzo, configurazione lato utente, risoluzione problemi, licenza. **Vietato** nel README: build, compilazione, toolchain e framework di sviluppo (es. `go build`, `wails`, `npm`, `cargo`), dipendenze di sviluppo, struttura dei sorgenti, test, linee guida di contribuzione. Se l'utente del prodotto è uno sviluppatore (libreria, SDK, CLI per dev), il README documenta installazione e **uso** (import, API pubblica, comandi), ma non come si compila o testa il progetto stesso.
-   - **Software → `.claude/development.md`**: riceve tutto ciò che è vietato nel README (build, toolchain, struttura, test, come contribuire). Crearlo o aggiornarlo quando il ciclo cambia queste informazioni o quando la ristrutturazione ce le sposta.
-   - **Homelab** (sviluppatore, riproducibile) — sezioni attese: panoramica e architettura, prerequisiti con versioni, setup passo-passo da zero, build e avvio, configurazione e variabili d'ambiente, deploy, struttura del progetto, risoluzione problemi. In Homelab `.claude/development.md` **non** si crea.
-5. **Mostrare le modifiche e attendere conferma.** Un'unica proposta per README e (in Software) `.claude/development.md`. L'utente può correggerla. Non scrivere nulla prima della conferma.
-6. **Scrivere i file** toccando solo le sezioni interessate dal ciclo (salvo la ristrutturazione accettata al sotto-passo 5), poi aggiungere `readme-aligned: true` al file di profilo se non c'è già. Mantenere la lingua e il fine riga (CRLF/LF) del README esistente; per un file nuovo usare la lingua delle istruzioni dell'utente e lo stesso fine riga degli altri file di testo del progetto.
-7. **Mettere in stage** `README.md` con nome esplicito, nello **stesso commit della feature** (come il CHANGELOG). `.claude/development.md` e `.claude/project-profile.md` sono file di lavoro: **mai** in stage.
-
-**Vietato in questo passo**: creare altra documentazione nella root o altrove (`DEVELOPMENT.md`, `CONTRIBUTING.md`, `docs/`, wiki), tradurre il README o cambiarne la lingua, modificare codice, CHANGELOG o manifest per adattarli al profilo, togliere `.claude/` dal `.gitignore`. L'allineamento del README al profilo avviene **solo** in questa fase; se il README è esplicitamente nei Goals/task della spec, quelle modifiche si fanno in `05-implement` e qui si verifica solo la coerenza col profilo.
-
 ## Output atteso
 
-Commit creati (feature + eventuale refactor separati), git tree pulito, `.claude/tasks.md` con tutti i task marcati `- [x]`, eventuale PR aperta. `CHANGELOG.md` nella root del progetto creato o aggiornato con la nuova voce nel commit della feature, oppure dichiarazione esplicita in chat del perché è stato saltato. `README.md` nella root coerente col profilo del progetto e aggiornato nel commit della feature (con, in Software, `.claude/development.md` aggiornato e non committato), oppure dichiarazione esplicita in chat del perché è stato saltato.
+Commit creati (feature + eventuale refactor separati), git tree pulito, `.claude/tasks.md` con tutti i task marcati `- [x]`, eventuale PR aperta. `CHANGELOG.md` nella root del progetto creato o aggiornato con la nuova voce nel commit della feature, oppure dichiarazione esplicita in chat del perché è stato saltato.
 
 ## Regole
 
