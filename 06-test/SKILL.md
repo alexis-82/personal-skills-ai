@@ -5,7 +5,7 @@ description: Scrivere ed eseguire test per una funzionalità appena implementata
 
 # Testing e verifica
 
-Fase 6/9 del workflow. Verifica che l'implementazione soddisfi la spec.
+Fase 6/10 del workflow. Verifica che l'implementazione soddisfi la spec.
 
 > **⚠ Output path (regola dura)**
 > Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.claude/` nella root del progetto:
@@ -38,7 +38,7 @@ Test aggiunti, suite verde, coverage sui criteri di accettazione dichiarati.
 
 ## Regole
 
-- **[GUARDRAIL SCOPE]** Aggiungi test **solo** per la funzionalità corrente. Non riscrivere o "migliorare" test esistenti fuori dallo scope. Vedi `/10-guardrail-scope`.
+- **[GUARDRAIL SCOPE]** Aggiungi test **solo** per la funzionalità corrente. Non riscrivere o "migliorare" test esistenti fuori dallo scope. Vedi la skill `guardrail-scope`.
 - Non testare l'implementazione (i dettagli), testa il comportamento (la spec).
 - Un test che passa senza fare nulla di significativo è peggio di un test mancante — verificarne il valore.
 - Se un test è flaky, marcarlo esplicitamente e aprire un task, non riprovare in loop.

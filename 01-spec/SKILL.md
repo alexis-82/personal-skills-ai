@@ -5,7 +5,7 @@ description: Definire la specifica di una nuova funzionalità partendo da un'ide
 
 # Specifica funzionalità
 
-Fase 1/9 del workflow. Trasforma un'idea in una specifica azionabile con confini chiari.
+Fase 1/10 del workflow. Trasforma un'idea in una specifica azionabile con confini chiari.
 
 > **⚠ Output path (regola dura)**
 > Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.claude/` nella root del progetto:

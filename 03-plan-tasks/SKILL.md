@@ -5,7 +5,7 @@ description: Trasformare una spec chiarita in un piano tecnico e una lista di ta
 
 # Piano tecnico e task breakdown
 
-Fase 3/9 del workflow. Da spec a lista di lavoro eseguibile.
+Fase 3/10 del workflow. Da spec a lista di lavoro eseguibile.
 
 > **⚠ Output path (regola dura)**
 > Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.claude/` nella root del progetto:
