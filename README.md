@@ -2,9 +2,9 @@
 
 # Feature-Driven Workflow — Claude Code Skills
 
-**10 skill per Claude Code che portano una funzionalità dalla spec al commit, senza uscire dallo scope.**
+**10 fasi per Claude Code che portano una funzionalità dalla spec al push, più un guardrail che impedisce di uscire dallo scope.**
 
-[![Version](https://img.shields.io/badge/version-1.2.0-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![Claude Code](https://img.shields.io/badge/Claude%20Code-skills-D97757?style=plastic&logo=anthropic&logoColor=white)](https://claude.com/claude-code)&nbsp;&nbsp;&nbsp;[![Markdown](https://img.shields.io/badge/Markdown-000000?style=plastic&logo=markdown&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=plastic&logo=powershell&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Bash](https://img.shields.io/badge/Bash-4EAA25?style=plastic&logo=gnubash&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=plastic)](#)&nbsp;&nbsp;&nbsp;[![Last commit](https://img.shields.io/github/last-commit/alexis-82/personal-skills-ai?style=plastic)](https://github.com/alexis-82/personal-skills-ai/commits)
+[![Version](https://img.shields.io/badge/version-2.0.0-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![Claude Code](https://img.shields.io/badge/Claude%20Code-skills-D97757?style=plastic&logo=anthropic&logoColor=white)](https://claude.com/claude-code)&nbsp;&nbsp;&nbsp;[![Markdown](https://img.shields.io/badge/Markdown-000000?style=plastic&logo=markdown&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=plastic&logo=powershell&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Bash](https://img.shields.io/badge/Bash-4EAA25?style=plastic&logo=gnubash&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=plastic)](#)&nbsp;&nbsp;&nbsp;[![Last commit](https://img.shields.io/github/last-commit/alexis-82/personal-skills-ai?style=plastic)](https://github.com/alexis-82/personal-skills-ai/commits)
 
 </div>
 
@@ -14,7 +14,7 @@
 ## 📑 Indice
 
 - [✨ Cos'è](#cose)
-- [🧩 Le 10 skill, seguire il workflow in questo ordine](#le-10-skill-seguire-il-workflow-in-questo-ordine)
+- [🧩 Le 10 fasi, seguire il workflow in questo ordine](#le-10-fasi-seguire-il-workflow-in-questo-ordine)
 - [🧠 Concetti chiave](#concetti-chiave)
 - [🚀 Installazione](#installazione)
 - [🛠️ Come si usano](#come-si-usano)
@@ -28,14 +28,14 @@
 <a id="cose"></a>
 ## ✨ Cos'è
 
-Set di **10 skill** per Claude Code che strutturano lo sviluppo di una funzionalità in fasi discrete, dalla spec iniziale al commit finale, con un **guardrail cross-cutting** che impedisce all'AI di uscire fuori dallo scope della richiesta.
+Set di **11 skill** per Claude Code: **10 fasi** che strutturano lo sviluppo di una funzionalità, dalla spec iniziale al push finale, più un **guardrail cross-cutting** che impedisce all'AI di uscire fuori dallo scope della richiesta.
 
 Le skill sono **stack-agnostic**: funzionano per script Python, librerie, CLI tool, servizi web, pipeline ML, app desktop, e qualunque altro tipo di software.
 
 ---
 
-<a id="le-10-skill-seguire-il-workflow-in-questo-ordine"></a>
-## 🧩 Le 10 skill, seguire il workflow in questo ordine
+<a id="le-10-fasi-seguire-il-workflow-in-questo-ordine"></a>
+## 🧩 Le 10 fasi, seguire il workflow in questo ordine
 
 | # | Skill | Ruolo | Output principale |
 |---|-------|-------|-------------------|
@@ -47,10 +47,12 @@ Le skill sono **stack-agnostic**: funzionano per script Python, librerie, CLI to
 | 06 | `06-test` | Test contro criteri di accettazione | Suite verde |
 | 07 | `07-review` | Code review del codice implementato (correttezza, edge case, sicurezza, prestazioni, leggibilità) | `.claude/review.md` con findings per severità |
 | 08 | `08-refactor` | Pulire con i test come rete di sicurezza | Codice più leggibile, comportamento invariato |
-| 09 | `09-commit` | `CHANGELOG.md` + `README.md` (secondo il profilo) aggiornati + commit strutturati + eventuale PR | Storia git pulita + `CHANGELOG.md` e `README.md` nella root |
-| 10 ⚠ | `10-guardrail-scope` | Cross-cutting: Guardarail AI | — |
+| 09 | `09-commit` | `CHANGELOG.md` + `README.md` (secondo il profilo) aggiornati + commit strutturati (solo in locale) | Storia git pulita + `CHANGELOG.md` e `README.md` nella root |
+| 10 | `10-push` | Push sul remote dopo conferma + eventuale PR | Branch pubblicato, eventuale PR aperta |
 
-Ordine tipico: `spec → clarify → plan-tasks → (analyze) → implement → test → (review) → (refactor) → commit`. Le fasi `04-analyze`, `07-review` e `08-refactor` sono opzionali.
+Ordine tipico: `spec → clarify → plan-tasks → (analyze) → implement → test → (review) → (refactor) → commit → (push)`. Le fasi `04-analyze`, `07-review`, `08-refactor` e `10-push` sono opzionali.
+
+Fuori dalla numerazione c'è `guardrail-scope` ⚠, la regola trasversale sullo scope: non è una fase e non compare nel menu `/`, la applica il modello (vedi [Guardrail](#guardrail-disciplina-dello-scope)).
 
 ---
 
@@ -80,9 +82,10 @@ Esempio (script Python di analisi):
 
 Il file `01-spec/spec.md` (template nella cartella della skill) contiene esempi di Non-Goals per: script Python, librerie, CLI, servizi backend, pipeline ML, app desktop.
 
+<a id="guardrail-disciplina-dello-scope"></a>
 ### Guardrail: disciplina dello scope
 
-`10-guardrail-scope` è una skill trasversale che vincola l'AI a modificare **solo** il codice strettamente necessario alla richiesta. Regole:
+`guardrail-scope` è una skill trasversale che vincola l'AI a modificare **solo** il codice strettamente necessario alla richiesta. Ha `user-invocable: false`: non compare nel menu `/` e non si lancia a mano, ma Claude la carica da solo quando lavora sul codice o quando dici "attenzione allo scope". Le fasi 05–10 ne riportano le regole principali nelle righe `[GUARDRAIL SCOPE]`. Regole:
 
 1. **Check n°1** — se esiste `.claude/spec.md` con Non-Goals, quelli sono la fonte di verità prioritaria.
 2. **Check n°2** — anche in loro assenza, no pulizie opportunistiche, no riformattazioni, no rinomine collaterali, no refactor spontanei.
@@ -134,7 +137,7 @@ Come viene aggiornato:
 <a id="installazione"></a>
 ## 🚀 Installazione
 
-Le skill vanno installate in `~/.claude/skills/` (su Windows: `C:\Users\<utente>\.claude\skills\`). Nel repo trovi due script che copiano le 9 cartelle nella destinazione, sovrascrivendo eventuali versioni precedenti con lo stesso nome.
+Le skill vanno installate in `~/.claude/skills/` (su Windows: `C:\Users\<utente>\.claude\skills\`). Nel repo trovi due script che copiano le 11 cartelle nella destinazione, sovrascrivendo eventuali versioni precedenti con lo stesso nome.
 
 ### Windows (PowerShell)
 
@@ -160,8 +163,8 @@ Se serve, rendi lo script eseguibile una volta sola: `chmod +x install.sh`.
 ### Cosa fanno gli script
 
 - Creano `~/.claude/skills/` se manca.
-- Rimuovono le eventuali cartelle installate con i vecchi nomi senza numerazione (`spec`, `clarify`, …) per evitare skill duplicate.
-- Copiano le 10 skill (`01-spec`, `02-clarify`, `03-plan-tasks`, `04-analyze`, `05-implement`, `06-test`, `07-review`, `08-refactor`, `09-commit`, `10-guardrail-scope`), sovrascrivendo eventuali versioni precedenti con lo stesso nome.
+- Rimuovono le eventuali cartelle installate con i vecchi nomi (`spec`, `clarify`, …, `10-guardrail-scope`) per evitare skill duplicate.
+- Copiano le 11 skill (`01-spec`, `02-clarify`, `03-plan-tasks`, `04-analyze`, `05-implement`, `06-test`, `07-review`, `08-refactor`, `09-commit`, `10-push`, `guardrail-scope`), sovrascrivendo eventuali versioni precedenti con lo stesso nome.
 - Al termine, riavvia Claude Code per caricare le skill aggiornate.
 
 Ogni cartella skill contiene:
@@ -180,8 +183,10 @@ Digita lo slash command:
 ```
 /01-spec
 /05-implement
-/10-guardrail-scope
+/10-push
 ```
+
+`guardrail-scope` non ha un comando: è nascosto dal menu `/` e lo carica Claude.
 
 ### Attivazione automatica
 
@@ -197,8 +202,9 @@ Le skill si attivano da sole in base al `description` YAML. Frasi che le trigger
 | "testa", "scrivi i test" | `06-test` |
 | "revisiona", "code review", "cerca bug nel codice" | `07-review` |
 | "refactora", "pulisci il codice" | `08-refactor` |
-| "committa", "apri PR", "aggiorna il changelog", "aggiorna il README" | `09-commit` |
-| "attenzione allo scope", "lavora sui binari" | `10-guardrail-scope` |
+| "committa", "aggiorna il changelog", "aggiorna il README" | `09-commit` |
+| "pusha", "pubblica", "apri PR" | `10-push` |
+| "attenzione allo scope", "lavora sui binari" | `guardrail-scope` |
 
 ---
 
@@ -248,10 +254,16 @@ Immagina di dover aggiungere un endpoint di export in un servizio Python esisten
 
 [AI rilegge il diff riga per riga, propone la voce ## [1.3.0] - <data> per il
  CHANGELOG e attende conferma, poi crea commit separati per feature (con CHANGELOG)
- e refactor]
+ e refactor, solo in locale]
+
+> /10-push  (opzionale)
+
+[AI controlla che non ci siano modifiche non committate e che il remote non sia
+ avanti, mostra i commit in uscita e attende conferma, poi fa il push.
+ Se lo chiedi, apre anche la PR]
 ```
 
-In qualunque momento puoi dire **"attenzione allo scope"** per invocare esplicitamente `10-guardrail-scope` come promemoria.
+In qualunque momento puoi dire **"attenzione allo scope"** per richiamare il guardrail come promemoria.
 
 ---
 
@@ -275,7 +287,8 @@ skills/
 ├── 08-refactor/
 ├── 09-commit/
 │   └── readme-format.md         # formato README: intestazione, badge, indice
-└── 10-guardrail-scope/
+├── 10-push/
+└── guardrail-scope/             # regola trasversale, non numerata
     └── SKILL.md
 ```
 
@@ -295,6 +308,6 @@ skills/
 ## 📝 Note
 
 - Le skill sono in italiano ma il codice generato segue le convenzioni del progetto (inglese se il codebase è in inglese).
-- I file `plan.md` / `spec.md` / `tasks.md` nelle cartelle skill sono **template di riferimento**, non vengono modificati durante l'uso. I file di lavoro veri vivono **sempre** nel progetto sotto `.claude/` (`spec.md`, `plan.md`, `tasks.md`, `analysis.md`, `review.md`, l'eventuale `test-report.md`, più `project-profile.md` e, nel profilo Software, `development.md`). Mai nella root del progetto, mai nella cartella della skill — regola rafforzata dal Check n°3 di `10-guardrail-scope`.
+- I file `plan.md` / `spec.md` / `tasks.md` nelle cartelle skill sono **template di riferimento**, non vengono modificati durante l'uso. I file di lavoro veri vivono **sempre** nel progetto sotto `.claude/` (`spec.md`, `plan.md`, `tasks.md`, `analysis.md`, `review.md`, l'eventuale `test-report.md`, più `project-profile.md` e, nel profilo Software, `development.md`). Mai nella root del progetto, mai nella cartella della skill — regola rafforzata dal Check n°3 di `guardrail-scope`.
 - Se dopo una sessione trovi uno di questi file nella root del progetto (residuo da versioni precedenti delle skill), spostalo dentro `.claude/`: le skill ora sanno gestirlo, ma un file omonimo in root può confondere le fasi successive.
-- La skill `10-guardrail-scope` è pensata anche per essere invocata fuori dal workflow feature-driven, in qualunque task che tocchi codice.
+- La skill `guardrail-scope` vale anche fuori dal workflow feature-driven, in qualunque task che tocchi codice.

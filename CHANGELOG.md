@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-10-22
+### Added
+- `/10-push`: optional final phase that checks the branch against the remote, shows the outgoing commits, pushes after confirmation and opens a pull request on request.
+
+### Changed
+- **Breaking:** the scope guardrail is renamed `10-guardrail-scope` → `guardrail-scope` and no longer appears in the `/` menu; Claude applies it on its own.
+- **Breaking:** `09-commit` works locally only; pushing and pull requests move to `/10-push`.
+- Phases are numbered out of 10 ("Fase N/10").
+- Installers remove previously installed skills from an explicit list of old names, including the old `10-guardrail-scope` folder.
+
 ## [1.2.0] - 2026-10-22
 ### Added
 - `09-commit` generates READMEs with a centered title and tagline, a single row of shields.io badges (version, technologies, and license/platform/last commit when available) and an index with emoji section titles.

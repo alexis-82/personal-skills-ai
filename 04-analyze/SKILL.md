@@ -5,7 +5,7 @@ description: Analisi critica di un piano tecnico, del codice esistente o di un p
 
 # Analisi critica
 
-Fase 4/9 del workflow. Trova i problemi prima che diventino costosi.
+Fase 4/10 del workflow. Trova i problemi prima che diventino costosi.
 
 > **⚠ Output path (regola dura)**
 > Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.claude/` nella root del progetto:

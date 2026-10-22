@@ -5,7 +5,7 @@ description: Chiarire una spec attraverso un dialogo di brainstorming con lo svi
 
 # Chiarimento requisiti + Brainstorming
 
-Fase 2/9 del workflow. Due obiettivi intrecciati:
+Fase 2/10 del workflow. Due obiettivi intrecciati:
 
 > **⚠ Output path (regola dura)**
 > Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.claude/` nella root del progetto:

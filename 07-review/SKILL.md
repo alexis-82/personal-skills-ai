@@ -5,7 +5,7 @@ description: Revisione critica del codice appena implementato — correttezza, e
 
 # Code Review
 
-Fase 7/9 del workflow. Trova problemi nel **codice implementato** prima che finiscano in un commit.
+Fase 7/10 del workflow. Trova problemi nel **codice implementato** prima che finiscano in un commit.
 
 > **⚠ Output path (regola dura)**
 > Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.claude/` nella root del progetto:
@@ -52,7 +52,7 @@ Sono complementari, non alternative.
 
 ## Regole
 
-- **[GUARDRAIL SCOPE]** Revisiona **solo** il codice modificato/aggiunto dall'implementazione corrente, non il resto del codebase. Se noti problemi in codice preesistente non toccato, elencali in una sezione separata "Fuori scope — segnalazioni" senza suggerire di risolverli in questo ciclo. Vedi `/10-guardrail-scope`.
+- **[GUARDRAIL SCOPE]** Revisiona **solo** il codice modificato/aggiunto dall'implementazione corrente, non il resto del codebase. Se noti problemi in codice preesistente non toccato, elencali in una sezione separata "Fuori scope — segnalazioni" senza suggerire di risolverli in questo ciclo. Vedi la skill `guardrail-scope`.
 - **[NON-GOALS]** I Non-Goals di `.claude/spec.md` valgono anche in review: non trattare come "problema" qualcosa che è esplicitamente dichiarato fuori scope (es. "NON parallelizzare" non è un finding di prestazioni).
 - Ogni finding **blocker** e **major** deve avere uno scenario di fallimento concreto (input → output sbagliato), non speculazioni tipo "potrebbe rompersi".
 - Preferire **pochi finding solidi** a molti speculativi. Meglio 3 problemi certi che 15 ipotesi.

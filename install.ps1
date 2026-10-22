@@ -13,6 +13,21 @@ $skills = @(
     '07-review',
     '08-refactor',
     '09-commit',
+    '10-push',
+    'guardrail-scope'
+)
+
+# Nomi usati da versioni precedenti, da rimuovere se installati
+$legacySkills = @(
+    'spec',
+    'clarify',
+    'plan-tasks',
+    'analyze',
+    'implement',
+    'test',
+    'review',
+    'refactor',
+    'commit',
     '10-guardrail-scope'
 )
 
@@ -27,9 +42,9 @@ if (-not (Test-Path $targetDir)) {
     Write-Host "Creata directory $targetDir"
 }
 
-# Rimuovi le versioni precedenti senza numerazione (evita skill duplicate)
-foreach ($skill in $skills) {
-    $legacy = Join-Path $targetDir ($skill -replace '^\d{2}-', '')
+# Rimuovi le versioni precedenti con i vecchi nomi (evita skill duplicate)
+foreach ($name in $legacySkills) {
+    $legacy = Join-Path $targetDir $name
     if (Test-Path $legacy) {
         Remove-Item -Recurse -Force $legacy
         Write-Host "  RM  $(Split-Path $legacy -Leaf) (vecchio nome)" -ForegroundColor Yellow

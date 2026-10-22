@@ -14,6 +14,21 @@ SKILLS=(
     07-review
     08-refactor
     09-commit
+    10-push
+    guardrail-scope
+)
+
+# Nomi usati da versioni precedenti, da rimuovere se installati
+LEGACY_SKILLS=(
+    spec
+    clarify
+    plan-tasks
+    analyze
+    implement
+    test
+    review
+    refactor
+    commit
     10-guardrail-scope
 )
 
@@ -34,12 +49,12 @@ printf "${C_CYAN}Installazione skill in: %s${C_RESET}\n\n" "$TARGET_DIR"
 
 mkdir -p "$TARGET_DIR"
 
-# Rimuovi le versioni precedenti senza numerazione (evita skill duplicate)
-for skill in "${SKILLS[@]}"; do
-    legacy="$TARGET_DIR/${skill#[0-9][0-9]-}"
+# Rimuovi le versioni precedenti con i vecchi nomi (evita skill duplicate)
+for name in "${LEGACY_SKILLS[@]}"; do
+    legacy="$TARGET_DIR/$name"
     if [ -d "$legacy" ]; then
         rm -rf "$legacy"
-        printf "  ${C_YELLOW}RM${C_RESET}  %s (vecchio nome)\n" "${skill#[0-9][0-9]-}"
+        printf "  ${C_YELLOW}RM${C_RESET}  %s (vecchio nome)\n" "$name"
     fi
 done
 

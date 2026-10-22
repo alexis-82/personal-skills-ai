@@ -5,7 +5,7 @@ description: Migliorare la qualità del codice appena implementato senza cambiar
 
 # Refactoring
 
-Fase 8/9 del workflow. Migliora la struttura mantenendo il comportamento, prima del commit finale.
+Fase 8/10 del workflow. Migliora la struttura mantenendo il comportamento, prima del commit finale.
 
 > **⚠ Output path (regola dura)**
 > Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.claude/` nella root del progetto:
@@ -42,7 +42,7 @@ Codice più semplice/leggibile, comportamento invariato (suite ancora verde), pr
 
 ## Regole
 
-- **[GUARDRAIL SCOPE]** Il refactor ha binari anche quando è il task principale: opera **solo** sui file/aree toccati dall'implementazione corrente. Non allargare lo scope a codice preesistente non correlato perché "già che ci sono". Vedi `/10-guardrail-scope`.
+- **[GUARDRAIL SCOPE]** Il refactor ha binari anche quando è il task principale: opera **solo** sui file/aree toccati dall'implementazione corrente. Non allargare lo scope a codice preesistente non correlato perché "già che ci sono". Vedi la skill `guardrail-scope`.
 - **[NON-GOALS]** I Non-Goals di `.claude/spec.md` valgono anche in refactor: se la spec dice "NON toccare il modulo X" o "NON ottimizzare le query esistenti", questo divieto si applica anche qui — anche se il modulo X sembra "urlare" per essere pulito.
 - Non mescolare refactor e cambio di comportamento — se scopri di dover cambiare comportamento, torna a `/05-implement`.
 - Se un refactor rompe i test, capire se il test era sbagliato o se il refactor ha cambiato il comportamento — nel dubbio, revertire.
