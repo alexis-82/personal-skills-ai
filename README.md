@@ -1,4 +1,32 @@
+<div align="center">
+
 # Feature-Driven Workflow — Claude Code Skills
+
+**10 skill per Claude Code che portano una funzionalità dalla spec al commit, senza uscire dallo scope.**
+
+[![Version](https://img.shields.io/badge/version-1.0.0-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![Claude Code](https://img.shields.io/badge/Claude%20Code-skills-D97757?style=plastic&logo=anthropic&logoColor=white)](https://claude.com/claude-code)&nbsp;&nbsp;&nbsp;[![Markdown](https://img.shields.io/badge/Markdown-000000?style=plastic&logo=markdown&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=plastic&logo=powershell&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Bash](https://img.shields.io/badge/Bash-4EAA25?style=plastic&logo=gnubash&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=plastic)](#)&nbsp;&nbsp;&nbsp;[![Last commit](https://img.shields.io/github/last-commit/alexis-82/personal-skills-claude?style=plastic)](https://github.com/alexis-82/personal-skills-claude/commits)
+
+</div>
+
+---
+
+<a id="indice"></a>
+## 📑 Indice
+
+- [✨ Cos'è](#cose)
+- [🧩 Le 10 skill, seguire il workflow in questo ordine](#le-10-skill-seguire-il-workflow-in-questo-ordine)
+- [🧠 Concetti chiave](#concetti-chiave)
+- [🚀 Installazione](#installazione)
+- [🛠️ Come si usano](#come-si-usano)
+- [💡 Esempio di flusso completo](#esempio-di-flusso-completo)
+- [📁 Struttura file](#struttura-file)
+- [🎨 Personalizzazione](#personalizzazione)
+- [📝 Note](#note)
+
+---
+
+<a id="cose"></a>
+## ✨ Cos'è
 
 Set di **10 skill** per Claude Code che strutturano lo sviluppo di una funzionalità in fasi discrete, dalla spec iniziale al commit finale, con un **guardrail cross-cutting** che impedisce all'AI di uscire fuori dallo scope della richiesta.
 
@@ -6,28 +34,8 @@ Le skill sono **stack-agnostic**: funzionano per script Python, librerie, CLI to
 
 ---
 
-## Indice
-
-- [Le 10 skill, seguire il workflow in questo ordine](#le-10-skill-seguire-il-workflow-in-questo-ordine)
-- [Concetti chiave](#concetti-chiave)
-  - [Goals / Non-Goals](#goals--non-goals)
-  - [Guardrail: disciplina dello scope](#guardrail-disciplina-dello-scope)
-  - [CHANGELOG automatico](#changelog-automatico)
-- [Installazione](#installazione)
-  - [Windows (PowerShell)](#windows-powershell)
-  - [Linux / macOS (bash)](#linux--macos-bash)
-  - [Cosa fanno gli script](#cosa-fanno-gli-script)
-- [Come si usano](#come-si-usano)
-  - [Invocazione esplicita](#invocazione-esplicita)
-  - [Attivazione automatica](#attivazione-automatica)
-- [Esempio di flusso completo](#esempio-di-flusso-completo)
-- [Struttura file](#struttura-file)
-- [Personalizzazione](#personalizzazione)
-- [Note](#note)
-
----
-
-## Le 10 skill, seguire il workflow in questo ordine
+<a id="le-10-skill-seguire-il-workflow-in-questo-ordine"></a>
+## 🧩 Le 10 skill, seguire il workflow in questo ordine
 
 | # | Skill | Ruolo | Output principale |
 |---|-------|-------|-------------------|
@@ -46,7 +54,8 @@ Ordine tipico: `spec → clarify → plan-tasks → (analyze) → implement → 
 
 ---
 
-## Concetti chiave
+<a id="concetti-chiave"></a>
+## 🧠 Concetti chiave
 
 ### Goals / Non-Goals
 
@@ -99,7 +108,8 @@ A ogni ciclo `09-commit` crea o aggiorna `CHANGELOG.md` nella **root del progett
 
 ---
 
-## Installazione
+<a id="installazione"></a>
+## 🚀 Installazione
 
 Le skill vanno installate in `~/.claude/skills/` (su Windows: `C:\Users\<utente>\.claude\skills\`). Nel repo trovi due script che copiano le 9 cartelle nella destinazione, sovrascrivendo eventuali versioni precedenti con lo stesso nome.
 
@@ -137,7 +147,8 @@ Ogni cartella skill contiene:
 
 ---
 
-## Come si usano
+<a id="come-si-usano"></a>
+## 🛠️ Come si usano
 
 ### Invocazione esplicita
 
@@ -168,7 +179,8 @@ Le skill si attivano da sole in base al `description` YAML. Frasi che le trigger
 
 ---
 
-## Esempio di flusso completo
+<a id="esempio-di-flusso-completo"></a>
+## 💡 Esempio di flusso completo
 
 Immagina di dover aggiungere un endpoint di export in un servizio Python esistente.
 
@@ -220,7 +232,8 @@ In qualunque momento puoi dire **"attenzione allo scope"** per invocare esplicit
 
 ---
 
-## Struttura file
+<a id="struttura-file"></a>
+## 📁 Struttura file
 
 ```
 skills/
@@ -244,7 +257,8 @@ skills/
 
 ---
 
-## Personalizzazione
+<a id="personalizzazione"></a>
+## 🎨 Personalizzazione
 
 - **Vocabolario**: adatta i termini della `spec.md` al tuo dominio. Il template è neutro (parla di "consumatori", "interfaccia", "unità di codice") — sostituisci con "endpoint", "comando", "modulo", "componente", ecc. secondo il progetto.
 - **Fasi**: se non ti serve una fase (es. analisi o refactor), saltala. Il workflow non è rigido.
@@ -253,7 +267,8 @@ skills/
 
 ---
 
-## Note
+<a id="note"></a>
+## 📝 Note
 
 - Le skill sono in italiano ma il codice generato segue le convenzioni del progetto (inglese se il codebase è in inglese).
 - I file `plan.md` / `spec.md` / `tasks.md` nelle cartelle skill sono **template di riferimento**, non vengono modificati durante l'uso. I file di lavoro veri vivono **sempre** nel progetto sotto `.claude/` (`spec.md`, `plan.md`, `tasks.md`, `analysis.md`, `review.md` e l'eventuale `test-report.md`). Mai nella root del progetto, mai nella cartella della skill — regola rafforzata dal Check n°3 di `10-guardrail-scope`.
