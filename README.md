@@ -111,6 +111,31 @@ A ogni ciclo `09-commit` crea o aggiorna `CHANGELOG.md` nella **root del progett
 <a id="installazione"></a>
 ## 🚀 Installazione
 
+### Requisiti
+
+- **pi 1.0.3** o superiore.
+- **Node.js superiore alla 22.14**, richiesto da pi 1.0.3 e successivi.
+
+### Usare Claude con un abbonamento Pro/Max
+
+Per usare i modelli Claude con un abbonamento **Claude Pro o Max**, pi ha bisogno dell'estensione [`pi-claude-pro`](https://www.npmjs.com/package/pi-claude-pro): senza, l'abbonamento non funziona.
+
+```bash
+pi install npm:pi-claude-pro
+```
+
+| Operazione | Comando |
+|------------|---------|
+| Provarla per una sola sessione, senza installarla | `pi -e npm:pi-claude-pro` |
+| Riallinearla | `pi update --extensions` |
+| Disinstallarla | `pi remove npm:pi-claude-pro` |
+
+- Usa **una sola** estensione che gestisce il provider `anthropic`: rimuovi le altre estensioni per abbonamenti Claude prima di installare questa.
+- Claude Code non è necessario. Se il comando `claude` è nel `PATH`, l'estensione ne invia la versione; altrimenti invia quella inclusa nell'estensione.
+- È un'estensione di terze parti: come tutte le estensioni pi, gira con gli stessi permessi di pi. Controllane il sorgente prima di installarla.
+
+### Installare le skill
+
 Le skill si installano come **pi package**, direttamente da questo branch:
 
 ```bash
