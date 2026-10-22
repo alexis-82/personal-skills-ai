@@ -8,15 +8,15 @@ description: Migliorare la qualità del codice appena implementato senza cambiar
 Fase 8/9 del workflow. Migliora la struttura mantenendo il comportamento, prima del commit finale.
 
 > **⚠ Output path (regola dura)**
-> Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.claude/` nella root del progetto:
-> `.claude/spec.md`, `.claude/plan.md`, `.claude/tasks.md`, `.claude/analysis.md`, `.claude/review.md`, `.claude/test-report.md`.
-> **Mai** nella root del progetto. **Mai** nella cartella della skill (`~/.claude/skills/...`).
+> Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.pi-workflow/` nella root del progetto:
+> `.pi-workflow/spec.md`, `.pi-workflow/plan.md`, `.pi-workflow/tasks.md`, `.pi-workflow/analysis.md`, `.pi-workflow/review.md`, `.pi-workflow/test-report.md`.
+> **Mai** nella root del progetto. **Mai** nella cartella della skill (quella in cui pi l'ha installata).
 >
 > **Prima di scrivere il primo file, obbligatorio**:
-> 1. Se `.claude/` non esiste nella root del progetto, crearla.
-> 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.claude/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
+> 1. Se `.pi-workflow/` non esiste nella root del progetto, crearla.
+> 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.pi-workflow/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
 >
-> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.claude/` del progetto.
+> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.pi-workflow/` del progetto.
 
 ## Perché prima del commit
 
@@ -34,7 +34,7 @@ Con i test verdi (fase 06) hai la rete di sicurezza per pulire il codice. Fare r
    - Eseguire i test dopo ogni cambio.
    - Se rompe qualcosa: revertire e riprovare in modo più piccolo.
 5. Non introdurre astrazioni "per il futuro" — solo se emergono da 3+ casi reali già presenti.
-6. Al termine, passare a `/09-commit` per consolidare.
+6. Al termine, passare a `/skill:09-commit` per consolidare.
 
 ## Output atteso
 
@@ -42,9 +42,9 @@ Codice più semplice/leggibile, comportamento invariato (suite ancora verde), pr
 
 ## Regole
 
-- **[GUARDRAIL SCOPE]** Il refactor ha binari anche quando è il task principale: opera **solo** sui file/aree toccati dall'implementazione corrente. Non allargare lo scope a codice preesistente non correlato perché "già che ci sono". Vedi `/10-guardrail-scope`.
-- **[NON-GOALS]** I Non-Goals di `.claude/spec.md` valgono anche in refactor: se la spec dice "NON toccare il modulo X" o "NON ottimizzare le query esistenti", questo divieto si applica anche qui — anche se il modulo X sembra "urlare" per essere pulito.
-- Non mescolare refactor e cambio di comportamento — se scopri di dover cambiare comportamento, torna a `/05-implement`.
+- **[GUARDRAIL SCOPE]** Il refactor ha binari anche quando è il task principale: opera **solo** sui file/aree toccati dall'implementazione corrente. Non allargare lo scope a codice preesistente non correlato perché "già che ci sono". Vedi `/skill:10-guardrail-scope`.
+- **[NON-GOALS]** I Non-Goals di `.pi-workflow/spec.md` valgono anche in refactor: se la spec dice "NON toccare il modulo X" o "NON ottimizzare le query esistenti", questo divieto si applica anche qui — anche se il modulo X sembra "urlare" per essere pulito.
+- Non mescolare refactor e cambio di comportamento — se scopri di dover cambiare comportamento, torna a `/skill:05-implement`.
 - Se un refactor rompe i test, capire se il test era sbagliato o se il refactor ha cambiato il comportamento — nel dubbio, revertire.
 - No refactor speculativi: se il codice funziona ed è leggibile "abbastanza", lascialo stare e passa al commit.
 - Aggiungere astrazioni solo quando ne emerge il bisogno, non prima.

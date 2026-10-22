@@ -1,0 +1,22 @@
+{
+  "name": "feature-driven-workflow-pi",
+  "private": true,
+  "description": "10 pi skills that take a feature from spec to commit without leaving scope.",
+  "keywords": [
+    "pi-package"
+  ],
+  "pi": {
+    "skills": [
+      "./01-spec",
+      "./02-clarify",
+      "./03-plan-tasks",
+      "./04-analyze",
+      "./05-implement",
+      "./06-test",
+      "./07-review",
+      "./08-refactor",
+      "./09-commit",
+      "./10-guardrail-scope"
+    ]
+  }
+}

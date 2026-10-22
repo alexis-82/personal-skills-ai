@@ -8,15 +8,15 @@ description: Creare commit ben strutturati e opzionalmente aprire una pull reque
 Fase 9/9 del workflow. Consolida il lavoro (implementazione + test + refactor) in git in modo revisionabile.
 
 > **⚠ Output path (regola dura)**
-> Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.claude/` nella root del progetto:
-> `.claude/spec.md`, `.claude/plan.md`, `.claude/tasks.md`, `.claude/analysis.md`, `.claude/review.md`, `.claude/test-report.md`.
-> **Mai** nella root del progetto. **Mai** nella cartella della skill (`~/.claude/skills/...`).
+> Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.pi-workflow/` nella root del progetto:
+> `.pi-workflow/spec.md`, `.pi-workflow/plan.md`, `.pi-workflow/tasks.md`, `.pi-workflow/analysis.md`, `.pi-workflow/review.md`, `.pi-workflow/test-report.md`.
+> **Mai** nella root del progetto. **Mai** nella cartella della skill (quella in cui pi l'ha installata).
 >
 > **Prima di scrivere il primo file, obbligatorio**:
-> 1. Se `.claude/` non esiste nella root del progetto, crearla.
-> 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.claude/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
+> 1. Se `.pi-workflow/` non esiste nella root del progetto, crearla.
+> 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.pi-workflow/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
 >
-> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.claude/` del progetto.
+> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.pi-workflow/` del progetto.
 >
 > **Eccezione**: `CHANGELOG.md` è un file di prodotto, non di workflow — va nella **root del progetto** (vedi [Aggiornamento CHANGELOG](#aggiornamento-changelog)).
 
@@ -38,11 +38,11 @@ Fase 9/9 del workflow. Consolida il lavoro (implementazione + test + refactor) i
 
 ## Aggiornamento CHANGELOG
 
-> **Eccezione al path**: `CHANGELOG.md` **non** è un file di workflow. Va nella **root del progetto** (`git rev-parse --show-toplevel`), mai in `.claude/` né nella cartella della skill.
+> **Eccezione al path**: `CHANGELOG.md` **non** è un file di workflow. Va nella **root del progetto** (`git rev-parse --show-toplevel`), mai in `.pi-workflow/` né nella cartella della skill.
 
 Eseguire i sotto-passi in ordine:
 
-1. **Classificare il ciclo.** Fonti: Goals di `.claude/spec.md` e task completati in `.claude/tasks.md` se esistono, altrimenti solo il diff. Ignorare i file sotto `.claude/`.
+1. **Classificare il ciclo.** Fonti: Goals di `.pi-workflow/spec.md` e task completati in `.pi-workflow/tasks.md` se esistono, altrimenti solo il diff. Ignorare i file sotto `.pi-workflow/`.
    - Se **non** ci sono cambiamenti visibili a chi usa il prodotto (solo refactor, chore, test, documentazione interna) → **saltare il CHANGELOG** e scrivere in chat: "CHANGELOG non aggiornato: <motivo>". Passare al punto 5 di "Cosa fare".
 2. **Riprendere un tentativo precedente.** Eseguire `git diff HEAD -- CHANGELOG.md`. Se mostra una voce `## [X.Y.Z]` aggiunta e non ancora committata (es. hook pre-commit fallito, commit rilanciato), quella voce va **sostituita**, non affiancata: rimuovere solo quella voce (il resto del file non si tocca) e proseguire dal sotto-passo 3. Versione e voce vanno **ricalcolate**, perché nel frattempo il contenuto del ciclo può essere cambiato (es. un fix diventato anche una feature: `1.2.1` → `1.3.0`).
 3. **Determinare la versione** (SemVer):
@@ -79,11 +79,11 @@ Eseguire i sotto-passi in ordine:
 
 ## Output atteso
 
-Commit creati (feature + eventuale refactor separati), git tree pulito, `.claude/tasks.md` con tutti i task marcati `- [x]`, eventuale PR aperta. `CHANGELOG.md` nella root del progetto creato o aggiornato con la nuova voce nel commit della feature, oppure dichiarazione esplicita in chat del perché è stato saltato.
+Commit creati (feature + eventuale refactor separati), git tree pulito, `.pi-workflow/tasks.md` con tutti i task marcati `- [x]`, eventuale PR aperta. `CHANGELOG.md` nella root del progetto creato o aggiornato con la nuova voce nel commit della feature, oppure dichiarazione esplicita in chat del perché è stato saltato.
 
 ## Regole
 
-- **[GUARDRAIL SCOPE]** Prima di committare, rileggi il diff riga per riga: ogni modifica deve essere motivabile con il task richiesto. Se una riga non serve, rimuovila. Vedi `/10-guardrail-scope`.
+- **[GUARDRAIL SCOPE]** Prima di committare, rileggi il diff riga per riga: ogni modifica deve essere motivabile con il task richiesto. Se una riga non serve, rimuovila. Vedi `/skill:10-guardrail-scope`.
 - Mai `git add -A` alla cieca — nomi di file espliciti o `git status` prima.
 - Mai `--no-verify`, `--force`, `reset --hard` senza richiesta esplicita.
 - Se un hook pre-commit fallisce, correggere la causa e fare un **nuovo** commit, non `--amend`.

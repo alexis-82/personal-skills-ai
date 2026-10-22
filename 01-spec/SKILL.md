@@ -8,27 +8,27 @@ description: Definire la specifica di una nuova funzionalità partendo da un'ide
 Fase 1/9 del workflow. Trasforma un'idea in una specifica azionabile con confini chiari.
 
 > **⚠ Output path (regola dura)**
-> Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.claude/` nella root del progetto:
-> `.claude/spec.md`, `.claude/plan.md`, `.claude/tasks.md`, `.claude/analysis.md`, `.claude/review.md`, `.claude/test-report.md`.
-> **Mai** nella root del progetto. **Mai** nella cartella della skill (`~/.claude/skills/...`).
+> Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.pi-workflow/` nella root del progetto:
+> `.pi-workflow/spec.md`, `.pi-workflow/plan.md`, `.pi-workflow/tasks.md`, `.pi-workflow/analysis.md`, `.pi-workflow/review.md`, `.pi-workflow/test-report.md`.
+> **Mai** nella root del progetto. **Mai** nella cartella della skill (quella in cui pi l'ha installata).
 >
 > **Prima di scrivere il primo file, obbligatorio**:
-> 1. Se `.claude/` non esiste nella root del progetto, crearla.
-> 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.claude/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
+> 1. Se `.pi-workflow/` non esiste nella root del progetto, crearla.
+> 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.pi-workflow/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
 >
-> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.claude/` del progetto.
+> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.pi-workflow/` del progetto.
 
 ## Cosa fare
 
 1. Leggere `plan.md` per il metodo, `spec.md` come template di output, `tasks.md` per la checklist operativa.
 2. Chiedere all'utente (o dedurre dal contesto) chi sono gli utenti, cosa devono ottenere e con quali vincoli.
-3. Compilare `.claude/spec.md` nella cartella del progetto (non in questa cartella skill, non nella root). Creare la cartella `.claude/` se non esiste. Il file deve contenere **tutte** le sezioni sotto, incluse Goals e Non-Goals.
+3. Compilare `.pi-workflow/spec.md` nella cartella del progetto (non in questa cartella skill, non nella root). Creare la cartella `.pi-workflow/` se non esiste. Il file deve contenere **tutte** le sezioni sotto, incluse Goals e Non-Goals.
 4. Rileggere Non-Goals con l'utente prima di procedere — è la sezione più importante per prevenire scope creep.
-5. Al termine, suggerire di passare a `/02-clarify` se restano ambiguità, altrimenti a `/03-plan-tasks`.
+5. Al termine, suggerire di passare a `/skill:02-clarify` se restano ambiguità, altrimenti a `/skill:03-plan-tasks`.
 
 ## Output atteso
 
-Un file `.claude/spec.md` nel progetto con queste sezioni **obbligatorie**:
+Un file `.pi-workflow/spec.md` nel progetto con queste sezioni **obbligatorie**:
 
 - **Obiettivo** — una frase che riassume perché questa feature esiste.
 - **Goals** — 3-7 bullet con cosa la feature **deve** fare. Ogni goal deve essere verificabile (superato/fallito), non aspirazionale.

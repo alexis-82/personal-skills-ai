@@ -8,7 +8,7 @@
 ## Brainstorming (obbligatorio)
 4. [ ] Per ogni punto decisionale, presentare 2-4 alternative con `pro`/`contro`/`quando conviene`
 5. [ ] Dichiarare la raccomandazione (senza imporla)
-6. [ ] Aprire domanda focalizzata con `AskUserQuestion`
+6. [ ] Aprire domanda focalizzata in chat con le alternative come opzioni numerate
 7. [ ] Discutere eventuali alternative proposte dallo sviluppatore
 
 ## Convergenza

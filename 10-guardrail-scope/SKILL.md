@@ -13,13 +13,13 @@ L'AI lavora su binari stretti. Modifica **solo** ciò che è strettamente necess
 
 ## Check n°1: i Non-Goals dichiarati
 
-Se esiste `.claude/spec.md` con una sezione **Non-Goals**, quella è la fonte di verità **prioritaria** su cosa NON fare. Prima di qualunque modifica:
+Se esiste `.pi-workflow/spec.md` con una sezione **Non-Goals**, quella è la fonte di verità **prioritaria** su cosa NON fare. Prima di qualunque modifica:
 
 1. Rileggere i Non-Goals.
 2. Per ogni modifica pianificata, chiedersi: "questa modifica viola un Non-Goal?"
 3. Se sì → **fermarsi**, non farla, segnalarlo all'utente.
 
-I Non-Goals sono un **contratto** già firmato dall'utente in fase spec: non vanno rinegoziati implicitamente durante l'implementazione. Se un Non-Goal sembra dover cambiare, tornare a `/01-spec` o `/02-clarify` e aggiornarlo esplicitamente.
+I Non-Goals sono un **contratto** già firmato dall'utente in fase spec: non vanno rinegoziati implicitamente durante l'implementazione. Se un Non-Goal sembra dover cambiare, tornare a `/skill:01-spec` o `/skill:02-clarify` e aggiornarlo esplicitamente.
 
 ## Check n°2: cosa NON fare (mai, senza autorizzazione esplicita)
 
@@ -39,25 +39,25 @@ Anche in assenza di Non-Goals espliciti, valgono queste regole di default:
 
 ## Check n°3: dove finiscono i file di workflow (regola dura)
 
-Tutti i file prodotti dalle skill di questo workflow vivono **esclusivamente** in `.claude/` nella root del progetto:
+Tutti i file prodotti dalle skill di questo workflow vivono **esclusivamente** in `.pi-workflow/` nella root del progetto:
 
-- `.claude/spec.md`
-- `.claude/plan.md`
-- `.claude/tasks.md`
-- `.claude/analysis.md`
-- `.claude/review.md`
-- `.claude/test-report.md`
+- `.pi-workflow/spec.md`
+- `.pi-workflow/plan.md`
+- `.pi-workflow/tasks.md`
+- `.pi-workflow/analysis.md`
+- `.pi-workflow/review.md`
+- `.pi-workflow/test-report.md`
 
 Regole:
 
 1. **Mai** creare uno di questi file nella root del progetto.
-2. **Mai** creare uno di questi file nella cartella della skill (`~/.claude/skills/<nome>/`).
-3. Se `.claude/` non esiste nella root del progetto, crearla **prima** di scrivere il primo file.
-4. Se durante il lavoro trovi uno di questi file per errore nella root del progetto (residui da sessioni precedenti), **spostalo** (git mv se tracciato, mv altrimenti) in `.claude/` prima di procedere; non duplicarlo.
-5. Il file `.claude/` è parte dei metadati del progetto, non dell'output finale: valuta con l'utente se andare in `.gitignore` o essere versionato — non è una decisione da prendere in autonomia.
-6. `CHANGELOG.md` **non** è un file di workflow: è un file di prodotto e va nella **root del progetto**, mai in `.claude/` (lo gestisce `09-commit`).
+2. **Mai** creare uno di questi file nella cartella della skill (quella in cui pi l'ha installata).
+3. Se `.pi-workflow/` non esiste nella root del progetto, crearla **prima** di scrivere il primo file.
+4. Se durante il lavoro trovi uno di questi file per errore nella root del progetto (residui da sessioni precedenti), **spostalo** (git mv se tracciato, mv altrimenti) in `.pi-workflow/` prima di procedere; non duplicarlo.
+5. Il file `.pi-workflow/` è parte dei metadati del progetto, non dell'output finale: valuta con l'utente se andare in `.gitignore` o essere versionato — non è una decisione da prendere in autonomia.
+6. `CHANGELOG.md` **non** è un file di workflow: è un file di prodotto e va nella **root del progetto**, mai in `.pi-workflow/` (lo gestisce `09-commit`).
 
-Confusione da evitare: dentro ogni cartella skill (`~/.claude/skills/01-spec/`, `~/.claude/skills/03-plan-tasks/`, ecc.) esistono file `plan.md`, `spec.md`, `tasks.md` — quelli sono **template/checklist di riferimento** della skill, si **leggono** ma non si toccano. I file di lavoro veri stanno **solo** in `.claude/` del progetto corrente.
+Confusione da evitare: dentro ogni cartella skill (`01-spec/`, `03-plan-tasks/`, ecc., dove pi le ha installate) esistono file `plan.md`, `spec.md`, `tasks.md` — quelli sono **template/checklist di riferimento** della skill, si **leggono** ma non si toccano. I file di lavoro veri stanno **solo** in `.pi-workflow/` del progetto corrente.
 
 ## Cosa fare quando si trova un problema fuori scope
 
@@ -74,7 +74,7 @@ Se un cambio **fuori scope** è tecnicamente **necessario** perché quello **den
 Doppia domanda su **ogni riga cambiata** nel diff:
 
 1. "Questa riga è strettamente necessaria al task richiesto?" — se no, rimuovila.
-2. "Questa riga viola un Non-Goal dichiarato in `.claude/spec.md`?" — se sì, rimuovila e segnala.
+2. "Questa riga viola un Non-Goal dichiarato in `.pi-workflow/spec.md`?" — se sì, rimuovila e segnala.
 
 Se anche una sola risposta è ambigua, il commit non è pronto.
 

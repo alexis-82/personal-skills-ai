@@ -1,6 +1,6 @@
 ---
 name: 05-implement
-description: Implementare la funzionalità seguendo un piano e una task list già definiti. Usare quando l'utente dice "implementa", "scrivi il codice", "esegui i task" o simili, e esistono già .claude/plan.md e .claude/tasks.md nel progetto. Quinta fase del workflow feature-driven.
+description: Implementare la funzionalità seguendo un piano e una task list già definiti. Usare quando l'utente dice "implementa", "scrivi il codice", "esegui i task" o simili, e esistono già .pi-workflow/plan.md e .pi-workflow/tasks.md nel progetto. Quinta fase del workflow feature-driven.
 ---
 
 # Implementazione
@@ -8,36 +8,36 @@ description: Implementare la funzionalità seguendo un piano e una task list gi�
 Fase 5/9 del workflow. Da piano a codice funzionante.
 
 > **⚠ Output path (regola dura)**
-> Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.claude/` nella root del progetto:
-> `.claude/spec.md`, `.claude/plan.md`, `.claude/tasks.md`, `.claude/analysis.md`, `.claude/review.md`, `.claude/test-report.md`.
-> **Mai** nella root del progetto. **Mai** nella cartella della skill (`~/.claude/skills/...`).
+> Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.pi-workflow/` nella root del progetto:
+> `.pi-workflow/spec.md`, `.pi-workflow/plan.md`, `.pi-workflow/tasks.md`, `.pi-workflow/analysis.md`, `.pi-workflow/review.md`, `.pi-workflow/test-report.md`.
+> **Mai** nella root del progetto. **Mai** nella cartella della skill (quella in cui pi l'ha installata).
 >
 > **Prima di scrivere il primo file, obbligatorio**:
-> 1. Se `.claude/` non esiste nella root del progetto, crearla.
-> 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.claude/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
+> 1. Se `.pi-workflow/` non esiste nella root del progetto, crearla.
+> 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.pi-workflow/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
 >
-> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.claude/` del progetto.
+> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.pi-workflow/` del progetto.
 
 ## Cosa fare
 
 1. Leggere `plan.md`, `spec.md`, `tasks.md` di questa cartella per il metodo.
-2. Leggere `.claude/plan.md`, `.claude/tasks.md` **e le sezioni Goals/Non-Goals di `.claude/spec.md`** del progetto. Tenere i Non-Goals in mente come lista di "vietato".
+2. Leggere `.pi-workflow/plan.md`, `.pi-workflow/tasks.md` **e le sezioni Goals/Non-Goals di `.pi-workflow/spec.md`** del progetto. Tenere i Non-Goals in mente come lista di "vietato".
 3. Per ogni task in ordine:
    - Marcarlo `in_progress`.
    - Implementare la modifica minima che soddisfa il DoD.
    - Verificare rapidamente (compilazione/lint/test unitario mirato) prima di passare al successivo.
-   - Marcarlo `done` in `.claude/tasks.md`.
+   - Marcarlo `done` in `.pi-workflow/tasks.md`.
 4. Se un task rivela che il piano è sbagliato: **fermarsi**, aggiornare il piano, non improvvisare.
-5. Al termine, suggerire `/06-test` per la validazione completa.
+5. Al termine, suggerire `/skill:06-test` per la validazione completa.
 
 ## Output atteso
 
-Codice implementato + `.claude/tasks.md` aggiornato con task completati marcati `- [x]`.
+Codice implementato + `.pi-workflow/tasks.md` aggiornato con task completati marcati `- [x]`.
 
 ## Regole
 
-- **[GUARDRAIL SCOPE]** Modifica solo il codice strettamente necessario al task. Niente pulizie opportunistiche, riformattazioni, rinomine o refactor non richiesti. Vedi `/10-guardrail-scope`.
-- **[NON-GOALS]** Prima di ogni modifica, verificare che non violi un Non-Goal dichiarato in `.claude/spec.md`. Se un task ti sta portando a violare un Non-Goal, **fermati** e segnalalo — probabilmente il piano ha un problema.
+- **[GUARDRAIL SCOPE]** Modifica solo il codice strettamente necessario al task. Niente pulizie opportunistiche, riformattazioni, rinomine o refactor non richiesti. Vedi `/skill:10-guardrail-scope`.
+- **[NON-GOALS]** Prima di ogni modifica, verificare che non violi un Non-Goal dichiarato in `.pi-workflow/spec.md`. Se un task ti sta portando a violare un Non-Goal, **fermati** e segnalalo — probabilmente il piano ha un problema.
 - Un task alla volta — no batch di modifiche non correlate.
 - No feature extra oltre spec: se serve qualcosa fuori scope, aggiungerlo come nuovo task, non implementarlo di nascosto.
 - Preferire modificare file esistenti a crearne di nuovi.

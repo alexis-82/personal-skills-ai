@@ -8,15 +8,15 @@ description: Revisione critica del codice appena implementato — correttezza, e
 Fase 7/9 del workflow. Trova problemi nel **codice implementato** prima che finiscano in un commit.
 
 > **⚠ Output path (regola dura)**
-> Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.claude/` nella root del progetto:
-> `.claude/spec.md`, `.claude/plan.md`, `.claude/tasks.md`, `.claude/analysis.md`, `.claude/review.md`, `.claude/test-report.md`.
-> **Mai** nella root del progetto. **Mai** nella cartella della skill (`~/.claude/skills/...`).
+> Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.pi-workflow/` nella root del progetto:
+> `.pi-workflow/spec.md`, `.pi-workflow/plan.md`, `.pi-workflow/tasks.md`, `.pi-workflow/analysis.md`, `.pi-workflow/review.md`, `.pi-workflow/test-report.md`.
+> **Mai** nella root del progetto. **Mai** nella cartella della skill (quella in cui pi l'ha installata).
 >
 > **Prima di scrivere il primo file, obbligatorio**:
-> 1. Se `.claude/` non esiste nella root del progetto, crearla.
-> 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.claude/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
+> 1. Se `.pi-workflow/` non esiste nella root del progetto, crearla.
+> 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.pi-workflow/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
 >
-> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.claude/` del progetto.
+> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.pi-workflow/` del progetto.
 
 ## Differenza con `04-analyze` (fase 04)
 
@@ -28,34 +28,34 @@ Sono complementari, non alternative.
 ## Cosa fare
 
 1. Leggere `plan.md`, `spec.md`, `tasks.md` di questa cartella per il metodo.
-2. Leggere `.claude/spec.md` (Goals, Non-Goals, criteri di accettazione) e `.claude/plan.md` del progetto.
-3. Recuperare il diff del lavoro corrente (git diff sui file toccati dall'implementazione, o l'elenco dei file modificati in `.claude/tasks.md`).
+2. Leggere `.pi-workflow/spec.md` (Goals, Non-Goals, criteri di accettazione) e `.pi-workflow/plan.md` del progetto.
+3. Recuperare il diff del lavoro corrente (git diff sui file toccati dall'implementazione, o l'elenco dei file modificati in `.pi-workflow/tasks.md`).
 4. Analizzare il codice su **5 assi**:
    - **Correttezza**: la logica soddisfa i criteri di accettazione? Ci sono branch non esercitati? Off-by-one, condizioni invertite, null/undefined non gestiti?
    - **Edge case non coperti**: input vuoti, valori limite, encoding, timezone, precisione numerica, concorrenza, ordini di esecuzione — casi che i test attuali non toccano.
    - **Sicurezza**: input non fidati, injection (SQL/command/path), secret hardcoded, autenticazione/autorizzazione mancanti, escaping, deserializzazione insicura.
    - **Prestazioni**: query N+1, loop nested inutili, chiamate di rete ripetute, allocazioni evitabili nel caldo, blocking I/O in path sincroni.
    - **Leggibilità / manutenibilità**: naming ambiguo, funzioni troppo lunghe, duplicazione, commenti che raccontano il "cosa" invece del "perché", firma poco chiara, abstraction leak.
-5. Produrre `.claude/review.md` nel progetto con findings numerati, ciascuno con:
+5. Produrre `.pi-workflow/review.md` nel progetto con findings numerati, ciascuno con:
    - **Severità**: `blocker` (rompe la feature o è un rischio sicurezza) / `major` (bug sottile o problema di correttezza che sfuggirà ai test) / `minor` (leggibilità, stile, refactor consigliato).
    - **Locazione**: `file:linea` esatta.
    - **Scenario di fallimento** (per blocker/major): input concreto → comportamento sbagliato.
    - **Suggerimento**: una frase con la direzione della fix, non il codice completo.
 6. Al termine, in base ai findings:
-   - Se ci sono **blocker o major**: tornare a `/05-implement` per correggerli, poi rilanciare `/06-test`.
-   - Se ci sono solo **minor** di natura strutturale (duplicazione, naming, funzioni lunghe): passare a `/08-refactor`.
-   - Se non ci sono findings: passare direttamente a `/09-commit`.
+   - Se ci sono **blocker o major**: tornare a `/skill:05-implement` per correggerli, poi rilanciare `/skill:06-test`.
+   - Se ci sono solo **minor** di natura strutturale (duplicazione, naming, funzioni lunghe): passare a `/skill:08-refactor`.
+   - Se non ci sono findings: passare direttamente a `/skill:09-commit`.
 
 ## Output atteso
 
-`.claude/review.md` nel progetto con findings numerati per severità decrescente, oppure dichiarazione esplicita "nessun problema rilevato" con una riga per ognuno dei 5 assi che spieghi perché.
+`.pi-workflow/review.md` nel progetto con findings numerati per severità decrescente, oppure dichiarazione esplicita "nessun problema rilevato" con una riga per ognuno dei 5 assi che spieghi perché.
 
 ## Regole
 
-- **[GUARDRAIL SCOPE]** Revisiona **solo** il codice modificato/aggiunto dall'implementazione corrente, non il resto del codebase. Se noti problemi in codice preesistente non toccato, elencali in una sezione separata "Fuori scope — segnalazioni" senza suggerire di risolverli in questo ciclo. Vedi `/10-guardrail-scope`.
-- **[NON-GOALS]** I Non-Goals di `.claude/spec.md` valgono anche in review: non trattare come "problema" qualcosa che è esplicitamente dichiarato fuori scope (es. "NON parallelizzare" non è un finding di prestazioni).
+- **[GUARDRAIL SCOPE]** Revisiona **solo** il codice modificato/aggiunto dall'implementazione corrente, non il resto del codebase. Se noti problemi in codice preesistente non toccato, elencali in una sezione separata "Fuori scope — segnalazioni" senza suggerire di risolverli in questo ciclo. Vedi `/skill:10-guardrail-scope`.
+- **[NON-GOALS]** I Non-Goals di `.pi-workflow/spec.md` valgono anche in review: non trattare come "problema" qualcosa che è esplicitamente dichiarato fuori scope (es. "NON parallelizzare" non è un finding di prestazioni).
 - Ogni finding **blocker** e **major** deve avere uno scenario di fallimento concreto (input → output sbagliato), non speculazioni tipo "potrebbe rompersi".
 - Preferire **pochi finding solidi** a molti speculativi. Meglio 3 problemi certi che 15 ipotesi.
-- Non riscrivere il codice in questa fase — segnala e basta. Le fix vanno in `/05-implement` o `/08-refactor`.
+- Non riscrivere il codice in questa fase — segnala e basta. Le fix vanno in `/skill:05-implement` o `/skill:08-refactor`.
 - Se un finding richiede di violare un Non-Goal per essere risolto, dichiararlo esplicitamente: la risoluzione va rimandata a una spec successiva, non fatta di nascosto.
 - La review è **critica ma costruttiva**: obiettivo è consegnare codice migliore, non elencare colpe.

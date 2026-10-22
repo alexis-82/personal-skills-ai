@@ -1,6 +1,6 @@
 ---
 name: 02-clarify
-description: Chiarire una spec attraverso un dialogo di brainstorming con lo sviluppatore — esplorare alternative tecniche, stack, architettura, approcci e trade-off, poi risolvere le ambiguità residue. Usare quando l'utente dice "chiarisci", "brainstorma", "esploriamo le opzioni", "quale stack usare", "quali alternative", "cosa manca", "questa spec è vaga", o quando `.claude/spec.md` contiene marker `[?]` / TODO / punti ambigui. Seconda fase del workflow feature-driven, tra spec e plan-tasks.
+description: Chiarire una spec attraverso un dialogo di brainstorming con lo sviluppatore — esplorare alternative tecniche, stack, architettura, approcci e trade-off, poi risolvere le ambiguità residue. Usare quando l'utente dice "chiarisci", "brainstorma", "esploriamo le opzioni", "quale stack usare", "quali alternative", "cosa manca", "questa spec è vaga", o quando `.pi-workflow/spec.md` contiene marker `[?]` / TODO / punti ambigui. Seconda fase del workflow feature-driven, tra spec e plan-tasks.
 ---
 
 # Chiarimento requisiti + Brainstorming
@@ -8,15 +8,15 @@ description: Chiarire una spec attraverso un dialogo di brainstorming con lo svi
 Fase 2/9 del workflow. Due obiettivi intrecciati:
 
 > **⚠ Output path (regola dura)**
-> Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.claude/` nella root del progetto:
-> `.claude/spec.md`, `.claude/plan.md`, `.claude/tasks.md`, `.claude/analysis.md`, `.claude/review.md`, `.claude/test-report.md`.
-> **Mai** nella root del progetto. **Mai** nella cartella della skill (`~/.claude/skills/...`).
+> Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.pi-workflow/` nella root del progetto:
+> `.pi-workflow/spec.md`, `.pi-workflow/plan.md`, `.pi-workflow/tasks.md`, `.pi-workflow/analysis.md`, `.pi-workflow/review.md`, `.pi-workflow/test-report.md`.
+> **Mai** nella root del progetto. **Mai** nella cartella della skill (quella in cui pi l'ha installata).
 >
 > **Prima di scrivere il primo file, obbligatorio**:
-> 1. Se `.claude/` non esiste nella root del progetto, crearla.
-> 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.claude/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
+> 1. Se `.pi-workflow/` non esiste nella root del progetto, crearla.
+> 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.pi-workflow/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
 >
-> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.claude/` del progetto.
+> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.pi-workflow/` del progetto.
 
 1. **Brainstorming** — dialogo aperto e bidirezionale per esplorare alternative (stack, architettura, approcci, trade-off) prima che qualunque decisione venga cementata nel piano.
 2. **Convergenza** — trasformare le esplorazioni in decisioni scritte e risolvere le ambiguità puntuali residue.
@@ -28,7 +28,7 @@ Il brainstorming **non è opzionale**: anche se la spec sembra chiara, ci sono q
 ### Fase A — Analisi (silenziosa)
 
 1. Leggere `plan.md`, `spec.md` (template), `tasks.md` (checklist) di questa cartella.
-2. Aprire `.claude/spec.md` del progetto e ispezionare rapidamente il codebase (stack esistente, convenzioni, dipendenze già presenti) per capire i vincoli reali.
+2. Aprire `.pi-workflow/spec.md` del progetto e ispezionare rapidamente il codebase (stack esistente, convenzioni, dipendenze già presenti) per capire i vincoli reali.
 3. Identificare **due categorie** di punti aperti:
    - **Ambiguità puntuali**: marker `[?]`, TODO, frasi vaghe ("gestire correttamente", "ottimizzato", "user-friendly"), assunzioni non dichiarate.
    - **Punti decisionali**: scelte con più soluzioni valide che la spec non ha ancora vincolato — es. quale libreria/framework, quale storage, quale pattern architetturale, come modellare i dati, dove tracciare i confini di responsabilità, come gestire concorrenza/errori, quale strategia di test.
@@ -40,7 +40,7 @@ Il brainstorming **non è opzionale**: anche se la spec sembra chiara, ci sono q
    - **2-4 alternative concrete e nominate**: non "opzione A vs opzione B" generiche — soluzioni riconoscibili tipo "SQLite vs Postgres vs file JSON", "async con `asyncio` vs sync + thread pool", "modulo dentro il monolite esistente vs microservizio separato".
    - **Per ciascuna alternativa**: `pro` (1-2 bullet concreti), `contro` (1-2 bullet concreti), `quando conviene` (una riga).
    - **Raccomandazione**: se una ti sembra più adatta al contesto, dichiaralo esplicitamente con la motivazione — non nascondere l'opinione, ma non imporla.
-   - **Domanda focalizzata** con `AskUserQuestion` presentando le alternative come opzioni. Lascia sempre lo spazio a una quinta strada proposta dallo sviluppatore.
+   - **Domanda focalizzata** in chat con le alternative come opzioni numerate (o con lo strumento di domanda strutturata, se un'estensione pi lo fornisce). L'utente risponde col numero. Lascia sempre lo spazio a una quinta strada proposta dallo sviluppatore.
 
 5. Se lo sviluppatore propone un'alternativa non nella lista, **discuterla**: pro/contro con la stessa struttura, poi confronto con le altre. Il brainstorming è bidirezionale, non un menu chiuso.
 
@@ -60,9 +60,9 @@ Non serve toccarli tutti — solo quelli **realmente aperti** per questa feature
 
 ### Fase C — Convergenza e scrittura
 
-6. Per ogni **ambiguità puntuale** residua (non decisionale) formulare **una** domanda chiusa (sì/no o opzioni multiple) — mai domande aperte a cascata. Usare `AskUserQuestion`.
+6. Per ogni **ambiguità puntuale** residua (non decisionale) formulare **una** domanda chiusa (sì/no o opzioni multiple) — mai domande aperte a cascata. Scriverla in chat con le opzioni numerate (o con lo strumento di domanda strutturata, se un'estensione pi lo fornisce).
 7. Verificare che la sezione **Non-Goals** esista e sia specifica. Se manca o è vaga, proporre 3-5 Non-Goals candidati dedotti dal contesto e dalle decisioni prese in brainstorming, e chiedere conferma — è il momento giusto per fissare i binari.
-8. Aggiornare `.claude/spec.md` del progetto con:
+8. Aggiornare `.pi-workflow/spec.md` del progetto con:
    - Nuova sezione **"Decisioni prese"** con: decisione, alternative valutate, motivazione (1-2 righe).
    - Risposte alle domande e rimozione dei marker `[?]` risolti.
    - Non-Goals confermati/aggiunti.
@@ -70,7 +70,7 @@ Non serve toccarli tutti — solo quelli **realmente aperti** per questa feature
 
 ## Output atteso
 
-`.claude/spec.md` del progetto con:
+`.pi-workflow/spec.md` del progetto con:
 - Nessun marker `[?]` non risolto (o marcato esplicitamente `[?risolvere-dopo]`).
 - Sezione **"Decisioni prese"** che documenta le scelte fatte in brainstorming, con motivazione breve e alternative scartate.
 - Non-Goals specifici e confermati.
@@ -83,5 +83,5 @@ Non serve toccarli tutti — solo quelli **realmente aperti** per questa feature
 - **Non decidere per l'utente**: proponi, valuta insieme, poi scrivi la scelta. Ma non essere neutro se hai un'opinione — dichiarala.
 - **Il brainstorming è divergente prima di essere convergente**: mostra le alternative *prima* di eleggere una vincitrice, anche quando hai già in mente la risposta.
 - **Non riscrivere la spec da zero** — modifica chirurgica, aggiungendo la sezione "Decisioni prese".
-- Se emergono ambiguità che cambiano la spec di fondo (Goals rivisti, scope allargato), tornare a `/01-spec`.
-- Se la spec è genuinamente chiusa e tutte le decisioni sono già state prese esplicitamente, dichiararlo e passare a `/03-plan-tasks`.
+- Se emergono ambiguità che cambiano la spec di fondo (Goals rivisti, scope allargato), tornare a `/skill:01-spec`.
+- Se la spec è genuinamente chiusa e tutte le decisioni sono già state prese esplicitamente, dichiararlo e passare a `/skill:03-plan-tasks`.

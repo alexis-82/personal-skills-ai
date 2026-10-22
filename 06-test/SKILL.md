@@ -8,20 +8,20 @@ description: Scrivere ed eseguire test per una funzionalità appena implementata
 Fase 6/9 del workflow. Verifica che l'implementazione soddisfi la spec.
 
 > **⚠ Output path (regola dura)**
-> Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.claude/` nella root del progetto:
-> `.claude/spec.md`, `.claude/plan.md`, `.claude/tasks.md`, `.claude/analysis.md`, `.claude/review.md`, `.claude/test-report.md`.
-> **Mai** nella root del progetto. **Mai** nella cartella della skill (`~/.claude/skills/...`).
+> Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.pi-workflow/` nella root del progetto:
+> `.pi-workflow/spec.md`, `.pi-workflow/plan.md`, `.pi-workflow/tasks.md`, `.pi-workflow/analysis.md`, `.pi-workflow/review.md`, `.pi-workflow/test-report.md`.
+> **Mai** nella root del progetto. **Mai** nella cartella della skill (quella in cui pi l'ha installata).
 >
 > **Prima di scrivere il primo file, obbligatorio**:
-> 1. Se `.claude/` non esiste nella root del progetto, crearla.
-> 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.claude/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
+> 1. Se `.pi-workflow/` non esiste nella root del progetto, crearla.
+> 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.pi-workflow/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
 >
-> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.claude/` del progetto.
+> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.pi-workflow/` del progetto.
 
 ## Cosa fare
 
 1. Leggere `plan.md`, `spec.md`, `tasks.md` di questa cartella per il metodo.
-2. Rileggere i **criteri di accettazione** in `.claude/spec.md` del progetto.
+2. Rileggere i **criteri di accettazione** in `.pi-workflow/spec.md` del progetto.
 3. Per ogni criterio scrivere almeno un test, scegliendo il livello adatto al tipo di software:
    - **Unit test** per la logica pura (una funzione, un metodo, una trasformazione).
    - **Integration test** per l'interazione tra unità reali (moduli, subprocess, I/O, servizi esterni "veri"). Mockare solo dipendenze genuinamente non controllabili in test (rete esterna a pagamento, hardware, tempo).
@@ -29,8 +29,8 @@ Fase 6/9 del workflow. Verifica che l'implementazione soddisfi la spec.
    - **Edge case**: input vuoti, valori limite, errori attesi, encoding, timezone, precisione numerica se rilevante.
 4. Eseguire l'intera suite (non solo i nuovi test) per catturare regressioni.
 5. Se ci sono fallimenti: capire causa radice, non silenziare.
-6. Produrre `.claude/test-report.md` opzionale con esito, o riportare direttamente in chat.
-7. Con suite verde, suggerire `/07-review` per una revisione critica del codice prima di refactor/commit. Se l'utente salta la review, `/08-refactor` (per pulire) o `/09-commit` (per andare diretti al consolidamento).
+6. Produrre `.pi-workflow/test-report.md` opzionale con esito, o riportare direttamente in chat.
+7. Con suite verde, suggerire `/skill:07-review` per una revisione critica del codice prima di refactor/commit. Se l'utente salta la review, `/skill:08-refactor` (per pulire) o `/skill:09-commit` (per andare diretti al consolidamento).
 
 ## Output atteso
 
@@ -38,7 +38,7 @@ Test aggiunti, suite verde, coverage sui criteri di accettazione dichiarati.
 
 ## Regole
 
-- **[GUARDRAIL SCOPE]** Aggiungi test **solo** per la funzionalità corrente. Non riscrivere o "migliorare" test esistenti fuori dallo scope. Vedi `/10-guardrail-scope`.
+- **[GUARDRAIL SCOPE]** Aggiungi test **solo** per la funzionalità corrente. Non riscrivere o "migliorare" test esistenti fuori dallo scope. Vedi `/skill:10-guardrail-scope`.
 - Non testare l'implementazione (i dettagli), testa il comportamento (la spec).
 - Un test che passa senza fare nulla di significativo è peggio di un test mancante — verificarne il valore.
 - Se un test è flaky, marcarlo esplicitamente e aprire un task, non riprovare in loop.
