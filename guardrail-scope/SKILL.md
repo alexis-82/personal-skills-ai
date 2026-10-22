@@ -1,6 +1,6 @@
 ---
-name: 10-guardrail-scope
-description: Guardrail di disciplina dello scope — vincola l'AI a modificare solo il codice strettamente necessario alla richiesta, mai fare "pulizie" opportunistiche o refactor non richiesti. Da invocare all'inizio di qualunque task che tocca codice, o quando l'utente dice "attenzione allo scope", "non toccare altro", "lavora sui binari", "solo quello che ho chiesto".
+name: guardrail-scope
+description: Guardrail di disciplina dello scope — vincola l'AI a modificare solo il codice strettamente necessario alla richiesta, mai fare "pulizie" opportunistiche o refactor non richiesti. Da applicare all'inizio di qualunque task che tocca codice, o quando l'utente dice "attenzione allo scope", "non toccare altro", "lavora sui binari", "solo quello che ho chiesto".
 ---
 
 # Guardrail: disciplina dello scope

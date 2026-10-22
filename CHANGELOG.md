@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2026-10-22
+### Added
+- `/skill:10-push`: optional final phase that checks the branch against the remote, shows the outgoing commits, pushes after confirmation and opens a pull request on request.
+
+### Changed
+- **Breaking:** the scope guardrail is renamed `/skill:10-guardrail-scope` → `/skill:guardrail-scope` and is no longer numbered as a phase.
+- **Breaking:** `09-commit` works locally only; pushing and pull requests move to `/skill:10-push`.
+- Phases are numbered out of 10 ("Fase N/10").
+
 ## [2.0.0] - 2026-10-22
 ### Added
 - pi package manifest (`package.json`): install all 10 skills with `pi install git:github.com/alexis-82/personal-skills-claude@pi-testing`.

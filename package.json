@@ -16,7 +16,8 @@
       "./07-review",
       "./08-refactor",
       "./09-commit",
-      "./10-guardrail-scope"
+      "./10-push",
+      "./guardrail-scope"
     ]
   }
 }

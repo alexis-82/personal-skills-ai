@@ -5,7 +5,7 @@ description: Implementare la funzionalità seguendo un piano e una task list gi�
 
 # Implementazione
 
-Fase 5/9 del workflow. Da piano a codice funzionante.
+Fase 5/10 del workflow. Da piano a codice funzionante.
 
 > **⚠ Output path (regola dura)**
 > Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.pi-workflow/` nella root del progetto:
@@ -36,7 +36,7 @@ Codice implementato + `.pi-workflow/tasks.md` aggiornato con task completati mar
 
 ## Regole
 
-- **[GUARDRAIL SCOPE]** Modifica solo il codice strettamente necessario al task. Niente pulizie opportunistiche, riformattazioni, rinomine o refactor non richiesti. Vedi `/skill:10-guardrail-scope`.
+- **[GUARDRAIL SCOPE]** Modifica solo il codice strettamente necessario al task. Niente pulizie opportunistiche, riformattazioni, rinomine o refactor non richiesti. Vedi la skill `guardrail-scope`.
 - **[NON-GOALS]** Prima di ogni modifica, verificare che non violi un Non-Goal dichiarato in `.pi-workflow/spec.md`. Se un task ti sta portando a violare un Non-Goal, **fermati** e segnalalo — probabilmente il piano ha un problema.
 - Un task alla volta — no batch di modifiche non correlate.
 - No feature extra oltre spec: se serve qualcosa fuori scope, aggiungerlo come nuovo task, non implementarlo di nascosto.

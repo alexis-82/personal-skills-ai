@@ -2,9 +2,9 @@
 
 # Feature-Driven Workflow — pi Skills
 
-**10 skill per pi che portano una funzionalità dalla spec al commit, senza uscire dallo scope.**
+**10 fasi per pi che portano una funzionalità dalla spec al push, più un guardrail che impedisce di uscire dallo scope.**
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![pi](https://img.shields.io/badge/pi-skills-8A2BE2?style=plastic)](https://pi.dev)&nbsp;&nbsp;&nbsp;[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-555555?style=plastic)](https://pi.dev/docs/latest/skills)&nbsp;&nbsp;&nbsp;[![Markdown](https://img.shields.io/badge/Markdown-000000?style=plastic&logo=markdown&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=plastic)](#)&nbsp;&nbsp;&nbsp;[![Last commit](https://img.shields.io/github/last-commit/alexis-82/personal-skills-ai/pi-testing?style=plastic)](https://github.com/alexis-82/personal-skills-ai/commits/pi-testing)
+[![Version](https://img.shields.io/badge/version-3.0.0-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![pi](https://img.shields.io/badge/pi-skills-8A2BE2?style=plastic)](https://pi.dev)&nbsp;&nbsp;&nbsp;[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-555555?style=plastic)](https://pi.dev/docs/latest/skills)&nbsp;&nbsp;&nbsp;[![Markdown](https://img.shields.io/badge/Markdown-000000?style=plastic&logo=markdown&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=plastic)](#)&nbsp;&nbsp;&nbsp;[![Last commit](https://img.shields.io/github/last-commit/alexis-82/personal-skills-ai/pi-testing?style=plastic)](https://github.com/alexis-82/personal-skills-ai/commits/pi-testing)
 
 </div>
 
@@ -14,7 +14,7 @@
 ## 📑 Indice
 
 - [✨ Cos'è](#cose)
-- [🧩 Le 10 skill, seguire il workflow in questo ordine](#le-10-skill-seguire-il-workflow-in-questo-ordine)
+- [🧩 Le 10 fasi, seguire il workflow in questo ordine](#le-10-fasi-seguire-il-workflow-in-questo-ordine)
 - [🧠 Concetti chiave](#concetti-chiave)
 - [🚀 Installazione](#installazione)
 - [🛠️ Come si usano](#come-si-usano)
@@ -28,14 +28,14 @@
 <a id="cose"></a>
 ## ✨ Cos'è
 
-Set di **10 skill** per [pi](https://pi.dev) che strutturano lo sviluppo di una funzionalità in fasi discrete, dalla spec iniziale al commit finale, con un **guardrail cross-cutting** che impedisce all'AI di uscire fuori dallo scope della richiesta.
+Set di **11 skill** per [pi](https://pi.dev): **10 fasi** che strutturano lo sviluppo di una funzionalità, dalla spec iniziale al push finale, più un **guardrail cross-cutting** che impedisce all'AI di uscire fuori dallo scope della richiesta.
 
 Le skill seguono lo standard **Agent Skills** (cartella con `SKILL.md`) e si installano come **pi package**. Sono **stack-agnostic**: funzionano per script Python, librerie, CLI tool, servizi web, pipeline ML, app desktop, e qualunque altro tipo di software.
 
 ---
 
-<a id="le-10-skill-seguire-il-workflow-in-questo-ordine"></a>
-## 🧩 Le 10 skill, seguire il workflow in questo ordine
+<a id="le-10-fasi-seguire-il-workflow-in-questo-ordine"></a>
+## 🧩 Le 10 fasi, seguire il workflow in questo ordine
 
 | # | Comando | Ruolo | Output principale |
 |---|---------|-------|-------------------|
@@ -47,10 +47,12 @@ Le skill seguono lo standard **Agent Skills** (cartella con `SKILL.md`) e si ins
 | 06 | `/skill:06-test` | Test contro criteri di accettazione | Suite verde |
 | 07 | `/skill:07-review` | Code review del codice implementato (correttezza, edge case, sicurezza, prestazioni, leggibilità) | `.pi-workflow/review.md` con findings per severità |
 | 08 | `/skill:08-refactor` | Pulire con i test come rete di sicurezza | Codice più leggibile, comportamento invariato |
-| 09 | `/skill:09-commit` | `CHANGELOG.md` aggiornato + commit strutturati + eventuale PR | Storia git pulita + `CHANGELOG.md` nella root |
-| 10 ⚠ | `/skill:10-guardrail-scope` | Cross-cutting: Guardrail AI | — |
+| 09 | `/skill:09-commit` | `CHANGELOG.md` aggiornato + commit strutturati (solo in locale) | Storia git pulita + `CHANGELOG.md` nella root |
+| 10 | `/skill:10-push` | Push sul remote dopo conferma + eventuale PR | Branch pubblicato, eventuale PR aperta |
 
-Ordine tipico: `spec → clarify → plan-tasks → (analyze) → implement → test → (review) → (refactor) → commit`. Le fasi `04-analyze`, `07-review` e `08-refactor` sono opzionali.
+Ordine tipico: `spec → clarify → plan-tasks → (analyze) → implement → test → (review) → (refactor) → commit → (push)`. Le fasi `04-analyze`, `07-review`, `08-refactor` e `10-push` sono opzionali.
+
+Fuori dalla numerazione c'è `/skill:guardrail-scope` ⚠, la regola trasversale sullo scope: non è una fase (vedi [Guardrail](#guardrail-disciplina-dello-scope)).
 
 ---
 
@@ -80,9 +82,10 @@ Esempio (script Python di analisi):
 
 Il file `01-spec/spec.md` (template nella cartella della skill) contiene esempi di Non-Goals per: script Python, librerie, CLI, servizi backend, pipeline ML, app desktop.
 
+<a id="guardrail-disciplina-dello-scope"></a>
 ### Guardrail: disciplina dello scope
 
-`10-guardrail-scope` è una skill trasversale che vincola l'AI a modificare **solo** il codice strettamente necessario alla richiesta. Regole:
+`guardrail-scope` è una skill trasversale che vincola l'AI a modificare **solo** il codice strettamente necessario alla richiesta. Le fasi 05–10 ne riportano le regole principali nelle righe `[GUARDRAIL SCOPE]`. In pi resta visibile come `/skill:guardrail-scope`, perché pi non permette di nascondere una singola skill dal menu. Regole:
 
 1. **Check n°1** — se esiste `.pi-workflow/spec.md` con Non-Goals, quelli sono la fonte di verità prioritaria.
 2. **Check n°2** — anche in loro assenza, no pulizie opportunistiche, no riformattazioni, no rinomine collaterali, no refactor spontanei.
@@ -160,11 +163,11 @@ Il `package.json` del repo dichiara le 10 cartelle skill nella chiave `pi.skills
 
 Dopo un'installazione o un aggiornamento in una sessione già aperta, esegui `/reload`. Se dopo nuovi commit sul branch la versione installata non cambia, reinstalla con `pi install <sorgente>`.
 
-> **Da verificare al primo avvio**: le cartelle skill contengono anche i template `plan.md`, `spec.md`, `tasks.md`. All'avvio di pi controlla nelle diagnostiche che le skill caricate siano **esattamente 10** e che i template non compaiano come skill a sé.
+> **Da verificare al primo avvio**: le cartelle skill contengono anche i template `plan.md`, `spec.md`, `tasks.md`. All'avvio di pi controlla nelle diagnostiche che le skill caricate siano **esattamente 11** e che i template non compaiano come skill a sé.
 
 ### Guardrail sempre attivo (opzionale)
 
-Come skill, `10-guardrail-scope` si attiva quando la invochi o quando il modello la riconosce dalla descrizione. Se vuoi che le sue regole valgano **in ogni sessione**, copia a mano le sezioni che ti interessano (Principio, Check n°1, Check n°2) nel context file globale di pi:
+Come skill, `guardrail-scope` si attiva quando la invochi o quando il modello la riconosce dalla descrizione. Se vuoi che le sue regole valgano **in ogni sessione**, copia a mano le sezioni che ti interessano (Principio, Check n°1, Check n°2) nel context file globale di pi:
 
 ```
 ~/.pi/agent/AGENTS.md
@@ -184,7 +187,8 @@ In pi le skill si invocano con il prefisso `/skill:`. Il testo dopo il nome vien
 ```
 /skill:01-spec voglio esportare gli utenti in CSV
 /skill:05-implement
-/skill:10-guardrail-scope
+/skill:10-push
+/skill:guardrail-scope
 ```
 
 La voce di settings `enableSkillCommands` decide se i comandi `/skill:` compaiono nel completamento; digitati a mano funzionano comunque.
@@ -203,8 +207,9 @@ All'avvio pi mette nome e `description` di ogni skill nel prompt di sistema, e i
 | "testa", "scrivi i test" | `06-test` |
 | "revisiona", "code review", "cerca bug nel codice" | `07-review` |
 | "refactora", "pulisci il codice" | `08-refactor` |
-| "committa", "apri PR", "aggiorna il changelog" | `09-commit` |
-| "attenzione allo scope", "lavora sui binari" | `10-guardrail-scope` |
+| "committa", "aggiorna il changelog" | `09-commit` |
+| "pusha", "pubblica", "apri PR" | `10-push` |
+| "attenzione allo scope", "lavora sui binari" | `guardrail-scope` |
 
 L'attivazione automatica non è garantita: se il modello non carica la skill, usa `/skill:<nome>`.
 
@@ -256,10 +261,16 @@ Immagina di dover aggiungere un endpoint di export in un servizio Python esisten
 
 [AI rilegge il diff riga per riga, propone la voce ## [1.3.0] - <data> per il
  CHANGELOG e attende conferma, poi crea commit separati per feature (con CHANGELOG)
- e refactor]
+ e refactor, solo in locale]
+
+> /skill:10-push  (opzionale)
+
+[AI controlla che non ci siano modifiche non committate e che il remote non sia
+ avanti, mostra i commit in uscita e attende conferma, poi fa il push.
+ Se lo chiedi, apre anche la PR]
 ```
 
-In qualunque momento puoi dire **"attenzione allo scope"** per invocare esplicitamente `10-guardrail-scope` come promemoria.
+In qualunque momento puoi dire **"attenzione allo scope"** per richiamare il guardrail come promemoria.
 
 ---
 
@@ -284,7 +295,8 @@ personal-skills-ai/
 ├── 07-review/
 ├── 08-refactor/
 ├── 09-commit/
-└── 10-guardrail-scope/
+├── 10-push/
+└── guardrail-scope/             # regola trasversale, non numerata
     └── SKILL.md
 ```
 
@@ -309,9 +321,9 @@ Ogni cartella skill contiene:
 ## 📝 Note
 
 - Le skill sono in italiano ma il codice generato segue le convenzioni del progetto (inglese se il codebase è in inglese).
-- I file `plan.md` / `spec.md` / `tasks.md` nelle cartelle skill sono **template di riferimento**, non vengono modificati durante l'uso. I file di lavoro veri vivono **sempre** nel progetto sotto `.pi-workflow/` (`spec.md`, `plan.md`, `tasks.md`, `analysis.md`, `review.md` e l'eventuale `test-report.md`). Mai nella root del progetto, mai nella cartella della skill — regola rafforzata dal Check n°3 di `10-guardrail-scope`.
+- I file `plan.md` / `spec.md` / `tasks.md` nelle cartelle skill sono **template di riferimento**, non vengono modificati durante l'uso. I file di lavoro veri vivono **sempre** nel progetto sotto `.pi-workflow/` (`spec.md`, `plan.md`, `tasks.md`, `analysis.md`, `review.md` e l'eventuale `test-report.md`). Mai nella root del progetto, mai nella cartella della skill — regola rafforzata dal Check n°3 di `guardrail-scope`.
 - `.pi-workflow/` è distinta da `.pi/`: quest'ultima è la cartella di configurazione di pi, che viene caricata solo dopo aver concesso la fiducia al progetto.
 - Se dopo una sessione trovi uno di questi file nella root del progetto (residuo da sessioni precedenti), spostalo dentro `.pi-workflow/`: le skill sanno gestirlo, ma un file omonimo in root può confondere le fasi successive.
 - **Domande in `02-clarify`**: pi non ha uno strumento integrato per le domande a scelta multipla, quindi la skill le scrive in chat con opzioni numerate. Se un'estensione fornisce uno strumento di domanda strutturata, la skill lo usa.
 - **Nessuna sandbox**: pi non ha un sistema di permessi; il guardrail di scope è un'istruzione per il modello, non un blocco tecnico.
-- La skill `10-guardrail-scope` è pensata anche per essere invocata fuori dal workflow feature-driven, in qualunque task che tocchi codice.
+- La skill `guardrail-scope` vale anche fuori dal workflow feature-driven, in qualunque task che tocchi codice.

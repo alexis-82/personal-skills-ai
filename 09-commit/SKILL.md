@@ -1,11 +1,11 @@
 ---
 name: 09-commit
-description: Creare commit ben strutturati e opzionalmente aprire una pull request per una funzionalità completata, testata ed eventualmente refactorata. Crea o aggiorna anche il CHANGELOG.md del progetto con versione SemVer e data. Usare quando l'utente dice "committa", "fai il commit", "apri PR", "aggiorna il changelog" a chiusura del ciclo di lavoro. Nona e ultima fase del workflow feature-driven.
+description: Creare commit ben strutturati per una funzionalità completata, testata ed eventualmente refactorata. Crea o aggiorna anche il CHANGELOG.md del progetto con versione SemVer e data. Usare quando l'utente dice "committa", "fai il commit", "aggiorna il changelog" a chiusura del ciclo di lavoro. Nona fase del workflow feature-driven.
 ---
 
-# Commit e pull request
+# Commit
 
-Fase 9/9 del workflow. Consolida il lavoro (implementazione + test + refactor) in git in modo revisionabile.
+Fase 9/10 del workflow. Consolida il lavoro (implementazione + test + refactor) in git in modo revisionabile.
 
 > **⚠ Output path (regola dura)**
 > Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.pi-workflow/` nella root del progetto:
@@ -33,8 +33,7 @@ Fase 9/9 del workflow. Consolida il lavoro (implementazione + test + refactor) i
 6. Messaggio di commit:
    - Prima riga: `<tipo>: <cosa cambia>` (max 70 caratteri). Tipi: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`.
    - Corpo: **perché**, non cosa (il diff mostra il cosa).
-7. Se richiesta PR: creare con `gh pr create`, titolo conciso, corpo con Summary (bullet) + Test plan.
-8. Non pushare/aprire PR senza conferma esplicita dell'utente per quel repo.
+7. Questa fase lavora solo in locale: niente push e niente PR, sono compito di `10-push`. Al termine, se il repo ha un remote, suggerire `/skill:10-push` per pubblicare.
 
 ## Aggiornamento CHANGELOG
 
@@ -79,11 +78,11 @@ Eseguire i sotto-passi in ordine:
 
 ## Output atteso
 
-Commit creati (feature + eventuale refactor separati), git tree pulito, `.pi-workflow/tasks.md` con tutti i task marcati `- [x]`, eventuale PR aperta. `CHANGELOG.md` nella root del progetto creato o aggiornato con la nuova voce nel commit della feature, oppure dichiarazione esplicita in chat del perché è stato saltato.
+Commit creati (feature + eventuale refactor separati), git tree pulito, `.pi-workflow/tasks.md` con tutti i task marcati `- [x]`. `CHANGELOG.md` nella root del progetto creato o aggiornato con la nuova voce nel commit della feature, oppure dichiarazione esplicita in chat del perché è stato saltato.
 
 ## Regole
 
-- **[GUARDRAIL SCOPE]** Prima di committare, rileggi il diff riga per riga: ogni modifica deve essere motivabile con il task richiesto. Se una riga non serve, rimuovila. Vedi `/skill:10-guardrail-scope`.
+- **[GUARDRAIL SCOPE]** Prima di committare, rileggi il diff riga per riga: ogni modifica deve essere motivabile con il task richiesto. Se una riga non serve, rimuovila. Vedi la skill `guardrail-scope`.
 - Mai `git add -A` alla cieca — nomi di file espliciti o `git status` prima.
 - Mai `--no-verify`, `--force`, `reset --hard` senza richiesta esplicita.
 - Se un hook pre-commit fallisce, correggere la causa e fare un **nuovo** commit, non `--amend`.
