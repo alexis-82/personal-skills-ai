@@ -4,7 +4,7 @@
 
 **10 skill per pi che portano una funzionalità dalla spec al commit, senza uscire dallo scope.**
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![pi](https://img.shields.io/badge/pi-skills-8A2BE2?style=plastic)](https://pi.dev)&nbsp;&nbsp;&nbsp;[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-555555?style=plastic)](https://pi.dev/docs/latest/skills)&nbsp;&nbsp;&nbsp;[![Markdown](https://img.shields.io/badge/Markdown-000000?style=plastic&logo=markdown&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=plastic)](#)&nbsp;&nbsp;&nbsp;[![Last commit](https://img.shields.io/github/last-commit/alexis-82/personal-skills-claude/pi-testing?style=plastic)](https://github.com/alexis-82/personal-skills-claude/commits/pi-testing)
+[![Version](https://img.shields.io/badge/version-2.0.0-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![pi](https://img.shields.io/badge/pi-skills-8A2BE2?style=plastic)](https://pi.dev)&nbsp;&nbsp;&nbsp;[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-555555?style=plastic)](https://pi.dev/docs/latest/skills)&nbsp;&nbsp;&nbsp;[![Markdown](https://img.shields.io/badge/Markdown-000000?style=plastic&logo=markdown&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=plastic)](#)&nbsp;&nbsp;&nbsp;[![Last commit](https://img.shields.io/github/last-commit/alexis-82/personal-skills-ai/pi-testing?style=plastic)](https://github.com/alexis-82/personal-skills-ai/commits/pi-testing)
 
 </div>
 
@@ -139,14 +139,14 @@ pi install npm:pi-claude-pro
 Le skill si installano come **pi package**, direttamente da questo branch:
 
 ```bash
-pi install git:github.com/alexis-82/personal-skills-claude@pi-testing
+pi install git:github.com/alexis-82/personal-skills-ai@pi-testing
 ```
 
 Oppure da un clone locale del repo:
 
 ```bash
-git clone -b pi-testing https://github.com/alexis-82/personal-skills-claude.git
-pi install ./personal-skills-claude
+git clone -b pi-testing https://github.com/alexis-82/personal-skills-ai.git
+pi install ./personal-skills-ai
 ```
 
 Il `package.json` del repo dichiara le 10 cartelle skill nella chiave `pi.skills`, quindi pi carica solo quelle.
@@ -267,7 +267,7 @@ In qualunque momento puoi dire **"attenzione allo scope"** per invocare esplicit
 ## 📁 Struttura file
 
 ```
-personal-skills-claude/
+personal-skills-ai/
 ├── README.md                    # questo file
 ├── CHANGELOG.md
 ├── package.json                 # manifest pi package (chiave "pi.skills")
