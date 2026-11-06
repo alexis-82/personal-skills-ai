@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-11-06
+### Added
+- `09-commit` now creates or updates the project's `README.md`: bilingual (English + Italian) in a single file, non-technical and written for everyday users, with a fixed template (centered header, badges, language links, per-language index) and confirmation before writing.
+
 ## [2.0.0] - 2026-10-22
 ### Added
 - `/10-push`: optional final phase that checks the branch against the remote, shows the outgoing commits, pushes after confirmation and opens a pull request on request.

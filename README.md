@@ -4,7 +4,7 @@
 
 **10 fasi per Claude Code che portano una funzionalità dalla spec al push, più un guardrail che impedisce di uscire dallo scope.**
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![Claude Code](https://img.shields.io/badge/Claude%20Code-skills-D97757?style=plastic&logo=anthropic&logoColor=white)](https://claude.com/claude-code)&nbsp;&nbsp;&nbsp;[![Markdown](https://img.shields.io/badge/Markdown-000000?style=plastic&logo=markdown&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=plastic&logo=powershell&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Bash](https://img.shields.io/badge/Bash-4EAA25?style=plastic&logo=gnubash&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=plastic)](#)&nbsp;&nbsp;&nbsp;[![Last commit](https://img.shields.io/github/last-commit/alexis-82/personal-skills-ai?style=plastic)](https://github.com/alexis-82/personal-skills-ai/commits)
+[![Version](https://img.shields.io/badge/version-2.1.0-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![Claude Code](https://img.shields.io/badge/Claude%20Code-skills-D97757?style=plastic&logo=anthropic&logoColor=white)](https://claude.com/claude-code)&nbsp;&nbsp;&nbsp;[![Markdown](https://img.shields.io/badge/Markdown-000000?style=plastic&logo=markdown&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=plastic&logo=powershell&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Bash](https://img.shields.io/badge/Bash-4EAA25?style=plastic&logo=gnubash&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=plastic)](#)&nbsp;&nbsp;&nbsp;[![Last commit](https://img.shields.io/github/last-commit/alexis-82/personal-skills-ai?style=plastic)](https://github.com/alexis-82/personal-skills-ai/commits)
 
 </div>
 
@@ -47,7 +47,7 @@ Le skill sono **stack-agnostic**: funzionano per script Python, librerie, CLI to
 | 06 | `06-test` | Test contro criteri di accettazione | Suite verde |
 | 07 | `07-review` | Code review del codice implementato (correttezza, edge case, sicurezza, prestazioni, leggibilità) | `.claude/review.md` con findings per severità |
 | 08 | `08-refactor` | Pulire con i test come rete di sicurezza | Codice più leggibile, comportamento invariato |
-| 09 | `09-commit` | `CHANGELOG.md` aggiornato + commit strutturati (solo in locale) | Storia git pulita + `CHANGELOG.md` nella root |
+| 09 | `09-commit` | `CHANGELOG.md` + `README.md` aggiornati + commit strutturati (solo in locale) | Storia git pulita + `CHANGELOG.md` e `README.md` nella root |
 | 10 | `10-push` | Push sul remote dopo conferma + eventuale PR | Branch pubblicato, eventuale PR aperta |
 
 Ordine tipico: `spec → clarify → plan-tasks → (analyze) → implement → test → (review) → (refactor) → commit → (push)`. Le fasi `04-analyze`, `07-review`, `08-refactor` e `10-push` sono opzionali.
@@ -108,6 +108,16 @@ A ogni ciclo `09-commit` crea o aggiorna `CHANGELOG.md` nella **root del progett
 - **Commit**: il CHANGELOG entra nello stesso commit della feature.
 - **Ogni ciclo è una nuova versione**. I cicli di solo refactor/chore/test non generano voci: l'AI lo dichiara in chat.
 - **Non** crea tag o GitHub Release, **non** modifica la versione in `package.json` & co., **non** tocca le voci precedenti.
+
+### README per utenti comuni
+
+Nello stesso ciclo `09-commit` crea o aggiorna anche `README.md` nella **root del progetto**, **bilingue (inglese + italiano)** e **non tecnico**: spiega cos'è il prodotto e come installarlo e usarlo a chi non programma.
+
+- **Template fisso**: header centrato con nome, tagline e badge (versione dal CHANGELOG + linguaggio principale), sotto ai badge i link 🇬🇧 English · 🇮🇹 Italiano che portano direttamente alla propria lingua.
+- **Stesse sezioni nelle due lingue**, ognuna con il suo indice: `✨ What it is` / `Cos'è` e `🚀 Installation` / `Installazione` più, se servono, `🧭 How to use` / `Come si usa`, `🛟 Troubleshooting` / `Problemi comuni`, `📄 License` / `Licenza`.
+- **Niente dettagli tecnici**: build, toolchain, struttura dei sorgenti, test e contribuzione restano fuori.
+- **README esistente non conforme**: l'AI propone la conversione e dice cosa verrà tolto. **Tu confermi** prima che il file venga scritto.
+- **Commit**: il README entra nello stesso commit della feature.
 
 ---
 
@@ -230,7 +240,7 @@ Immagina di dover aggiungere un endpoint di export in un servizio Python esisten
 > /09-commit
 
 [AI rilegge il diff riga per riga, propone la voce ## [1.3.0] - <data> per il
- CHANGELOG e attende conferma, poi crea commit separati per feature (con CHANGELOG)
+ CHANGELOG e il README, attende conferma, poi crea commit separati per feature (con CHANGELOG e README)
  e refactor, solo in locale]
 
 > /10-push  (opzionale)
