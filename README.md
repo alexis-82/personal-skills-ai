@@ -4,7 +4,7 @@
 
 **10 fasi per Claude Code che portano una funzionalità dalla spec al push, più un guardrail che impedisce di uscire dallo scope.**
 
-[![Version](https://img.shields.io/badge/version-2.1.0-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![Claude Code](https://img.shields.io/badge/Claude%20Code-skills-D97757?style=plastic&logo=anthropic&logoColor=white)](https://claude.com/claude-code)&nbsp;&nbsp;&nbsp;[![Markdown](https://img.shields.io/badge/Markdown-000000?style=plastic&logo=markdown&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=plastic&logo=powershell&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Bash](https://img.shields.io/badge/Bash-4EAA25?style=plastic&logo=gnubash&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=plastic)](#)&nbsp;&nbsp;&nbsp;[![Last commit](https://img.shields.io/github/last-commit/alexis-82/personal-skills-ai?style=plastic)](https://github.com/alexis-82/personal-skills-ai/commits)
+[![Version](https://img.shields.io/badge/version-2.2.0-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![Claude Code](https://img.shields.io/badge/Claude%20Code-skills-D97757?style=plastic&logo=anthropic&logoColor=white)](https://claude.com/claude-code)&nbsp;&nbsp;&nbsp;[![Markdown](https://img.shields.io/badge/Markdown-000000?style=plastic&logo=markdown&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=plastic&logo=powershell&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Bash](https://img.shields.io/badge/Bash-4EAA25?style=plastic&logo=gnubash&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=plastic)](#)&nbsp;&nbsp;&nbsp;[![Last commit](https://img.shields.io/github/last-commit/alexis-82/personal-skills-ai?style=plastic)](https://github.com/alexis-82/personal-skills-ai/commits)
 
 </div>
 
@@ -40,7 +40,7 @@ Le skill sono **stack-agnostic**: funzionano per script Python, librerie, CLI to
 | # | Skill | Ruolo | Output principale |
 |---|-------|-------|-------------------|
 | 01 | `01-spec` | Definire requisiti + Goals + **Non-Goals** | `.claude/spec.md` nel progetto |
-| 02 | `02-clarify` | Brainstorming interattivo (stack, architettura, alternative) + risoluzione ambiguità | `spec.md` chiarito con "Decisioni prese" |
+| 02 | `02-clarify` | Brainstorming interattivo (stack, architettura, alternative) + risoluzione ambiguità; su progetto nuovo propone l'architettura idiomatica per linguaggio | `spec.md` chiarito con "Decisioni prese" + `.claude/architecture.md` su progetto nuovo |
 | 03 | `03-plan-tasks` | Piano tecnico + task breakdown | `.claude/plan.md` + `.claude/tasks.md` |
 | 04 | `04-analyze` | Analisi critica del piano | `.claude/analysis.md` |
 | 05 | `05-implement` | Scrivere il codice | Codice + `.claude/tasks.md` aggiornato |
@@ -266,6 +266,7 @@ skills/
 │   ├── spec.md                  # template output (con esempi Non-Goals per stack)
 │   └── tasks.md                 # checklist
 ├── 02-clarify/
+│   └── architectures/           # riferimenti curati: python, js-ts, go, bash
 ├── 03-plan-tasks/
 ├── 04-analyze/
 ├── 05-implement/
@@ -294,6 +295,6 @@ skills/
 ## 📝 Note
 
 - Le skill sono in italiano ma il codice generato segue le convenzioni del progetto (inglese se il codebase è in inglese).
-- I file `plan.md` / `spec.md` / `tasks.md` nelle cartelle skill sono **template di riferimento**, non vengono modificati durante l'uso. I file di lavoro veri vivono **sempre** nel progetto sotto `.claude/` (`spec.md`, `plan.md`, `tasks.md`, `analysis.md`, `review.md` e l'eventuale `test-report.md`). Mai nella root del progetto, mai nella cartella della skill — regola rafforzata dal Check n°3 di `guardrail-scope`.
+- I file `plan.md` / `spec.md` / `tasks.md` nelle cartelle skill sono **template di riferimento**, non vengono modificati durante l'uso. I file di lavoro veri vivono **sempre** nel progetto sotto `.claude/` (`spec.md`, `plan.md`, `tasks.md`, `analysis.md`, `review.md`, l'eventuale `test-report.md` e, su progetto nuovo, `architecture.md`). Mai nella root del progetto, mai nella cartella della skill — regola rafforzata dal Check n°3 di `guardrail-scope`.
 - Se dopo una sessione trovi uno di questi file nella root del progetto (residuo da versioni precedenti delle skill), spostalo dentro `.claude/`: le skill ora sanno gestirlo, ma un file omonimo in root può confondere le fasi successive.
 - La skill `guardrail-scope` vale anche fuori dal workflow feature-driven, in qualunque task che tocchi codice.
