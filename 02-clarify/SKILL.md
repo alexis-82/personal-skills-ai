@@ -9,7 +9,7 @@ Fase 2/10 del workflow. Due obiettivi intrecciati:
 
 > **⚠ Output path (regola dura)**
 > Tutti i file di lavoro di questa skill vanno **esclusivamente** in `.pi-workflow/` nella root del progetto:
-> `.pi-workflow/spec.md`, `.pi-workflow/plan.md`, `.pi-workflow/tasks.md`, `.pi-workflow/analysis.md`, `.pi-workflow/review.md`, `.pi-workflow/test-report.md`.
+> `.pi-workflow/spec.md`, `.pi-workflow/plan.md`, `.pi-workflow/tasks.md`, `.pi-workflow/analysis.md`, `.pi-workflow/review.md`, `.pi-workflow/test-report.md`, `.pi-workflow/architecture.md`.
 > **Mai** nella root del progetto. **Mai** nella cartella della skill (quella in cui pi l'ha installata).
 >
 > **Prima di scrivere il primo file, obbligatorio**:
@@ -58,12 +58,55 @@ Il brainstorming **non è opzionale**: anche se la spec sembra chiara, ci sono q
 
 Non serve toccarli tutti — solo quelli **realmente aperti** per questa feature. Se la spec dice già "usa Postgres esistente", non ribrainstormare la persistenza.
 
+#### Architettura (solo greenfield)
+
+Punto decisionale **obbligatorio** quando il progetto è greenfield. Si affronta **dopo** aver chiuso lo stack tecnico.
+
+a. **Rilevare il greenfield**: il progetto è greenfield se non contiene file sorgente (`.py`, `.js`, `.mjs`, `.ts`, `.jsx`, `.tsx`, `.vue`, `.go`, `.sh`, ecc.). Non contano README, LICENSE, `.gitignore`, file di configurazione (`package.json`, `pyproject.toml`, `go.mod`, ...) e `.pi-workflow/`. Nei casi dubbi (es. un solo script di prova, codice generato) chiedere all'utente. **Non greenfield ⇒ saltare questa sezione**: non proporre una nuova architettura, non scrivere `architecture.md`.
+b. **Se `.pi-workflow/architecture.md` esiste già**: chiedere se tenerlo così com'è o rifare la scelta. Se va tenuto, chiudere qui la sezione.
+c. **Stack prima, architettura dopo**: chiudere linguaggio e framework prima di questa decisione. Se il framework resta aperto, decidere su linguaggio + tipo di progetto.
+d. **Aprire il riferimento** `architectures/<linguaggio>.md` di questa cartella (`python.md`, `js-ts.md`, `go.md`, `bash.md`) e cercare la voce per tipo di progetto + framework.
+   - **Multi-stack** (es. API Python + SPA React): aprire un file per stack e comporre gli alberi sotto cartelle di primo livello (`backend/`, `frontend/`), ognuno con le convenzioni del proprio stack al suo interno. Niente cartelle di stack diversi in collisione alla root.
+   - **Nessun riferimento curato** (linguaggio non coperto o combinazione assente nel file): dichiararlo esplicitamente ("nessun riferimento curato per <combinazione>"), poi proporre alternative col formato standard del brainstorming **senza presentarle come curate**.
+e. **Principio guida**: architettura idiomatica rispetto a linguaggio, framework e tipo di progetto, privilegiando semplicità, manutenibilità, testabilità e separazione delle responsabilità. **Nessun pattern senza una necessità reale**: MVC, layer, hexagonal ecc. solo dove il caso d'uso lo giustifica. In dubbio, la voce più semplice che regge il caso d'uso.
+f. **Proporre 2-4 pattern** col formato standard (contesto, alternative con pro/contro/quando conviene, raccomandazione), mostrando per ciascuno l'albero di cartelle. Nell'albero sostituire i segnaposto dei riferimenti (`<pkg>`, `<nome>`, `<dominio>`, ...) con nomi concreti del progetto: lo scaffold crea le cartelle esattamente come scritte. Chiedere conferma dell'albero in chat con i pattern come opzioni numerate (o con lo strumento di domanda strutturata, se un'estensione pi lo fornisce). Senza conferma non si scrive nulla.
+g. **In Fase C**, dopo la conferma, scrivere `.pi-workflow/architecture.md` con questo template:
+
+   ```markdown
+   # Architettura
+
+   ## Pattern
+   <nome del pattern> — <riferimento curato usato, oppure "nessun riferimento curato">
+
+   ## Motivazione
+   <perché questo pattern per linguaggio + framework + tipo di progetto>
+
+   ## Alternative scartate
+   - <alternativa> — <motivo>
+
+   ## Albero
+   <albero di cartelle confermato>
+
+   ## Responsabilità
+   - `<cartella>/` — <cosa contiene e cosa NON contiene>
+
+   ## Test
+   <dove vanno i test e di che tipo>
+
+   ## Note
+   Lo scaffold crea solo cartelle + `.gitkeep`; i `.gitkeep` restano anche quando le cartelle vengono popolate.
+   ```
+
+**Divieto**: questa fase **non crea cartelle né file nel progetto**. Lo scaffold lo pianifica `03-plan-tasks` come Task 0 e lo esegue `05-implement`.
+
 ### Fase C — Convergenza e scrittura
 
 6. Per ogni **ambiguità puntuale** residua (non decisionale) formulare **una** domanda chiusa (sì/no o opzioni multiple) — mai domande aperte a cascata. Scriverla in chat con le opzioni numerate (o con lo strumento di domanda strutturata, se un'estensione pi lo fornisce).
 7. Verificare che la sezione **Non-Goals** esista e sia specifica. Se manca o è vaga, proporre 3-5 Non-Goals candidati dedotti dal contesto e dalle decisioni prese in brainstorming, e chiedere conferma — è il momento giusto per fissare i binari.
 8. Aggiornare `.pi-workflow/spec.md` del progetto con:
    - Nuova sezione **"Decisioni prese"** con: decisione, alternative valutate, motivazione (1-2 righe).
+   - Se è stata scelta un'architettura: una riga in "Decisioni prese" con il pattern e il rinvio a `.pi-workflow/architecture.md`, senza duplicare l'albero.
+   - Se è stata scelta un'architettura: scrivere `.pi-workflow/architecture.md` col template del punto (g) della sottosezione "Architettura (solo greenfield)".
    - Risposte alle domande e rimozione dei marker `[?]` risolti.
    - Non-Goals confermati/aggiunti.
 9. Se restano ambiguità non risolvibili ora, marcarle come `[?risolvere-dopo: <motivo>]`.

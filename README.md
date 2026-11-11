@@ -1,329 +1,148 @@
 <div align="center">
 
-# Feature-Driven Workflow — pi Skills
+# Feature-Driven Workflow for pi
 
-**10 fasi per pi che portano una funzionalità dalla spec al push, più un guardrail che impedisce di uscire dallo scope.**
+**Ten guided steps that help the pi assistant take a new feature from idea to publication, without going off track.**<br>
+*Dieci passi guidati che aiutano l'assistente pi a portare una nuova funzione dall'idea alla pubblicazione, senza uscire dai binari.*
 
-[![Version](https://img.shields.io/badge/version-3.0.0-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![pi](https://img.shields.io/badge/pi-skills-8A2BE2?style=plastic)](https://pi.dev)&nbsp;&nbsp;&nbsp;[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-555555?style=plastic)](https://pi.dev/docs/latest/skills)&nbsp;&nbsp;&nbsp;[![Markdown](https://img.shields.io/badge/Markdown-000000?style=plastic&logo=markdown&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=plastic)](#)&nbsp;&nbsp;&nbsp;[![Last commit](https://img.shields.io/github/last-commit/alexis-82/personal-skills-ai/pi-testing?style=plastic)](https://github.com/alexis-82/personal-skills-ai/commits/pi-testing)
+[![Version](https://img.shields.io/badge/version-3.1.0-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![Markdown](https://img.shields.io/badge/Markdown-000000?style=plastic&logo=markdown&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=plastic)](#)
+
+🇬🇧 [English](#en)&nbsp;&nbsp;·&nbsp;&nbsp;🇮🇹 [Italiano](#it)
 
 </div>
 
 ---
 
+<a id="en"></a>
+<a id="contents"></a>
+## 📑 Contents
+
+- [✨ What it is](#what-it-is)
+- [🚀 Installation](#installation)
+- [🧭 How to use](#how-to-use)
+- [🛟 Troubleshooting](#troubleshooting)
+
+---
+
+<a id="what-it-is"></a>
+## ✨ What it is
+
+Feature-Driven Workflow is a set of skills for [pi](https://pi.dev), an AI coding assistant. It splits the work on a new feature into ten clear steps: first you decide together what to build and what to leave out, then pi plans, writes, tests, reviews and saves the work, asking for your confirmation at the important moments.
+
+What you get:
+
+- **Clear boundaries**: at the start you write down what the feature must do and, just as important, what it must not do. pi keeps to that list for the whole job.
+- **Choices made together**: before writing anything, pi shows you the alternatives with their pros and cons and lets you decide.
+- **A tidy project from day one**: on a new project pi proposes a folder structure suited to the language you use.
+- **No surprises**: pi changes only what you asked for. If it notices other problems, it tells you instead of fixing them on its own.
+- **Ready-made notes**: at the end, pi updates the list of changes and the project description for you.
+
+It works with any kind of software: scripts, websites, apps, command-line tools and more.
+
+<a id="installation"></a>
+## 🚀 Installation
+
+You need pi version 1.0.3 or later, which in turn needs Node.js newer than 22.14. It works on Windows, Linux and macOS.
+
+Open a terminal and paste this command:
+
+```bash
+pi install git:github.com/alexis-82/personal-skills-ai@pi-testing
+```
+
+If pi is already open, type `/reload` to load the skills. To update later, run the same command again.
+
+<a id="how-to-use"></a>
+## 🧭 How to use
+
+In pi, type the command of the step you want, or simply ask in your own words (for example "write the spec" or "commit"): pi usually picks the right step by itself.
+
+| Step | Command | What happens |
+|---|---|---|
+| 1 | `/skill:01-spec` | You describe the idea; pi writes what the feature must and must not do |
+| 2 | `/skill:02-clarify` | pi shows the options and asks you to choose |
+| 3 | `/skill:03-plan-tasks` | pi splits the work into small tasks |
+| 4 | `/skill:04-analyze` | *Optional* — pi looks for risks in the plan |
+| 5 | `/skill:05-implement` | pi writes the code, one task at a time |
+| 6 | `/skill:06-test` | pi checks that everything works as agreed |
+| 7 | `/skill:07-review` | *Optional* — pi reviews the code looking for problems |
+| 8 | `/skill:08-refactor` | *Optional* — pi tidies up the new code without changing what it does |
+| 9 | `/skill:09-commit` | pi saves the work and updates the change list and description |
+| 10 | `/skill:10-push` | *Optional* — pi publishes the work online after your confirmation |
+
+At any time you can say **"watch the scope"** or type `/skill:guardrail-scope` to remind pi to change only what you asked for.
+
+<a id="troubleshooting"></a>
+## 🛟 Troubleshooting
+
+- **pi doesn't pick the right step on its own**: type the step command directly, for example `/skill:01-spec`.
+- **The commands don't appear after installing**: type `/reload` in pi, or restart it.
+- **You want to use Claude with a Claude Pro or Max subscription**: pi needs an extra add-on. Paste `pi install npm:pi-claude-pro`, and keep only one add-on of this kind installed. It is made by a third party: check it before installing.
+
+---
+
+<a id="it"></a>
 <a id="indice"></a>
 ## 📑 Indice
 
 - [✨ Cos'è](#cose)
-- [🧩 Le 10 fasi, seguire il workflow in questo ordine](#le-10-fasi-seguire-il-workflow-in-questo-ordine)
-- [🧠 Concetti chiave](#concetti-chiave)
 - [🚀 Installazione](#installazione)
-- [🛠️ Come si usano](#come-si-usano)
-- [💡 Esempio di flusso completo](#esempio-di-flusso-completo)
-- [📁 Struttura file](#struttura-file)
-- [🎨 Personalizzazione](#personalizzazione)
-- [📝 Note](#note)
+- [🧭 Come si usa](#come-si-usa)
+- [🛟 Problemi comuni](#problemi-comuni)
 
 ---
 
 <a id="cose"></a>
 ## ✨ Cos'è
 
-Set di **11 skill** per [pi](https://pi.dev): **10 fasi** che strutturano lo sviluppo di una funzionalità, dalla spec iniziale al push finale, più un **guardrail cross-cutting** che impedisce all'AI di uscire fuori dallo scope della richiesta.
+Feature-Driven Workflow è un insieme di skill per [pi](https://pi.dev), un assistente alla programmazione basato sull'AI. Divide il lavoro su una nuova funzione in dieci passi chiari: prima decidete insieme cosa costruire e cosa lasciare fuori, poi pi pianifica, scrive, prova, revisiona e salva il lavoro, chiedendo la tua conferma nei momenti importanti.
 
-Le skill seguono lo standard **Agent Skills** (cartella con `SKILL.md`) e si installano come **pi package**. Sono **stack-agnostic**: funzionano per script Python, librerie, CLI tool, servizi web, pipeline ML, app desktop, e qualunque altro tipo di software.
+Cosa ottieni:
 
----
+- **Confini chiari**: all'inizio scrivi cosa la funzione deve fare e, altrettanto importante, cosa non deve fare. pi rispetta quell'elenco per tutto il lavoro.
+- **Scelte fatte insieme**: prima di scrivere qualsiasi cosa, pi ti mostra le alternative con pro e contro e ti lascia decidere.
+- **Un progetto ordinato dal primo giorno**: su un progetto nuovo pi propone una struttura di cartelle adatta al linguaggio che usi.
+- **Nessuna sorpresa**: pi modifica solo quello che hai chiesto. Se nota altri problemi te li segnala, invece di sistemarli di testa sua.
+- **Note già pronte**: alla fine pi aggiorna per te l'elenco delle modifiche e la descrizione del progetto.
 
-<a id="le-10-fasi-seguire-il-workflow-in-questo-ordine"></a>
-## 🧩 Le 10 fasi, seguire il workflow in questo ordine
-
-| # | Comando | Ruolo | Output principale |
-|---|---------|-------|-------------------|
-| 01 | `/skill:01-spec` | Definire requisiti + Goals + **Non-Goals** | `.pi-workflow/spec.md` nel progetto |
-| 02 | `/skill:02-clarify` | Brainstorming interattivo (stack, architettura, alternative) + risoluzione ambiguità | `spec.md` chiarito con "Decisioni prese" |
-| 03 | `/skill:03-plan-tasks` | Piano tecnico + task breakdown | `.pi-workflow/plan.md` + `.pi-workflow/tasks.md` |
-| 04 | `/skill:04-analyze` | Analisi critica del piano | `.pi-workflow/analysis.md` |
-| 05 | `/skill:05-implement` | Scrivere il codice | Codice + `.pi-workflow/tasks.md` aggiornato |
-| 06 | `/skill:06-test` | Test contro criteri di accettazione | Suite verde |
-| 07 | `/skill:07-review` | Code review del codice implementato (correttezza, edge case, sicurezza, prestazioni, leggibilità) | `.pi-workflow/review.md` con findings per severità |
-| 08 | `/skill:08-refactor` | Pulire con i test come rete di sicurezza | Codice più leggibile, comportamento invariato |
-| 09 | `/skill:09-commit` | `CHANGELOG.md` aggiornato + commit strutturati (solo in locale) | Storia git pulita + `CHANGELOG.md` nella root |
-| 10 | `/skill:10-push` | Push sul remote dopo conferma + eventuale PR | Branch pubblicato, eventuale PR aperta |
-
-Ordine tipico: `spec → clarify → plan-tasks → (analyze) → implement → test → (review) → (refactor) → commit → (push)`. Le fasi `04-analyze`, `07-review`, `08-refactor` e `10-push` sono opzionali.
-
-Fuori dalla numerazione c'è `/skill:guardrail-scope` ⚠, la regola trasversale sullo scope: non è una fase (vedi [Guardrail](#guardrail-disciplina-dello-scope)).
-
----
-
-<a id="concetti-chiave"></a>
-## 🧠 Concetti chiave
-
-### Goals / Non-Goals
-
-Ogni `.pi-workflow/spec.md` contiene due sezioni obbligatorie:
-
-- **Goals** — 3-7 bullet verificabili con cosa la feature **deve** fare.
-- **Non-Goals** — 3-7 bullet con cosa la feature **NON** deve fare, esplicitamente.
-
-I **Non-Goals** sono il contratto che l'utente firma con l'AI in fase 01. Vengono riletti dalle fasi successive prima di ogni modifica e servono a prevenire scope creep.
-
-Esempio (script Python di analisi):
-
-```markdown
-## Goals
-- [ ] Leggere CSV da ./in/, calcolare medie mensili, salvare in ./out/report.csv
-
-## Non-Goals
-- [ ] NON parallelizzare il calcolo
-- [ ] NON persistere su DB
-- [ ] NON aggiungere plot/grafici
-```
-
-Il file `01-spec/spec.md` (template nella cartella della skill) contiene esempi di Non-Goals per: script Python, librerie, CLI, servizi backend, pipeline ML, app desktop.
-
-<a id="guardrail-disciplina-dello-scope"></a>
-### Guardrail: disciplina dello scope
-
-`guardrail-scope` è una skill trasversale che vincola l'AI a modificare **solo** il codice strettamente necessario alla richiesta. Le fasi 05–10 ne riportano le regole principali nelle righe `[GUARDRAIL SCOPE]`. In pi resta visibile come `/skill:guardrail-scope`, perché pi non permette di nascondere una singola skill dal menu. Regole:
-
-1. **Check n°1** — se esiste `.pi-workflow/spec.md` con Non-Goals, quelli sono la fonte di verità prioritaria.
-2. **Check n°2** — anche in loro assenza, no pulizie opportunistiche, no riformattazioni, no rinomine collaterali, no refactor spontanei.
-3. **Auto-verifica pre-commit** — ogni riga del diff deve essere motivabile con il task richiesto. Se no, va rimossa.
-
-Se durante il lavoro emergono problemi fuori scope, l'AI li **segnala** ma non li risolve senza autorizzazione.
-
-### CHANGELOG automatico
-
-A ogni ciclo `09-commit` crea o aggiorna `CHANGELOG.md` nella **root del progetto** (non in `.pi-workflow/`), nel formato [Keep a Changelog](https://keepachangelog.com/) + [SemVer](https://semver.org/), con voci in inglese:
-
-```markdown
-## [1.3.0] - 2026-10-17
-### Added
-- CSV export of users via `GET /users/export`.
-```
-
-- **Versione**: l'AI propone il bump SemVer (MAJOR = breaking, MINOR = nuova funzionalità, PATCH = fix) partendo dall'ultima voce; se il CHANGELOG non esiste legge la versione da manifest o tag, altrimenti propone `0.1.0` / `1.0.0`. **Tu confermi** versione e testo prima che il file venga scritto.
-- **Data**: quella odierna, nel formato `YYYY-MM-DD`.
-- **Commit**: il CHANGELOG entra nello stesso commit della feature.
-- **Ogni ciclo è una nuova versione**. I cicli di solo refactor/chore/test non generano voci: l'AI lo dichiara in chat.
-- **Non** crea tag o GitHub Release, **non** modifica la versione in `package.json` & co., **non** tocca le voci precedenti.
-
----
+Funziona con qualunque tipo di software: script, siti web, app, programmi da riga di comando e altro.
 
 <a id="installazione"></a>
 ## 🚀 Installazione
 
-### Requisiti
+Ti serve pi versione 1.0.3 o successiva, che a sua volta richiede Node.js più recente della 22.14. Funziona su Windows, Linux e macOS.
 
-- **pi 1.0.3** o superiore.
-- **Node.js superiore alla 22.14**, richiesto da pi 1.0.3 e successivi.
-
-### Usare Claude con un abbonamento Pro/Max
-
-Per usare i modelli Claude con un abbonamento **Claude Pro o Max**, pi ha bisogno dell'estensione [`pi-claude-pro`](https://www.npmjs.com/package/pi-claude-pro): senza, l'abbonamento non funziona.
-
-```bash
-pi install npm:pi-claude-pro
-```
-
-| Operazione | Comando |
-|------------|---------|
-| Provarla per una sola sessione, senza installarla | `pi -e npm:pi-claude-pro` |
-| Riallinearla | `pi update --extensions` |
-| Disinstallarla | `pi remove npm:pi-claude-pro` |
-
-- Usa **una sola** estensione che gestisce il provider `anthropic`: rimuovi le altre estensioni per abbonamenti Claude prima di installare questa.
-- Claude Code non è necessario. Se il comando `claude` è nel `PATH`, l'estensione ne invia la versione; altrimenti invia quella inclusa nell'estensione.
-- È un'estensione di terze parti: come tutte le estensioni pi, gira con gli stessi permessi di pi. Controllane il sorgente prima di installarla.
-
-### Installare le skill
-
-Le skill si installano come **pi package**, direttamente da questo branch:
+Apri un terminale e incolla questo comando:
 
 ```bash
 pi install git:github.com/alexis-82/personal-skills-ai@pi-testing
 ```
 
-Oppure da un clone locale del repo:
+Se pi è già aperto, scrivi `/reload` per caricare le skill. Per aggiornare in futuro, ripeti lo stesso comando.
 
-```bash
-git clone -b pi-testing https://github.com/alexis-82/personal-skills-ai.git
-pi install ./personal-skills-ai
-```
+<a id="come-si-usa"></a>
+## 🧭 Come si usa
 
-Il `package.json` del repo dichiara le 10 cartelle skill nella chiave `pi.skills`, quindi pi carica solo quelle.
+In pi scrivi il comando del passo che ti serve, oppure chiedi semplicemente a parole tue (per esempio "scrivi la spec" o "committa"): di solito pi sceglie da solo il passo giusto.
 
-| Operazione | Comando |
-|------------|---------|
-| Installare solo per il progetto corrente (scrive in `.pi/settings.json`) | `pi install -l <sorgente>` |
-| Riallineare i package installati | `pi update --extensions` |
-| Vedere i package installati | `pi list` |
-| Disinstallare | `pi remove <sorgente>` |
+| Passo | Comando | Cosa succede |
+|---|---|---|
+| 1 | `/skill:01-spec` | Descrivi l'idea; pi scrive cosa la funzione deve e non deve fare |
+| 2 | `/skill:02-clarify` | pi ti mostra le opzioni e ti chiede di scegliere |
+| 3 | `/skill:03-plan-tasks` | pi divide il lavoro in piccoli compiti |
+| 4 | `/skill:04-analyze` | *Facoltativo* — pi cerca i rischi nel piano |
+| 5 | `/skill:05-implement` | pi scrive il codice, un compito alla volta |
+| 6 | `/skill:06-test` | pi verifica che tutto funzioni come concordato |
+| 7 | `/skill:07-review` | *Facoltativo* — pi rilegge il codice in cerca di problemi |
+| 8 | `/skill:08-refactor` | *Facoltativo* — pi riordina il codice nuovo senza cambiare cosa fa |
+| 9 | `/skill:09-commit` | pi salva il lavoro e aggiorna elenco delle modifiche e descrizione |
+| 10 | `/skill:10-push` | *Facoltativo* — pi pubblica il lavoro online dopo la tua conferma |
 
-Dopo un'installazione o un aggiornamento in una sessione già aperta, esegui `/reload`. Se dopo nuovi commit sul branch la versione installata non cambia, reinstalla con `pi install <sorgente>`.
+In qualunque momento puoi dire **"attenzione allo scope"** o scrivere `/skill:guardrail-scope` per ricordare a pi di modificare solo quello che hai chiesto.
 
-> **Da verificare al primo avvio**: le cartelle skill contengono anche i template `plan.md`, `spec.md`, `tasks.md`. All'avvio di pi controlla nelle diagnostiche che le skill caricate siano **esattamente 11** e che i template non compaiano come skill a sé.
+<a id="problemi-comuni"></a>
+## 🛟 Problemi comuni
 
-### Guardrail sempre attivo (opzionale)
-
-Come skill, `guardrail-scope` si attiva quando la invochi o quando il modello la riconosce dalla descrizione. Se vuoi che le sue regole valgano **in ogni sessione**, copia a mano le sezioni che ti interessano (Principio, Check n°1, Check n°2) nel context file globale di pi:
-
-```
-~/.pi/agent/AGENTS.md
-```
-
-pi carica `AGENTS.md` sempre, senza bisogno di invocarlo. Il package non scrive mai in questo file: la scelta resta tua.
-
----
-
-<a id="come-si-usano"></a>
-## 🛠️ Come si usano
-
-### Invocazione esplicita
-
-In pi le skill si invocano con il prefisso `/skill:`. Il testo dopo il nome viene passato come richiesta:
-
-```
-/skill:01-spec voglio esportare gli utenti in CSV
-/skill:05-implement
-/skill:10-push
-/skill:guardrail-scope
-```
-
-La voce di settings `enableSkillCommands` decide se i comandi `/skill:` compaiono nel completamento; digitati a mano funzionano comunque.
-
-### Attivazione automatica
-
-All'avvio pi mette nome e `description` di ogni skill nel prompt di sistema, e il modello carica la skill adatta quando la richiesta corrisponde. Frasi che le triggerano:
-
-| Se dici… | Si attiva… |
-|----------|------------|
-| "definisci i requisiti", "scrivi la spec" | `01-spec` |
-| "chiarisci", "cosa manca", "brainstorma", "esploriamo le opzioni", "quale stack" | `02-clarify` |
-| "pianifica", "scomponi in task" | `03-plan-tasks` |
-| "analizza", "verifica il piano" | `04-analyze` |
-| "implementa", "scrivi il codice" | `05-implement` |
-| "testa", "scrivi i test" | `06-test` |
-| "revisiona", "code review", "cerca bug nel codice" | `07-review` |
-| "refactora", "pulisci il codice" | `08-refactor` |
-| "committa", "aggiorna il changelog" | `09-commit` |
-| "pusha", "pubblica", "apri PR" | `10-push` |
-| "attenzione allo scope", "lavora sui binari" | `guardrail-scope` |
-
-L'attivazione automatica non è garantita: se il modello non carica la skill, usa `/skill:<nome>`.
-
----
-
-<a id="esempio-di-flusso-completo"></a>
-## 💡 Esempio di flusso completo
-
-Immagina di dover aggiungere un endpoint di export in un servizio Python esistente.
-
-```
-> /skill:01-spec voglio esportare gli utenti in CSV via endpoint GET /users/export
-
-[AI compila .pi-workflow/spec.md con Goals + Non-Goals + interfaccia + criteri]
-
-> ok procedi
-
-> /skill:02-clarify
-
-[AI apre un brainstorming: presenta 2-4 alternative per i punti decisionali
- (es. formato CSV via streaming vs in-memory, autenticazione richiesta o no,
- paginazione o dump completo) con pro/contro concreti e opzioni numerate,
- e tu rispondi col numero. Poi 2-3 domande chiuse per le ambiguità puntuali
- e propone Non-Goals aggiuntivi. Aggiunge la sezione "Decisioni prese" a spec.md]
-
-> /skill:03-plan-tasks
-
-[AI ispeziona il codebase, produce .pi-workflow/plan.md e .pi-workflow/tasks.md con 4 task]
-
-> /skill:05-implement
-
-[AI implementa task 1..4, tenendo d'occhio i Non-Goals; se emerge un problema fuori scope, lo segnala]
-
-> /skill:06-test
-
-[AI scrive test per ogni criterio di accettazione, verifica suite verde]
-
-> /skill:07-review  (opzionale)
-
-[AI revisiona il codice su 5 assi (correttezza, edge case, sicurezza, prestazioni,
- leggibilità), produce .pi-workflow/review.md con findings per severità. Se ci sono
- blocker/major, torna a /skill:05-implement; altrimenti prosegue.]
-
-> /skill:08-refactor  (opzionale)
-
-[AI pulisce solo il codice appena scritto, non tocca il resto]
-
-> /skill:09-commit
-
-[AI rilegge il diff riga per riga, propone la voce ## [1.3.0] - <data> per il
- CHANGELOG e attende conferma, poi crea commit separati per feature (con CHANGELOG)
- e refactor, solo in locale]
-
-> /skill:10-push  (opzionale)
-
-[AI controlla che non ci siano modifiche non committate e che il remote non sia
- avanti, mostra i commit in uscita e attende conferma, poi fa il push.
- Se lo chiedi, apre anche la PR]
-```
-
-In qualunque momento puoi dire **"attenzione allo scope"** per richiamare il guardrail come promemoria.
-
----
-
-<a id="struttura-file"></a>
-## 📁 Struttura file
-
-```
-personal-skills-ai/
-├── README.md                    # questo file
-├── CHANGELOG.md
-├── package.json                 # manifest pi package (chiave "pi.skills")
-├── 01-spec/
-│   ├── SKILL.md                 # istruzioni AI
-│   ├── plan.md                  # metodo
-│   ├── spec.md                  # template output (con esempi Non-Goals per stack)
-│   └── tasks.md                 # checklist
-├── 02-clarify/
-├── 03-plan-tasks/
-├── 04-analyze/
-├── 05-implement/
-├── 06-test/
-├── 07-review/
-├── 08-refactor/
-├── 09-commit/
-├── 10-push/
-└── guardrail-scope/             # regola trasversale, non numerata
-    └── SKILL.md
-```
-
-Ogni cartella skill contiene:
-- `SKILL.md` — istruzioni per l'AI (con frontmatter YAML `name` e `description`)
-- `plan.md`, `spec.md`, `tasks.md` — template e checklist di supporto (dove applicabile), letti dalla skill per percorso relativo
-
----
-
-<a id="personalizzazione"></a>
-## 🎨 Personalizzazione
-
-- **Vocabolario**: adatta i termini della `spec.md` al tuo dominio. Il template è neutro (parla di "consumatori", "interfaccia", "unità di codice") — sostituisci con "endpoint", "comando", "modulo", "componente", ecc. secondo il progetto.
-- **Fasi**: se non ti serve una fase (es. analisi o refactor), saltala. Il workflow non è rigido.
-- **Non-Goals per stack**: `01-spec/spec.md` ha esempi per 6 tipi di software; aggiungi i tuoi se lavori su domini ricorrenti (embedded, mobile, ecc.).
-- **Solo invocazione esplicita**: se non vuoi che il modello attivi una skill da solo, aggiungi `disable-model-invocation: true` al suo frontmatter; resterà disponibile con `/skill:<nome>`.
-- **Modifiche locali**: dopo aver modificato una skill durante una sessione, esegui `/reload`.
-
----
-
-<a id="note"></a>
-## 📝 Note
-
-- Le skill sono in italiano ma il codice generato segue le convenzioni del progetto (inglese se il codebase è in inglese).
-- I file `plan.md` / `spec.md` / `tasks.md` nelle cartelle skill sono **template di riferimento**, non vengono modificati durante l'uso. I file di lavoro veri vivono **sempre** nel progetto sotto `.pi-workflow/` (`spec.md`, `plan.md`, `tasks.md`, `analysis.md`, `review.md` e l'eventuale `test-report.md`). Mai nella root del progetto, mai nella cartella della skill — regola rafforzata dal Check n°3 di `guardrail-scope`.
-- `.pi-workflow/` è distinta da `.pi/`: quest'ultima è la cartella di configurazione di pi, che viene caricata solo dopo aver concesso la fiducia al progetto.
-- Se dopo una sessione trovi uno di questi file nella root del progetto (residuo da sessioni precedenti), spostalo dentro `.pi-workflow/`: le skill sanno gestirlo, ma un file omonimo in root può confondere le fasi successive.
-- **Domande in `02-clarify`**: pi non ha uno strumento integrato per le domande a scelta multipla, quindi la skill le scrive in chat con opzioni numerate. Se un'estensione fornisce uno strumento di domanda strutturata, la skill lo usa.
-- **Nessuna sandbox**: pi non ha un sistema di permessi; il guardrail di scope è un'istruzione per il modello, non un blocco tecnico.
-- La skill `guardrail-scope` vale anche fuori dal workflow feature-driven, in qualunque task che tocchi codice.
+- **pi non sceglie da solo il passo giusto**: scrivi direttamente il comando del passo, per esempio `/skill:01-spec`.
+- **I comandi non compaiono dopo l'installazione**: scrivi `/reload` in pi, oppure riavvialo.
+- **Vuoi usare Claude con un abbonamento Claude Pro o Max**: pi ha bisogno di un componente aggiuntivo. Incolla `pi install npm:pi-claude-pro` e tieni installato un solo componente di questo tipo. È fatto da terzi: controllalo prima di installarlo.

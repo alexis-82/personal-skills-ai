@@ -1,6 +1,6 @@
 ---
 name: 09-commit
-description: Creare commit ben strutturati per una funzionalità completata, testata ed eventualmente refactorata. Crea o aggiorna anche il CHANGELOG.md del progetto con versione SemVer e data. Usare quando l'utente dice "committa", "fai il commit", "aggiorna il changelog" a chiusura del ciclo di lavoro. Nona fase del workflow feature-driven.
+description: Creare commit ben strutturati per una funzionalità completata, testata ed eventualmente refactorata. Crea o aggiorna anche il CHANGELOG.md del progetto con versione SemVer e data, e il README.md bilingue (inglese e italiano) con un template fisso, non tecnico, pensato per utenti comuni. Usare quando l'utente dice "committa", "fai il commit", "aggiorna il changelog", "aggiorna il README" a chiusura del ciclo di lavoro. Nona fase del workflow feature-driven.
 ---
 
 # Commit
@@ -16,16 +16,14 @@ Fase 9/10 del workflow. Consolida il lavoro (implementazione + test + refactor) 
 > 1. Se `.pi-workflow/` non esiste nella root del progetto, crearla.
 > 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.pi-workflow/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
 >
-> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.pi-workflow/` del progetto.
->
-> **Eccezione**: `CHANGELOG.md` è un file di prodotto, non di workflow — va nella **root del progetto** (vedi [Aggiornamento CHANGELOG](#aggiornamento-changelog)).
+> **Eccezione**: `CHANGELOG.md` e `README.md` sono file di prodotto, non di workflow — vanno nella **root del progetto** (vedi [Aggiornamento CHANGELOG](#aggiornamento-changelog) e [Aggiornamento README](#aggiornamento-readme)).
 
 ## Cosa fare
 
-1. Leggere `plan.md`, `spec.md`, `tasks.md` di questa cartella per il metodo.
-2. Eseguire `git status` e `git diff` per capire cosa entra nel commit.
-3. **Ispezionare i file staged**: cercare segreti (chiavi API, password, token), file di build, file `.env`. Se trovi qualcosa di sospetto — anche se il nome sembra innocuo — aprire il file prima di procedere.
-4. **Aggiornare il CHANGELOG** (vedi sezione [Aggiornamento CHANGELOG](#aggiornamento-changelog)): creare o aggiornare `CHANGELOG.md` nella root del progetto con la nuova voce, oppure dichiarare perché viene saltato.
+1. Eseguire `git status` e `git diff` per capire cosa entra nel commit.
+2. **Ispezionare i file staged**: cercare segreti (chiavi API, password, token), file di build, file `.env`. Se trovi qualcosa di sospetto — anche se il nome sembra innocuo — aprire il file prima di procedere.
+3. **Aggiornare il CHANGELOG** (vedi sezione [Aggiornamento CHANGELOG](#aggiornamento-changelog)): creare o aggiornare `CHANGELOG.md` nella root del progetto con la nuova voce, oppure dichiarare perché viene saltato.
+4. **Aggiornare il README** (vedi sezione [Aggiornamento README](#aggiornamento-readme)): creare o aggiornare `README.md` nella root del progetto secondo il template bilingue (inglese + italiano), oppure dichiarare perché viene saltato.
 5. Raggruppare le modifiche in commit logici. Come regola:
    - **Un commit per la feature** (implementazione + test relativi).
    - **Un commit separato per il refactor** se è stato fatto (fase 07), così la storia distingue chiaramente cambi di comportamento da cambi strutturali.
@@ -42,7 +40,7 @@ Fase 9/10 del workflow. Consolida il lavoro (implementazione + test + refactor) 
 Eseguire i sotto-passi in ordine:
 
 1. **Classificare il ciclo.** Fonti: Goals di `.pi-workflow/spec.md` e task completati in `.pi-workflow/tasks.md` se esistono, altrimenti solo il diff. Ignorare i file sotto `.pi-workflow/`.
-   - Se **non** ci sono cambiamenti visibili a chi usa il prodotto (solo refactor, chore, test, documentazione interna) → **saltare il CHANGELOG** e scrivere in chat: "CHANGELOG non aggiornato: <motivo>". Passare al punto 5 di "Cosa fare".
+   - Se **non** ci sono cambiamenti visibili a chi usa il prodotto (solo refactor, chore, test, documentazione interna) → **saltare il CHANGELOG** e scrivere in chat: "CHANGELOG non aggiornato: <motivo>". Passare al punto 4 di "Cosa fare" (README).
 2. **Riprendere un tentativo precedente.** Eseguire `git diff HEAD -- CHANGELOG.md`. Se mostra una voce `## [X.Y.Z]` aggiunta e non ancora committata (es. hook pre-commit fallito, commit rilanciato), quella voce va **sostituita**, non affiancata: rimuovere solo quella voce (il resto del file non si tocca) e proseguire dal sotto-passo 3. Versione e voce vanno **ricalcolate**, perché nel frattempo il contenuto del ciclo può essere cambiato (es. un fix diventato anche una feature: `1.2.1` → `1.3.0`).
 3. **Determinare la versione** (SemVer):
    - `## [Unreleased]` **non è una versione**: non conta mai come base del calcolo.
@@ -76,9 +74,108 @@ Eseguire i sotto-passi in ordine:
 
 **Vietato in questo passo**: creare tag git o GitHub Release, aggiornare la versione in file di progetto (`package.json`, `pyproject.toml`, ecc.), ricostruire lo storico dal `git log`.
 
+## Aggiornamento README
+
+> **Eccezione al path**: `README.md` **non** è un file di workflow. Va nella **root del progetto** (`git rev-parse --show-toplevel`), mai in `.pi-workflow/` né nella cartella della skill.
+
+**Pubblico: utenti comuni, non sviluppatori.** Il README spiega cos'è il prodotto, a cosa serve e come installarlo e usarlo, come lo si spiegherebbe a chi non ha mai programmato.
+
+**Bilingue in un unico file**: header comune, sotto ai badge i link alle due lingue, poi la parte **inglese** e la parte **italiana**, con le stesse sezioni e lo stesso contenuto (traduzione fedele, non due testi diversi).
+
+Eseguire i sotto-passi in ordine, **dopo** che la voce del CHANGELOG è stata confermata (o saltata):
+
+1. **Decidere cosa fare.**
+   - **README assente** → crearlo dal template (sotto-passo 2).
+   - **README presente e conforme al template** (header centrato con badge `Version`, link lingua, ancore `<a id="en"></a>` e `<a id="it"></a>`) → aggiornarlo **solo se** il ciclo cambia qualcosa che un utente comune nota (una funzione nuova o cambiata, il modo di installare o di usare, i requisiti) oppure se il CHANGELOG ha una nuova versione (badge). Altrimenti **saltare** e scrivere in chat: "README non aggiornato: <motivo>".
+   - **README presente ma non conforme** (incluso un README conforme al vecchio template solo italiano) → proporre la **conversione** al template, recuperando dal vecchio README solo i contenuti utili a un utente comune. Nella proposta elencare esplicitamente cosa verrà **tolto** (es. build, struttura dei sorgenti, contribuzione). Se l'utente rifiuta, non toccare il README e scrivere in chat: "README non aggiornato: conversione rifiutata".
+2. **Struttura obbligatoria** — seguire esattamente questo template, inclusi i separatori `---`, `<div align="center">`, le ancore `<a id>` e le emoji:
+   ```markdown
+   <div align="center">
+
+   # <Nome progetto>
+
+   **<one-line tagline in English>**<br>
+   *<tagline di una riga in italiano>*
+
+   [![Version](https://img.shields.io/badge/version-X.Y.Z-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![Python](https://img.shields.io/badge/Python-3776AB?style=plastic&logo=python&logoColor=white)](#)
+
+   🇬🇧 [English](#en)&nbsp;&nbsp;·&nbsp;&nbsp;🇮🇹 [Italiano](#it)
+
+   </div>
+
+   ---
+
+   <a id="en"></a>
+   <a id="contents"></a>
+   ## 📑 Contents
+
+   - [✨ What it is](#what-it-is)
+   - [🚀 Installation](#installation)
+
+   ---
+
+   <a id="what-it-is"></a>
+   ## ✨ What it is
+
+   ...
+
+   <a id="installation"></a>
+   ## 🚀 Installation
+
+   ...
+
+   ---
+
+   <a id="it"></a>
+   <a id="indice"></a>
+   ## 📑 Indice
+
+   - [✨ Cos'è](#cose)
+   - [🚀 Installazione](#installazione)
+
+   ---
+
+   <a id="cose"></a>
+   ## ✨ Cos'è
+
+   ...
+
+   <a id="installazione"></a>
+   ## 🚀 Installazione
+
+   ...
+   ```
+   - **Nome progetto**: nome leggibile (dal manifest o dalla cartella del repo, senza trattini o maiuscole forzate da codice).
+   - **Tagline**: una sola frase che dice cosa fa il prodotto **per l'utente**, senza gergo; in grassetto la versione inglese, sotto in corsivo la stessa frase in italiano.
+   - **Link lingua**: sempre presenti, subito sotto ai badge, dentro il `<div align="center">`, puntano alle ancore `#en` e `#it`.
+   - **Badge `Version`**: `X.Y.Z` = versione della voce CHANGELOG appena confermata; se il CHANGELOG è stato saltato, la prima versione già presente nel CHANGELOG; altrimenti quella da manifest o ultimo tag (senza `v`); se non ce n'è nessuna, omettere il badge. Link a `CHANGELOG.md` solo se il file esiste, altrimenti `(#)`.
+   - **Badge del linguaggio**: uno solo, per il linguaggio principale del progetto, nello stesso stile (`style=plastic`, logo e colore ufficiali shields.io, link `(#)`). Facoltativo un badge piattaforma (es. `platform-Windows%20%7C%20Linux-lightgrey`) se il progetto lo dichiara. Nessun altro badge. Badge separati da `&nbsp;&nbsp;&nbsp;`.
+   - **Ordine delle lingue**: prima l'inglese, poi l'italiano, separati da `---`.
+   - **Sezioni**: obbligatorie `✨ What it is` / `✨ Cos'è` e `🚀 Installation` / `🚀 Installazione`. Facoltative, solo se c'è qualcosa di utile da dire, in quest'ordine dopo l'installazione:
+
+     | Inglese (ancora) | Italiano (ancora) |
+     |---|---|
+     | `🧭 How to use` (`how-to-use`) | `🧭 Come si usa` (`come-si-usa`) |
+     | `🛟 Troubleshooting` (`troubleshooting`) | `🛟 Problemi comuni` (`problemi-comuni`) |
+     | `📄 License` (`license`) | `📄 Licenza` (`licenza`) |
+
+     Nessun'altra sezione. Le due lingue hanno **sempre le stesse sezioni**, nello stesso ordine.
+   - **Indice**: uno per lingua (`📑 Contents` / `📑 Indice`), una voce per ogni sezione presente, nello stesso ordine, con la stessa emoji e il link all'ancora. Ogni sezione è preceduta da `<a id="<ancora>"></a>`; le ancore inglesi e italiane sono diverse, quindi non si scontrano.
+3. **Stile non tecnico (regola dura).**
+   - Frasi brevi, seconda persona ("you can", "open" / "puoi", "apri"), si spiega **cosa fa** e **a cosa serve**, non **come è fatto**.
+   - **Vietato nel README**: build/compilazione, toolchain e framework di sviluppo, dipendenze di sviluppo, struttura dei sorgenti, architettura, test, CI, linee guida di contribuzione, API interne, nomi di file/funzioni/classi del codice, variabili d'ambiente da sviluppatore, gergo non spiegato.
+   - **Installazione**: il percorso più semplice per un utente comune (download dalla pagina Releases, installer, store, pacchetto), con i requisiti (sistema operativo, ecc.) detti a parole. Se l'unico modo è un comando da terminale, è ammesso il **minimo indispensabile** in un blocco copia-incolla, preceduto da istruzioni a parole (es. "Open the Terminal and paste this command" / "Apri il Terminale e incolla questo comando"). Il blocco di codice è identico nelle due lingue.
+   - **Non inventare**: link di download, comandi, funzioni e requisiti si scrivono solo se esistono davvero nel progetto. Se non è chiaro come un utente comune installa o usa il prodotto, **chiedere** all'utente.
+4. **Aggiornare un README conforme**: toccare solo il badge versione e le sezioni interessate dal ciclo, **in entrambe le lingue** (una modifica in inglese ha sempre la sua controparte in italiano e viceversa); aggiungere una sezione facoltativa solo se il ciclo la rende necessaria, in entrambe le lingue, aggiornando i due indici. Non riscrivere né riformattare il resto.
+5. **Mostrare il README all'utente e attendere conferma**: completo se nuovo o convertito, il diff se aggiornato. L'utente può correggerlo. Non scrivere nulla prima della conferma.
+6. **Scrivere il file**, mantenendo il fine riga (CRLF/LF) del file esistente; per un file nuovo, lo stesso fine riga degli altri file di testo del progetto.
+7. **Mettere in stage** `README.md` con nome esplicito, nello **stesso commit della feature** (come il CHANGELOG).
+
+**Vietato in questo passo**: creare file README separati per lingua (`README.it.md`, `README.en.md`), creare altra documentazione (`DEVELOPMENT.md`, `CONTRIBUTING.md`, `docs/`, wiki), spostare altrove i contenuti tecnici tolti dal README, modificare codice o manifest per adattarli al README.
+
 ## Output atteso
 
-Commit creati (feature + eventuale refactor separati), git tree pulito, `.pi-workflow/tasks.md` con tutti i task marcati `- [x]`. `CHANGELOG.md` nella root del progetto creato o aggiornato con la nuova voce nel commit della feature, oppure dichiarazione esplicita in chat del perché è stato saltato.
+Commit creati (feature + eventuale refactor separati), git tree pulito, `.pi-workflow/tasks.md` con tutti i task marcati `- [x]`. `CHANGELOG.md` nella root del progetto creato o aggiornato con la nuova voce nel commit della feature, oppure dichiarazione esplicita in chat del perché è stato saltato. `README.md` nella root conforme al template bilingue (inglese + italiano), non tecnico, nel commit della feature, oppure dichiarazione esplicita in chat del perché è stato saltato.
 
 ## Regole
 

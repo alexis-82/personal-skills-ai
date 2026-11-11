@@ -15,20 +15,17 @@ Fase 4/10 del workflow. Trova i problemi prima che diventino costosi.
 > **Prima di scrivere il primo file, obbligatorio**:
 > 1. Se `.pi-workflow/` non esiste nella root del progetto, crearla.
 > 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.pi-workflow/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
->
-> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.pi-workflow/` del progetto.
 
 ## Cosa fare
 
-1. Leggere `plan.md`, `spec.md`, `tasks.md` di questa cartella per il metodo.
-2. Leggere `.pi-workflow/spec.md`, `.pi-workflow/plan.md`, `.pi-workflow/tasks.md` del progetto.
-3. Analizzare su 4 assi:
+1. Leggere `.pi-workflow/spec.md`, `.pi-workflow/plan.md`, `.pi-workflow/tasks.md` del progetto.
+2. Analizzare su 4 assi:
    - **Correttezza**: il piano copre tutti i criteri di accettazione della spec?
    - **Impatto**: quali parti del codice esistente vengono toccate? Regressioni possibili?
    - **Sicurezza**: input non fidati, autenticazione, autorizzazione, secret, injection.
    - **Prestazioni**: query N+1, loop nested, chiamate di rete non necessarie.
-4. Produrre `.pi-workflow/analysis.md` nel progetto con findings elencati, ognuno con severità (blocker/major/minor) e file:linea.
-5. Se ci sono blocker, tornare a `/skill:03-plan-tasks` per aggiornare il piano.
+3. Produrre `.pi-workflow/analysis.md` nel progetto con findings elencati, ognuno con severità (blocker/major/minor) e file:linea.
+4. Se ci sono blocker, tornare a `/skill:03-plan-tasks` per aggiornare il piano.
 
 ## Output atteso
 
