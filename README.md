@@ -1,300 +1,170 @@
 <div align="center">
 
-# Feature-Driven Workflow — Claude Code Skills
+# Feature-Driven Workflow
 
-**10 fasi per Claude Code che portano una funzionalità dalla spec al push, più un guardrail che impedisce di uscire dallo scope.**
+**Ten guided steps that help Claude Code take a new feature from idea to publication, without going off track.**<br>
+*Dieci passi guidati che aiutano Claude Code a portare una nuova funzione dall'idea alla pubblicazione, senza uscire dai binari.*
 
-[![Version](https://img.shields.io/badge/version-2.3.0-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![Claude Code](https://img.shields.io/badge/Claude%20Code-skills-D97757?style=plastic&logo=anthropic&logoColor=white)](https://claude.com/claude-code)&nbsp;&nbsp;&nbsp;[![Markdown](https://img.shields.io/badge/Markdown-000000?style=plastic&logo=markdown&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=plastic&logo=powershell&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Bash](https://img.shields.io/badge/Bash-4EAA25?style=plastic&logo=gnubash&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=plastic)](#)&nbsp;&nbsp;&nbsp;[![Last commit](https://img.shields.io/github/last-commit/alexis-82/personal-skills-ai?style=plastic)](https://github.com/alexis-82/personal-skills-ai/commits)
+[![Version](https://img.shields.io/badge/version-2.3.0-blue?style=plastic)](CHANGELOG.md)&nbsp;&nbsp;&nbsp;[![Markdown](https://img.shields.io/badge/Markdown-000000?style=plastic&logo=markdown&logoColor=white)](#)&nbsp;&nbsp;&nbsp;[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=plastic)](#)
+
+🇬🇧 [English](#en)&nbsp;&nbsp;·&nbsp;&nbsp;🇮🇹 [Italiano](#it)
 
 </div>
 
 ---
 
+<a id="en"></a>
+<a id="contents"></a>
+## 📑 Contents
+
+- [✨ What it is](#what-it-is)
+- [🚀 Installation](#installation)
+- [🧭 How to use](#how-to-use)
+- [🛟 Troubleshooting](#troubleshooting)
+
+---
+
+<a id="what-it-is"></a>
+## ✨ What it is
+
+Feature-Driven Workflow is a set of skills for Claude Code, Anthropic's coding assistant. It splits the work on a new feature into ten clear steps: first you decide together what to build and what to leave out, then Claude plans, writes, tests, reviews and saves the work, asking for your confirmation at the important moments.
+
+What you get:
+
+- **Clear boundaries**: at the start you write down what the feature must do and, just as important, what it must not do. Claude keeps to that list for the whole job.
+- **Choices made together**: before writing anything, Claude shows you the alternatives with their pros and cons and lets you decide.
+- **A tidy project from day one**: on a new project Claude proposes a folder structure suited to the language you use.
+- **No surprises**: Claude changes only what you asked for. If it notices other problems, it tells you instead of fixing them on its own.
+- **Ready-made notes**: at the end, Claude updates the list of changes and the project description for you.
+
+It works with any kind of software: scripts, websites, apps, command-line tools and more.
+
+<a id="installation"></a>
+## 🚀 Installation
+
+You need Claude Code installed on your computer (Windows, Linux or macOS).
+
+1. Download this project: on the GitHub page click **Code → Download ZIP** and unzip it, or copy it with Git.
+2. Open the unzipped folder in a terminal and run the installer for your system.
+
+**Windows** — open PowerShell in the folder and paste:
+
+```powershell
+.\install.ps1
+```
+
+**Linux / macOS** — open the Terminal in the folder and paste:
+
+```bash
+./install.sh
+```
+
+3. Restart Claude Code. The skills are ready.
+
+To update, download the new version and run the installer again: it replaces the old one.
+
+<a id="how-to-use"></a>
+## 🧭 How to use
+
+In Claude Code, type the command of the step you want, or simply ask in your own words (for example "write the spec" or "commit"): Claude picks the right step by itself.
+
+| Step | Command | What happens |
+|---|---|---|
+| 1 | `/01-spec` | You describe the idea; Claude writes what the feature must and must not do |
+| 2 | `/02-clarify` | Claude shows the options and asks you to choose |
+| 3 | `/03-plan-tasks` | Claude splits the work into small tasks |
+| 4 | `/04-analyze` | *Optional* — Claude looks for risks in the plan |
+| 5 | `/05-implement` | Claude writes the code, one task at a time |
+| 6 | `/06-test` | Claude checks that everything works as agreed |
+| 7 | `/07-review` | *Optional* — Claude reviews the code looking for problems |
+| 8 | `/08-refactor` | *Optional* — Claude tidies up the new code without changing what it does |
+| 9 | `/09-commit` | Claude saves the work and updates the change list and description |
+| 10 | `/10-push` | *Optional* — Claude publishes the work online after your confirmation |
+
+At any time you can say **"watch the scope"** to remind Claude to change only what you asked for.
+
+<a id="troubleshooting"></a>
+## 🛟 Troubleshooting
+
+- **Windows blocks the installer with an "execution policy" error**: in the same PowerShell window paste `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`, then run `.\install.ps1` again. The change lasts only until you close the window.
+- **Linux or macOS says "permission denied"**: paste `chmod +x install.sh` once, then run `./install.sh` again.
+- **The commands don't appear in Claude Code**: restart Claude Code after installing.
+
+---
+
+<a id="it"></a>
 <a id="indice"></a>
 ## 📑 Indice
 
 - [✨ Cos'è](#cose)
-- [🧩 Le 10 fasi, seguire il workflow in questo ordine](#le-10-fasi-seguire-il-workflow-in-questo-ordine)
-- [🧠 Concetti chiave](#concetti-chiave)
 - [🚀 Installazione](#installazione)
-- [🛠️ Come si usano](#come-si-usano)
-- [💡 Esempio di flusso completo](#esempio-di-flusso-completo)
-- [📁 Struttura file](#struttura-file)
-- [🎨 Personalizzazione](#personalizzazione)
-- [📝 Note](#note)
+- [🧭 Come si usa](#come-si-usa)
+- [🛟 Problemi comuni](#problemi-comuni)
 
 ---
 
 <a id="cose"></a>
 ## ✨ Cos'è
 
-Set di **11 skill** per Claude Code: **10 fasi** che strutturano lo sviluppo di una funzionalità, dalla spec iniziale al push finale, più un **guardrail cross-cutting** che impedisce all'AI di uscire fuori dallo scope della richiesta.
+Feature-Driven Workflow è un insieme di skill per Claude Code, l'assistente alla programmazione di Anthropic. Divide il lavoro su una nuova funzione in dieci passi chiari: prima decidete insieme cosa costruire e cosa lasciare fuori, poi Claude pianifica, scrive, prova, revisiona e salva il lavoro, chiedendo la tua conferma nei momenti importanti.
 
-Le skill sono **stack-agnostic**: funzionano per script Python, librerie, CLI tool, servizi web, pipeline ML, app desktop, e qualunque altro tipo di software.
+Cosa ottieni:
 
----
+- **Confini chiari**: all'inizio scrivi cosa la funzione deve fare e, altrettanto importante, cosa non deve fare. Claude rispetta quell'elenco per tutto il lavoro.
+- **Scelte fatte insieme**: prima di scrivere qualsiasi cosa, Claude ti mostra le alternative con pro e contro e ti lascia decidere.
+- **Un progetto ordinato dal primo giorno**: su un progetto nuovo Claude propone una struttura di cartelle adatta al linguaggio che usi.
+- **Nessuna sorpresa**: Claude modifica solo quello che hai chiesto. Se nota altri problemi te li segnala, invece di sistemarli di testa sua.
+- **Note già pronte**: alla fine Claude aggiorna per te l'elenco delle modifiche e la descrizione del progetto.
 
-<a id="le-10-fasi-seguire-il-workflow-in-questo-ordine"></a>
-## 🧩 Le 10 fasi, seguire il workflow in questo ordine
-
-| # | Skill | Ruolo | Output principale |
-|---|-------|-------|-------------------|
-| 01 | `01-spec` | Definire requisiti + Goals + **Non-Goals** | `.claude/spec.md` nel progetto |
-| 02 | `02-clarify` | Brainstorming interattivo (stack, architettura, alternative) + risoluzione ambiguità; su progetto nuovo propone l'architettura idiomatica per linguaggio | `spec.md` chiarito con "Decisioni prese" + `.claude/architecture.md` su progetto nuovo |
-| 03 | `03-plan-tasks` | Piano tecnico + task breakdown | `.claude/plan.md` + `.claude/tasks.md` |
-| 04 | `04-analyze` | Analisi critica del piano | `.claude/analysis.md` |
-| 05 | `05-implement` | Scrivere il codice | Codice + `.claude/tasks.md` aggiornato |
-| 06 | `06-test` | Test contro criteri di accettazione | Suite verde |
-| 07 | `07-review` | Code review del codice implementato (correttezza, edge case, sicurezza, prestazioni, leggibilità) | `.claude/review.md` con findings per severità |
-| 08 | `08-refactor` | Pulire con i test come rete di sicurezza | Codice più leggibile, comportamento invariato |
-| 09 | `09-commit` | `CHANGELOG.md` + `README.md` aggiornati + commit strutturati (solo in locale) | Storia git pulita + `CHANGELOG.md` e `README.md` nella root |
-| 10 | `10-push` | Push sul remote dopo conferma + eventuale PR | Branch pubblicato, eventuale PR aperta |
-
-Ordine tipico: `spec → clarify → plan-tasks → (analyze) → implement → test → (review) → (refactor) → commit → (push)`. Le fasi `04-analyze`, `07-review`, `08-refactor` e `10-push` sono opzionali.
-
-Fuori dalla numerazione c'è `guardrail-scope` ⚠, la regola trasversale sullo scope: non è una fase e non compare nel menu `/`, la applica il modello (vedi [Guardrail](#guardrail-disciplina-dello-scope)).
-
----
-
-<a id="concetti-chiave"></a>
-## 🧠 Concetti chiave
-
-### Goals / Non-Goals
-
-Ogni `.claude/spec.md` contiene due sezioni obbligatorie:
-
-- **Goals** — 3-7 bullet verificabili con cosa la feature **deve** fare.
-- **Non-Goals** — 3-7 bullet con cosa la feature **NON** deve fare, esplicitamente.
-
-I **Non-Goals** sono il contratto che l'utente firma con l'AI in fase 01. Vengono riletti dalle fasi successive prima di ogni modifica e servono a prevenire scope creep.
-
-Esempio (script Python di analisi):
-
-```markdown
-## Goals
-- [ ] Leggere CSV da ./in/, calcolare medie mensili, salvare in ./out/report.csv
-
-## Non-Goals
-- [ ] NON parallelizzare il calcolo
-- [ ] NON persistere su DB
-- [ ] NON aggiungere plot/grafici
-```
-
-Il file `01-spec/spec.md` (template nella cartella della skill) contiene esempi di Non-Goals per: script Python, librerie, CLI, servizi backend, pipeline ML, app desktop.
-
-<a id="guardrail-disciplina-dello-scope"></a>
-### Guardrail: disciplina dello scope
-
-`guardrail-scope` è una skill trasversale che vincola l'AI a modificare **solo** il codice strettamente necessario alla richiesta. Ha `user-invocable: false`: non compare nel menu `/` e non si lancia a mano, ma Claude la carica da solo quando lavora sul codice o quando dici "attenzione allo scope". Le fasi 05–10 ne riportano le regole principali nelle righe `[GUARDRAIL SCOPE]`. Regole:
-
-1. **Check n°1** — se esiste `.claude/spec.md` con Non-Goals, quelli sono la fonte di verità prioritaria.
-2. **Check n°2** — anche in loro assenza, no pulizie opportunistiche, no riformattazioni, no rinomine collaterali, no refactor spontanei.
-3. **Auto-verifica pre-commit** — ogni riga del diff deve essere motivabile con il task richiesto. Se no, va rimossa.
-
-Se durante il lavoro emergono problemi fuori scope, l'AI li **segnala** ma non li risolve senza autorizzazione.
-
-### CHANGELOG automatico
-
-A ogni ciclo `09-commit` crea o aggiorna `CHANGELOG.md` nella **root del progetto** (non in `.claude/`), nel formato [Keep a Changelog](https://keepachangelog.com/) + [SemVer](https://semver.org/), con voci in inglese:
-
-```markdown
-## [1.3.0] - 2026-10-17
-### Added
-- CSV export of users via `GET /users/export`.
-```
-
-- **Versione**: l'AI propone il bump SemVer (MAJOR = breaking, MINOR = nuova funzionalità, PATCH = fix) partendo dall'ultima voce; se il CHANGELOG non esiste legge la versione da manifest o tag, altrimenti propone `0.1.0` / `1.0.0`. **Tu confermi** versione e testo prima che il file venga scritto.
-- **Data**: quella odierna, nel formato `YYYY-MM-DD`.
-- **Commit**: il CHANGELOG entra nello stesso commit della feature.
-- **Ogni ciclo è una nuova versione**. I cicli di solo refactor/chore/test non generano voci: l'AI lo dichiara in chat.
-- **Non** crea tag o GitHub Release, **non** modifica la versione in `package.json` & co., **non** tocca le voci precedenti.
-
-### README per utenti comuni
-
-Nello stesso ciclo `09-commit` crea o aggiorna anche `README.md` nella **root del progetto**, **bilingue (inglese + italiano)** e **non tecnico**: spiega cos'è il prodotto e come installarlo e usarlo a chi non programma.
-
-- **Template fisso**: header centrato con nome, tagline e badge (versione dal CHANGELOG + linguaggio principale), sotto ai badge i link 🇬🇧 English · 🇮🇹 Italiano che portano direttamente alla propria lingua.
-- **Stesse sezioni nelle due lingue**, ognuna con il suo indice: `✨ What it is` / `Cos'è` e `🚀 Installation` / `Installazione` più, se servono, `🧭 How to use` / `Come si usa`, `🛟 Troubleshooting` / `Problemi comuni`, `📄 License` / `Licenza`.
-- **Niente dettagli tecnici**: build, toolchain, struttura dei sorgenti, test e contribuzione restano fuori.
-- **README esistente non conforme**: l'AI propone la conversione e dice cosa verrà tolto. **Tu confermi** prima che il file venga scritto.
-- **Commit**: il README entra nello stesso commit della feature.
-
----
+Funziona con qualunque tipo di software: script, siti web, app, programmi da riga di comando e altro.
 
 <a id="installazione"></a>
 ## 🚀 Installazione
 
-Le skill vanno installate in `~/.claude/skills/` (su Windows: `C:\Users\<utente>\.claude\skills\`). Nel repo trovi due script che copiano le 11 cartelle nella destinazione, sovrascrivendo eventuali versioni precedenti con lo stesso nome.
+Ti serve Claude Code installato sul computer (Windows, Linux o macOS).
 
-### Windows (PowerShell)
+1. Scarica questo progetto: nella pagina GitHub clicca **Code → Download ZIP** ed estrailo, oppure copialo con Git.
+2. Apri la cartella estratta in un terminale e avvia l'installazione per il tuo sistema.
+
+**Windows** — apri PowerShell nella cartella e incolla:
 
 ```powershell
 .\install.ps1
 ```
 
-Se PowerShell blocca l'esecuzione con un errore di execution policy, sbloccalo solo per questa sessione:
-
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\install.ps1
-```
-
-### Linux / macOS (bash)
+**Linux / macOS** — apri il Terminale nella cartella e incolla:
 
 ```bash
 ./install.sh
 ```
 
-Se serve, rendi lo script eseguibile una volta sola: `chmod +x install.sh`.
+3. Riavvia Claude Code. Le skill sono pronte.
 
-### Cosa fanno gli script
+Per aggiornare, scarica la nuova versione e avvia di nuovo l'installazione: sostituisce quella vecchia.
 
-- Creano `~/.claude/skills/` se manca.
-- Rimuovono le eventuali cartelle installate con i vecchi nomi (`spec`, `clarify`, …, `10-guardrail-scope`) per evitare skill duplicate.
-- Copiano le 11 skill (`01-spec`, `02-clarify`, `03-plan-tasks`, `04-analyze`, `05-implement`, `06-test`, `07-review`, `08-refactor`, `09-commit`, `10-push`, `guardrail-scope`), sovrascrivendo eventuali versioni precedenti con lo stesso nome.
-- Al termine, riavvia Claude Code per caricare le skill aggiornate.
+<a id="come-si-usa"></a>
+## 🧭 Come si usa
 
-Ogni cartella skill contiene:
-- `SKILL.md` — istruzioni per l'AI (con frontmatter YAML)
-- eventuali template di output (`01-spec/spec.md`, `03-plan-tasks/plan-template.md`, `plan.md`/`spec.md`/`tasks.md` in 02, 07 e 10)
+In Claude Code scrivi il comando del passo che ti serve, oppure chiedi semplicemente a parole tue (per esempio "scrivi la spec" o "committa"): Claude sceglie da solo il passo giusto.
 
----
+| Passo | Comando | Cosa succede |
+|---|---|---|
+| 1 | `/01-spec` | Descrivi l'idea; Claude scrive cosa la funzione deve e non deve fare |
+| 2 | `/02-clarify` | Claude ti mostra le opzioni e ti chiede di scegliere |
+| 3 | `/03-plan-tasks` | Claude divide il lavoro in piccoli compiti |
+| 4 | `/04-analyze` | *Facoltativo* — Claude cerca i rischi nel piano |
+| 5 | `/05-implement` | Claude scrive il codice, un compito alla volta |
+| 6 | `/06-test` | Claude verifica che tutto funzioni come concordato |
+| 7 | `/07-review` | *Facoltativo* — Claude rilegge il codice in cerca di problemi |
+| 8 | `/08-refactor` | *Facoltativo* — Claude riordina il codice nuovo senza cambiare cosa fa |
+| 9 | `/09-commit` | Claude salva il lavoro e aggiorna elenco delle modifiche e descrizione |
+| 10 | `/10-push` | *Facoltativo* — Claude pubblica il lavoro online dopo la tua conferma |
 
-<a id="come-si-usano"></a>
-## 🛠️ Come si usano
+In qualunque momento puoi dire **"attenzione allo scope"** per ricordare a Claude di modificare solo quello che hai chiesto.
 
-### Invocazione esplicita
+<a id="problemi-comuni"></a>
+## 🛟 Problemi comuni
 
-Digita lo slash command:
-
-```
-/01-spec
-/05-implement
-/10-push
-```
-
-`guardrail-scope` non ha un comando: è nascosto dal menu `/` e lo carica Claude.
-
-### Attivazione automatica
-
-Le skill si attivano da sole in base al `description` YAML. Frasi che le triggerano:
-
-| Se dici… | Si attiva… |
-|----------|------------|
-| "definisci i requisiti", "scrivi la spec" | `01-spec` |
-| "chiarisci", "cosa manca", "brainstorma", "esploriamo le opzioni", "quale stack" | `02-clarify` |
-| "pianifica", "scomponi in task" | `03-plan-tasks` |
-| "analizza", "verifica il piano" | `04-analyze` |
-| "implementa", "scrivi il codice" | `05-implement` |
-| "testa", "scrivi i test" | `06-test` |
-| "revisiona", "code review", "cerca bug nel codice" | `07-review` |
-| "refactora", "pulisci il codice" | `08-refactor` |
-| "committa", "aggiorna il changelog" | `09-commit` |
-| "pusha", "pubblica", "apri PR" | `10-push` |
-| "attenzione allo scope", "lavora sui binari" | `guardrail-scope` |
-
----
-
-<a id="esempio-di-flusso-completo"></a>
-## 💡 Esempio di flusso completo
-
-Immagina di dover aggiungere un endpoint di export in un servizio Python esistente.
-
-```
-> /01-spec voglio esportare gli utenti in CSV via endpoint GET /users/export
-
-[AI compila spec.md con Goals + Non-Goals + interfaccia + criteri]
-
-> ok procedi
-
-> /02-clarify
-
-[AI apre un brainstorming: presenta 2-4 alternative per i punti decisionali
- (es. formato CSV via streaming vs in-memory, autenticazione richiesta o no,
- paginazione o dump completo) con pro/contro concreti, chiede a te di scegliere.
- Poi 2-3 domande chiuse per le ambiguità puntuali e propone Non-Goals aggiuntivi.
- Aggiunge la sezione "Decisioni prese" a spec.md]
-
-> /03-plan-tasks
-
-[AI ispeziona il codebase, produce .claude/plan.md e .claude/tasks.md con 4 task]
-
-> /05-implement
-
-[AI implementa task 1..4, tenendo d'occhio i Non-Goals; se emerge un problema fuori scope, lo segnala]
-
-> /06-test
-
-[AI scrive test per ogni criterio di accettazione, verifica suite verde]
-
-> /07-review  (opzionale)
-
-[AI revisiona il codice su 5 assi (correttezza, edge case, sicurezza, prestazioni,
- leggibilità), produce .claude/review.md con findings per severità. Se ci sono
- blocker/major, torna a /05-implement; altrimenti prosegue.]
-
-> /08-refactor  (opzionale)
-
-[AI pulisce solo il codice appena scritto, non tocca il resto]
-
-> /09-commit
-
-[AI rilegge il diff riga per riga, propone la voce ## [1.3.0] - <data> per il
- CHANGELOG e il README, attende conferma, poi crea commit separati per feature (con CHANGELOG e README)
- e refactor, solo in locale]
-
-> /10-push  (opzionale)
-
-[AI controlla che non ci siano modifiche non committate e che il remote non sia
- avanti, mostra i commit in uscita e attende conferma, poi fa il push.
- Se lo chiedi, apre anche la PR]
-```
-
-In qualunque momento puoi dire **"attenzione allo scope"** per richiamare il guardrail come promemoria.
-
----
-
-<a id="struttura-file"></a>
-## 📁 Struttura file
-
-```
-skills/
-├── README.md                    # questo file
-├── 01-spec/
-│   ├── SKILL.md                 # istruzioni AI
-│   └── spec.md                  # template output (con esempi Non-Goals per stack)
-├── 02-clarify/
-│   ├── plan.md, spec.md, tasks.md   # metodo, template, checklist
-│   └── architectures/           # riferimenti curati: python, js-ts, go, bash
-├── 03-plan-tasks/
-│   └── plan-template.md         # template di .claude/plan.md
-├── 04-analyze/
-├── 05-implement/
-├── 06-test/
-├── 07-review/
-├── 08-refactor/
-├── 09-commit/
-├── 10-push/
-└── guardrail-scope/             # regola trasversale, non numerata
-    └── SKILL.md
-```
-
----
-
-<a id="personalizzazione"></a>
-## 🎨 Personalizzazione
-
-- **Vocabolario**: adatta i termini della `spec.md` al tuo dominio. Il template è neutro (parla di "consumatori", "interfaccia", "unità di codice") — sostituisci con "endpoint", "comando", "modulo", "componente", ecc. secondo il progetto.
-- **Fasi**: se non ti serve una fase (es. analisi o refactor), saltala. Il workflow non è rigido.
-- **Non-Goals per stack**: `01-spec/spec.md` ha esempi per 6 tipi di software; aggiungi i tuoi se lavori su domini ricorrenti (embedded, mobile, ecc.).
-- **Memoria persistente**: il guardrail è già registrato nel sistema di memoria di Claude Code, quindi si applica **in tutte le sessioni**, anche fuori da questo workflow.
-
----
-
-<a id="note"></a>
-## 📝 Note
-
-- Le skill sono in italiano ma il codice generato segue le convenzioni del progetto (inglese se il codebase è in inglese).
-- I template nelle cartelle skill (`spec.md`, `plan-template.md`, ecc.) sono **template di riferimento**, non vengono modificati durante l'uso. I file di lavoro veri vivono **sempre** nel progetto sotto `.claude/` (`spec.md`, `plan.md`, `tasks.md`, `analysis.md`, `review.md`, l'eventuale `test-report.md` e, su progetto nuovo, `architecture.md`). Mai nella root del progetto, mai nella cartella della skill — regola rafforzata dal Check n°3 di `guardrail-scope`.
-- Se dopo una sessione trovi uno di questi file nella root del progetto (residuo da versioni precedenti delle skill), spostalo dentro `.claude/`: le skill ora sanno gestirlo, ma un file omonimo in root può confondere le fasi successive.
-- La skill `guardrail-scope` vale anche fuori dal workflow feature-driven, in qualunque task che tocchi codice.
+- **Windows blocca l'installazione con un errore di "execution policy"**: nella stessa finestra di PowerShell incolla `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`, poi avvia di nuovo `.\install.ps1`. La modifica dura solo finché non chiudi la finestra.
+- **Linux o macOS risponde "permission denied"**: incolla una volta `chmod +x install.sh`, poi avvia di nuovo `./install.sh`.
+- **I comandi non compaiono in Claude Code**: riavvia Claude Code dopo l'installazione.
