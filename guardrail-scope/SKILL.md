@@ -58,7 +58,7 @@ Regole:
 5. Il file `.claude/` è parte dei metadati del progetto, non dell'output finale: valuta con l'utente se andare in `.gitignore` o essere versionato — non è una decisione da prendere in autonomia.
 6. `CHANGELOG.md` **non** è un file di workflow: è un file di prodotto e va nella **root del progetto**, mai in `.claude/` (lo gestisce `09-commit`).
 
-Confusione da evitare: dentro ogni cartella skill (`~/.claude/skills/01-spec/`, `~/.claude/skills/03-plan-tasks/`, ecc.) esistono file `plan.md`, `spec.md`, `tasks.md` — quelli sono **template/checklist di riferimento** della skill, si **leggono** ma non si toccano. I file di lavoro veri stanno **solo** in `.claude/` del progetto corrente.
+Confusione da evitare: dentro ogni cartella skill (`~/.claude/skills/01-spec/`, `~/.claude/skills/03-plan-tasks/`, ecc.) possono esistere template come `spec.md` (01), `plan-template.md` (03), `plan.md`/`spec.md`/`tasks.md` (02, 07, 10) — sono **template di riferimento** della skill, si **leggono** ma non si toccano. I file di lavoro veri stanno **solo** in `.claude/` del progetto corrente.
 
 ## Cosa fare quando si trova un problema fuori scope
 

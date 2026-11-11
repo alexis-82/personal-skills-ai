@@ -15,8 +15,6 @@ Fase 8/10 del workflow. Migliora la struttura mantenendo il comportamento, prima
 > **Prima di scrivere il primo file, obbligatorio**:
 > 1. Se `.claude/` non esiste nella root del progetto, crearla.
 > 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.claude/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
->
-> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.claude/` del progetto.
 
 ## Perché prima del commit
 
@@ -26,15 +24,14 @@ Con i test verdi (fase 06) hai la rete di sicurezza per pulire il codice. Fare r
 
 ## Cosa fare
 
-1. Leggere `plan.md`, `spec.md`, `tasks.md` di questa cartella per il metodo.
-2. **Verificare che la suite di test sia verde prima di iniziare** — senza rete di sicurezza il refactor è cieco.
-3. Identificare target concreti: duplicazione (3+ ripetizioni), funzioni troppo lunghe (>50 righe), naming ambiguo, dipendenze inutili, dead code.
-4. Applicare un refactor alla volta:
+1. **Verificare che la suite di test sia verde prima di iniziare** — senza rete di sicurezza il refactor è cieco.
+2. Identificare target concreti: duplicazione (3+ ripetizioni), funzioni troppo lunghe (>50 righe), naming ambiguo, dipendenze inutili, dead code.
+3. Applicare un refactor alla volta:
    - Modifica minima focalizzata.
    - Eseguire i test dopo ogni cambio.
    - Se rompe qualcosa: revertire e riprovare in modo più piccolo.
-5. Non introdurre astrazioni "per il futuro" — solo se emergono da 3+ casi reali già presenti.
-6. Al termine, passare a `/09-commit` per consolidare.
+4. Non introdurre astrazioni "per il futuro" — solo se emergono da 3+ casi reali già presenti.
+5. Al termine, passare a `/09-commit` per consolidare.
 
 ## Output atteso
 

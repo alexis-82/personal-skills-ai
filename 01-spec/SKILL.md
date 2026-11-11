@@ -16,11 +16,11 @@ Fase 1/10 del workflow. Trasforma un'idea in una specifica azionabile con confin
 > 1. Se `.claude/` non esiste nella root del progetto, crearla.
 > 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.claude/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
 >
-> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.claude/` del progetto.
+> Nota: dentro la cartella di questa skill esiste `spec.md` — è un **template di riferimento**, si legge ma non si tocca. Il file di lavoro vero sta solo in `.claude/` del progetto.
 
 ## Cosa fare
 
-1. Leggere `plan.md` per il metodo, `spec.md` come template di output, `tasks.md` per la checklist operativa.
+1. Leggere `spec.md` di questa cartella come template di output (con esempi di Non-Goals per tipo di software).
 2. Chiedere all'utente (o dedurre dal contesto) chi sono gli utenti, cosa devono ottenere e con quali vincoli.
 3. Compilare `.claude/spec.md` nella cartella del progetto (non in questa cartella skill, non nella root). Creare la cartella `.claude/` se non esiste. Il file deve contenere **tutte** le sezioni sotto, incluse Goals e Non-Goals.
 4. Rileggere Non-Goals con l'utente prima di procedere — è la sezione più importante per prevenire scope creep.

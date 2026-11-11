@@ -15,22 +15,19 @@ Fase 6/10 del workflow. Verifica che l'implementazione soddisfi la spec.
 > **Prima di scrivere il primo file, obbligatorio**:
 > 1. Se `.claude/` non esiste nella root del progetto, crearla.
 > 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.claude/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
->
-> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.claude/` del progetto.
 
 ## Cosa fare
 
-1. Leggere `plan.md`, `spec.md`, `tasks.md` di questa cartella per il metodo.
-2. Rileggere i **criteri di accettazione** in `.claude/spec.md` del progetto.
-3. Per ogni criterio scrivere almeno un test, scegliendo il livello adatto al tipo di software:
+1. Rileggere i **criteri di accettazione** in `.claude/spec.md` del progetto.
+2. Per ogni criterio scrivere almeno un test, scegliendo il livello adatto al tipo di software:
    - **Unit test** per la logica pura (una funzione, un metodo, una trasformazione).
    - **Integration test** per l'interazione tra unità reali (moduli, subprocess, I/O, servizi esterni "veri"). Mockare solo dipendenze genuinamente non controllabili in test (rete esterna a pagamento, hardware, tempo).
    - **End-to-end / behavior test** per il flusso completo dal punto di vista del consumatore (utente CLI, chiamante di libreria, client di servizio, esecutore di script).
    - **Edge case**: input vuoti, valori limite, errori attesi, encoding, timezone, precisione numerica se rilevante.
-4. Eseguire l'intera suite (non solo i nuovi test) per catturare regressioni.
-5. Se ci sono fallimenti: capire causa radice, non silenziare.
-6. Produrre `.claude/test-report.md` opzionale con esito, o riportare direttamente in chat.
-7. Con suite verde, suggerire `/07-review` per una revisione critica del codice prima di refactor/commit. Se l'utente salta la review, `/08-refactor` (per pulire) o `/09-commit` (per andare diretti al consolidamento).
+3. Eseguire l'intera suite (non solo i nuovi test) per catturare regressioni.
+4. Se ci sono fallimenti: capire causa radice, non silenziare.
+5. Produrre `.claude/test-report.md` opzionale con esito, o riportare direttamente in chat.
+6. Con suite verde, suggerire `/07-review` per una revisione critica del codice prima di refactor/commit. Se l'utente salta la review, `/08-refactor` (per pulire) o `/09-commit` (per andare diretti al consolidamento).
 
 ## Output atteso
 

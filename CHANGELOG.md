@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-11-11
+### Added
+- `05-implement` handles scaffold tasks: it creates only folders and `.gitkeep`, checks the result against `.claude/architecture.md`, and asks before touching files a project generator placed outside the planned tree.
+- `03-plan-tasks` lists the files each project generator creates and flags those outside the documented tree as risks.
+- The JS/TS frontend reference adds `pages/`, `components/ui/` and `lib/`, and keeps `main.tsx` and `App.tsx` where Vite generates them.
+
+### Changed
+- The Node API reference (Express/Fastify) now recommends one folder per business component (route, controller, service, data access, interfaces, colocated tests) with shared `core/`, `config/` and `bin/www/`; the layered layout becomes the alternative for small APIs.
+- The Python API reference (FastAPI/Flask) now recommends one package per domain (router, schemas, service, repository, models) with shared `core/`, matching the JS/TS and Go references; the layered layout becomes the alternative for small APIs.
+- The `.claude/plan.md` template is renamed `03-plan-tasks/plan-template.md`.
+
+### Removed
+- Generic team-oriented templates (time estimates, stakeholders, peer review) from phases 01, 03, 04, 05, 06, 08 and 09, which contradicted the skill instructions.
+
 ## [2.2.0] - 2026-11-10
 ### Added
 - When you start a new project (no source code yet), `02-clarify` now proposes an idiomatic architecture based on language, framework and project type, avoiding MVC or extra layers where they aren't needed, and records the confirmed choice in `.claude/architecture.md`.

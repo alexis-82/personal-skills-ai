@@ -15,20 +15,25 @@ Fase 5/10 del workflow. Da piano a codice funzionante.
 > **Prima di scrivere il primo file, obbligatorio**:
 > 1. Se `.claude/` non esiste nella root del progetto, crearla.
 > 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.claude/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
->
-> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.claude/` del progetto.
 
 ## Cosa fare
 
-1. Leggere `plan.md`, `spec.md`, `tasks.md` di questa cartella per il metodo.
-2. Leggere `.claude/plan.md`, `.claude/tasks.md` **e le sezioni Goals/Non-Goals di `.claude/spec.md`** del progetto. Tenere i Non-Goals in mente come lista di "vietato".
-3. Per ogni task in ordine:
+1. Leggere `.claude/plan.md`, `.claude/tasks.md` **e le sezioni Goals/Non-Goals di `.claude/spec.md`** del progetto. Tenere i Non-Goals in mente come lista di "vietato".
+2. Per ogni task in ordine:
    - Marcarlo `in_progress`.
    - Implementare la modifica minima che soddisfa il DoD.
    - Verificare rapidamente (compilazione/lint/test unitario mirato) prima di passare al successivo.
    - Marcarlo `done` in `.claude/tasks.md`.
-4. Se un task rivela che il piano è sbagliato: **fermarsi**, aggiornare il piano, non improvvisare.
-5. Al termine, suggerire `/06-test` per la validazione completa.
+3. Se un task rivela che il piano è sbagliato: **fermarsi**, aggiornare il piano, non improvvisare.
+4. Al termine, suggerire `/06-test` per la validazione completa.
+
+## Task di scaffold e generatori
+
+Vale per il Task 0 e per i task di scaffold che seguono un generatore (pianificati da `03-plan-tasks` a partire da `.claude/architecture.md`):
+
+- Creare **solo cartelle + `.gitkeep`**, esattamente come nell'albero documentato. Nessun altro file (niente entrypoint, `package.json`, `__init__.py`, `go.mod`): quelli arrivano dai task successivi.
+- Al termine confrontare `find <cartella> -type d` con l'albero di `architecture.md`; il task è fatto solo se coincidono.
+- Dopo un generatore (es. `npm create vite`, `nest new`, `django-admin startproject`): se ha creato file o cartelle **non previsti** dall'albero, **non spostarli né cancellarli**. Elencarli e chiedere se aggiornare `architecture.md` o spostarli; solo dopo la risposta proseguire.
 
 ## Output atteso
 

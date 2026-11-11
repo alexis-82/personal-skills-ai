@@ -53,25 +53,31 @@ Voci ordinate dalla più semplice alla più strutturata: partire dalla prima che
 
 ## API HTTP (FastAPI / Flask)
 
-- **Pattern consigliato**: layered leggero `routers → services → repositories`; schemi di I/O separati dai modelli di persistenza.
-- **Alternative**: package-by-feature (`users/`, `orders/`, ognuno con router/service/repo) quando i domini sono più di 3-4; singolo `main.py` per prototipi o microservizi con < 5 endpoint.
-- **Albero (layered)**:
+- **Pattern consigliato**: un package per dominio con router, schemi, service e accesso dati; trasversale in `core/`. Fonti: FastAPI "Bigger Applications" (un router per risorsa), Flask "Project Layout" (un blueprint per dominio), zhanymkanov/fastapi-best-practices (package per dominio).
+- **Alternative**: layered (`routers/ services/ repositories/`) per 1-2 domini piccoli; singolo `main.py` per prototipi o microservizi con < 5 endpoint.
+- **Albero (per dominio)**:
   ```
   src/<pkg>/
-    main.py          # crea app, registra router
-    routers/         # FastAPI APIRouter / Flask Blueprint
-    services/        # logica di dominio, nessun import del framework
-    repositories/    # accesso dati
-    schemas/         # Pydantic / dataclass di I/O
-    models/          # ORM, se presente
-    config.py
+    main.py          # crea app, middleware, include i router dei domini
+    core/            # trasversale, nessun codice di un singolo dominio
+      config.py      # settings da env (pydantic-settings)
+      db.py          # engine / sessione
+      security.py    # auth, dipendenze condivise
+      exceptions.py  # errori base + handler
+    <dominio>/       # al plurale (users, orders)
+      router.py      # APIRouter / Blueprint: validazione via schemas, status code
+      schemas.py     # Pydantic / dataclass di I/O
+      service.py     # logica, nessun import del framework HTTP
+      repository.py  # accesso dati
+      models.py      # ORM, se presente
   tests/
-    unit/            # services con repository finti
-    integration/     # client HTTP di test
+    <dominio>/
+      test_service.py  # unit con repository finto
+      test_router.py   # integration con client HTTP di test
   ```
-- **Naming**: moduli al plurale per i layer (`routers/users.py`); funzioni di service come verbi (`create_user`).
-- **Test**: unit sui service, integration via `TestClient` (FastAPI) o `app.test_client()` (Flask).
-- **Quando NON usarlo**: CRUD sottile senza logica ⇒ il layer `services/` è solo inoltro, eliminarlo.
+- **Naming**: package di dominio `snake_case` al plurale; moduli per ruolo senza ripetere il dominio (`users/service.py`, non `users/users_service.py`); funzioni di service come verbi (`create_user`).
+- **Test**: `tests/` speculare ai domini, fuori dal package; unit sui service, integration via `TestClient` (FastAPI) o `app.test_client()` (Flask).
+- **Quando NON usarlo**: CRUD sottile senza logica ⇒ `service.py` è solo inoltro, eliminarlo.
 
 ## Web app Django
 

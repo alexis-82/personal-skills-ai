@@ -39,25 +39,39 @@ Voci ordinate dalla più semplice alla più strutturata. TypeScript è il defaul
 
 ## API HTTP Node (Express / Fastify)
 
-- **Pattern consigliato**: layered leggero `routes → services → repositories`; validazione input al bordo (zod/JSON schema).
-- **Alternative**: package-by-feature (`src/modules/users/{routes,service,repo}.ts`) oltre 3-4 domini; file singolo per microservizi con < 5 endpoint.
-- **Albero (layered)**:
+- **Pattern consigliato**: per business component (Node.js Best Practices 1.1): una cartella per dominio con route, controller, service, data access e interfacce; validazione input nel controller (zod/JSON schema).
+- **Alternative**: layered `routes/ services/ repositories/` per 1-2 domini piccoli; file singolo per microservizi con < 5 endpoint.
+- **Albero (per component)**:
   ```
   src/
-    app.ts           # crea app, registra route e middleware
-    server.ts        # avvio (listen), separato per i test
-    routes/
-    services/        # logica, nessun import del framework HTTP
-    repositories/
-    schemas/         # validazione I/O
-    config.ts
-  test/
-    unit/
-    integration/     # supertest / fastify.inject
+    index.ts         # crea l'app, middleware globali, monta le route dei component; export default app
+    bin/
+      www/
+        server.ts    # avvio (listen), separato da index.ts per i test
+    config/          # configurazione: lettura env, config dei servizi esterni (<db>.config.ts)
+    core/            # trasversale, nessun codice di un singolo dominio
+      constants/     # HttpCode, messaggi
+      db/            # pool/client del DB
+      interfaces/    # contratti condivisi (IResponse, IErrorWithStatus)
+      log/           # logger applicativo + logger HTTP
+      middleware/    # auth, error handler
+      types/         # dichiarazioni .d.ts (es. environment.d.ts)
+      utils/         # helper condivisi (createError, createResponse)
+    components/
+      <nome>/                      # dominio al plurale (brands, tasks)
+        <nome>.route.ts            # path + middleware → controller
+        <nome>.controller.ts       # HTTP: validazione input, req/res, status code
+        <nome>.service.ts          # logica, nessun import del framework HTTP
+        <nome>.data.ts             # query / accesso dati
+        I<Entità>.ts               # interfacce del dominio, entità al singolare (IBrand); una per file
+        <nome>.controller.test.ts  # integration: supertest / fastify.inject
+        <nome>.service.test.ts     # unit con .data.ts finto
   ```
-- **Naming**: file `kebab-case.ts`, layer al plurale (`routes/users.ts`).
-- **Test**: unit sui service con repository finti; integration con `supertest` (Express) o `app.inject` (Fastify).
-- **Quando NON usarlo**: proxy o BFF senza logica ⇒ eliminare `services/`.
+- **Naming**: cartelle e file `kebab-case`, suffisso di ruolo (`.route.ts`, `.controller.ts`, `.service.ts`, `.data.ts`); interfacce `I<Entità>.ts` al singolare (alternativa idiomatica TS senza prefisso: `<nome>.types.ts`).
+- **Import**: una sola convenzione per tutto il progetto — relativi, oppure subpath imports nativi di Node (`"imports": { "#core/*": "./dist/core/*" }` in `package.json` + `paths` in tsconfig). Mai misti.
+- **Config**: una sola cartella `config/`; `core/` non ha una propria `config/` (evita due posti per la stessa cosa).
+- **Test**: colocati nel component; service in unit con `.data.ts` finto, controller in integration con `supertest` (Express) o `app.inject` (Fastify).
+- **Quando NON usarlo**: proxy o BFF senza logica ⇒ eliminare `.service.ts`.
 
 ## API HTTP NestJS
 
@@ -86,17 +100,23 @@ Voci ordinate dalla più semplice alla più strutturata. TypeScript è il defaul
 - **Albero (per feature)**:
   ```
   src/
-    main.tsx         # main.ts per Vue
-    app/             # root, router, provider
+    main.tsx         # main.ts per Vue; generato da Vite
+    App.tsx          # root: router + provider; generato da Vite, resta qui
+    assets/          # statici importati; generato da Vite
+    pages/
+      <pagina>/
+        <pagina>.tsx # una pagina per rotta: compone le feature, nessuna logica propria
     features/
       <feature>/
         components/
-        hooks/       # composables/ per Vue
-        api.ts
-    shared/          # componenti e util riusati da 2+ feature
+        hooks/       # composables/ per Vue; solo se la feature ha stato/side effect
+        api.ts       # solo se la feature chiama il backend
+    components/
+      ui/            # primitive UI riusate da 2+ feature (shadcn o proprie)
+    lib/             # util senza UI (cn, client HTTP)
   ```
-- **Naming**: componenti `PascalCase.tsx` / `.vue`; hook `useXxx`; composable `useXxx`.
-- **Test**: colocati (`Component.test.tsx`) con vitest + Testing Library; e2e separati se previsti.
+- **Naming**: file `kebab-case.tsx` (coerente con shadcn), componenti esportati `PascalCase`; hook `useXxx`; composable `useXxx`.
+- **Test**: colocati (`<componente>.test.tsx`) con vitest + Testing Library; e2e separati se previsti.
 - **Quando NON usarlo**: pagina statica o widget singolo ⇒ niente `features/`, un componente basta.
 
 ---

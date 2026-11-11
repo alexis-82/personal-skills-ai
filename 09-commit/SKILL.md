@@ -16,25 +16,22 @@ Fase 9/10 del workflow. Consolida il lavoro (implementazione + test + refactor) 
 > 1. Se `.claude/` non esiste nella root del progetto, crearla.
 > 2. Se trovi già uno di questi file nella **root del progetto** (residuo da sessioni precedenti), **spostalo** in `.claude/` (`git mv` se tracciato, `mv` altrimenti) prima di procedere — non duplicarlo, non ignorarlo, non ricrearne una copia.
 >
-> Nota: dentro la cartella di questa skill esistono `plan.md`/`spec.md`/`tasks.md` — sono **template di riferimento**, si leggono ma non si toccano. I file di lavoro veri stanno solo in `.claude/` del progetto.
->
 > **Eccezione**: `CHANGELOG.md` e `README.md` sono file di prodotto, non di workflow — vanno nella **root del progetto** (vedi [Aggiornamento CHANGELOG](#aggiornamento-changelog) e [Aggiornamento README](#aggiornamento-readme)).
 
 ## Cosa fare
 
-1. Leggere `plan.md`, `spec.md`, `tasks.md` di questa cartella per il metodo.
-2. Eseguire `git status` e `git diff` per capire cosa entra nel commit.
-3. **Ispezionare i file staged**: cercare segreti (chiavi API, password, token), file di build, file `.env`. Se trovi qualcosa di sospetto — anche se il nome sembra innocuo — aprire il file prima di procedere.
-4. **Aggiornare il CHANGELOG** (vedi sezione [Aggiornamento CHANGELOG](#aggiornamento-changelog)): creare o aggiornare `CHANGELOG.md` nella root del progetto con la nuova voce, oppure dichiarare perché viene saltato.
-5. **Aggiornare il README** (vedi sezione [Aggiornamento README](#aggiornamento-readme)): creare o aggiornare `README.md` nella root del progetto secondo il template bilingue (inglese + italiano), oppure dichiarare perché viene saltato.
-6. Raggruppare le modifiche in commit logici. Come regola:
+1. Eseguire `git status` e `git diff` per capire cosa entra nel commit.
+2. **Ispezionare i file staged**: cercare segreti (chiavi API, password, token), file di build, file `.env`. Se trovi qualcosa di sospetto — anche se il nome sembra innocuo — aprire il file prima di procedere.
+3. **Aggiornare il CHANGELOG** (vedi sezione [Aggiornamento CHANGELOG](#aggiornamento-changelog)): creare o aggiornare `CHANGELOG.md` nella root del progetto con la nuova voce, oppure dichiarare perché viene saltato.
+4. **Aggiornare il README** (vedi sezione [Aggiornamento README](#aggiornamento-readme)): creare o aggiornare `README.md` nella root del progetto secondo il template bilingue (inglese + italiano), oppure dichiarare perché viene saltato.
+5. Raggruppare le modifiche in commit logici. Come regola:
    - **Un commit per la feature** (implementazione + test relativi).
    - **Un commit separato per il refactor** se è stato fatto (fase 07), così la storia distingue chiaramente cambi di comportamento da cambi strutturali.
    - Mai un file solo per commit se non giustificato dal senso logico.
-7. Messaggio di commit:
+6. Messaggio di commit:
    - Prima riga: `<tipo>: <cosa cambia>` (max 70 caratteri). Tipi: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`.
    - Corpo: **perché**, non cosa (il diff mostra il cosa).
-8. Questa fase lavora solo in locale: niente push e niente PR, sono compito di `10-push`. Al termine, se il repo ha un remote, suggerire `/10-push` per pubblicare.
+7. Questa fase lavora solo in locale: niente push e niente PR, sono compito di `10-push`. Al termine, se il repo ha un remote, suggerire `/10-push` per pubblicare.
 
 ## Aggiornamento CHANGELOG
 
@@ -43,7 +40,7 @@ Fase 9/10 del workflow. Consolida il lavoro (implementazione + test + refactor) 
 Eseguire i sotto-passi in ordine:
 
 1. **Classificare il ciclo.** Fonti: Goals di `.claude/spec.md` e task completati in `.claude/tasks.md` se esistono, altrimenti solo il diff. Ignorare i file sotto `.claude/`.
-   - Se **non** ci sono cambiamenti visibili a chi usa il prodotto (solo refactor, chore, test, documentazione interna) → **saltare il CHANGELOG** e scrivere in chat: "CHANGELOG non aggiornato: <motivo>". Passare al punto 5 di "Cosa fare" (README).
+   - Se **non** ci sono cambiamenti visibili a chi usa il prodotto (solo refactor, chore, test, documentazione interna) → **saltare il CHANGELOG** e scrivere in chat: "CHANGELOG non aggiornato: <motivo>". Passare al punto 4 di "Cosa fare" (README).
 2. **Riprendere un tentativo precedente.** Eseguire `git diff HEAD -- CHANGELOG.md`. Se mostra una voce `## [X.Y.Z]` aggiunta e non ancora committata (es. hook pre-commit fallito, commit rilanciato), quella voce va **sostituita**, non affiancata: rimuovere solo quella voce (il resto del file non si tocca) e proseguire dal sotto-passo 3. Versione e voce vanno **ricalcolate**, perché nel frattempo il contenuto del ciclo può essere cambiato (es. un fix diventato anche una feature: `1.2.1` → `1.3.0`).
 3. **Determinare la versione** (SemVer):
    - `## [Unreleased]` **non è una versione**: non conta mai come base del calcolo.
